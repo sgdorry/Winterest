@@ -1,5 +1,5 @@
 Progress:                                                                      
-                                                                                Backend IInfrastructure:                                                       
+Backend Infrastructure:                                                       
 - REST API backend service for managing geographic data                       
 - MongoDB integration with connection management                              
 - Python Anywhere deployment configuration                                    
