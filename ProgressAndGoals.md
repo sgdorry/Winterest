@@ -1,4 +1,6 @@
-Progress:                                                                      
+# Progress and Goals
+
+## Progress:                                                                      
 Backend Infrastructure:                                                       
 - REST API backend service for managing geographic data                       
 - MongoDB integration with connection management                              
@@ -6,21 +8,19 @@ Backend Infrastructure:
 - In-memory caching for performance                                           
 - Data validation for all entities                                            
                                                                                 
-Geographic Entities (Full CRUD):                                              
+### Geographic Entities (Full CRUD):                                              
 - Countries: Name, population, continent, capital, GDP, area, founded, president                                                                     
 - States: Name, population, capital, governor, country_code, code            
 - Cities: Name, population, state, state_code, area, founded, mayor           
 - Counties: Name, population, state, area, founded, county_seat, state_code   
                                                                                 
-REST API Endpoints:                                                           
-- /hello - Health check                                                       
-- /health - API status                                                        
+### REST API Endpoints:                                                                                                                
 - /endpoints - API discovery                                                  
 - /echo - POST testing                                                        
 - /stats - Entity counts                                                      
 - /countries, /states, /cities, /counties - Full CRUD for each                
                                                                                 
-Development Tools:                                                            
+### Development Tools:                                                            
 - Makefile for build automation                                               
 - Comprehensive unit tests for all modules                                     
 - GitHub Actions CI/CD pipeline                                               
@@ -28,11 +28,11 @@ Development Tools:
 - CORS support for frontend integration   
 
 
-Goals:
+## Goals:
 
-Geography Guessing Game
+### Geography Guessing Game
 
-The game will have a:
+### Core Pages
 - Title
 - Home/landing page
 - Rules/how-to-play page
@@ -40,7 +40,7 @@ The game will have a:
 - Game select
 - Gameplay
 
-Players:
+### Players:
 	
 - Creating a player account is required to play
 - Users can edit and delete their own accounts
@@ -48,13 +48,13 @@ Players:
 - A leaderboard will be displayed ranked by total points.
 - Player statistics will be viewable on their profile
 
-Game Content:
+### Game Content:
 
 - All hints and their corresponding countries/answers are stored in the database
 - Each country has a series of hints that progressively reveal information
 - Hints include: geographic clues, population, capital, etc.
 
-Gameplay:
+### Gameplay:
 
 - Players start a new game to guess a country
 - Hints are progressively revealed (displayed after each incorrect guess)
