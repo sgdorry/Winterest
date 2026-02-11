@@ -79,3 +79,10 @@ def test_create_bad_flag_color():
         #try creating a country with an int value for flag color
         qry.create({'name': 'United States of America', 'population': 100 , 'contentient': 'North America', 'capital': 'DC', 'gdp': '1.2 T', 'area': 3810000, 'founded': '1900', 'president': 'Test Person', 'flag_color': 999})
     assert qry.num_countries() == old_count
+
+def test_create_bad_language():
+    old_count = qry.num_countries() #current count of counties
+    with pytest.raises(Exception):
+        #try creating a country with an int value for language
+        qry.create({'name': 'United States of America','population': 100, 'contentient': 'North America','capital': 'DC','gdp': '1.2 T','area': '1000 sq mi','founded': '1900','president': 'Test Person','flag_color': 'Red, White, Blue','language': 123})
+    assert qry.num_countries() == old_count
