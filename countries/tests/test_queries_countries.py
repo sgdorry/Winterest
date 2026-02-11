@@ -78,4 +78,4 @@ def test_create_bad_flag_color():
     with py.test.raises(Exeption):
         #try creating a country with an int value for flag color
         qry.create({'name': 'United States of America', 'population': 100 , 'contentient': 'North America', 'capital': 'DC', 'gdp': '1.2 T', 'area': 3810000, 'founded': '1900', 'president': 'Test Person', 'flag_color': 999})
-        assert qry.num_countries() == old_count
+    assert qry.num_countries() == old_count
