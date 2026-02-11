@@ -133,7 +133,7 @@ def update(name: str, fields: dict):
                                 not isinstance(fields[PRESIDENT], str)):
         raise ValueError(f'Bad value for {fields.get(PRESIDENT)=}')
     if FLAG_COLOR in fields and (not fields[FLAG_COLOR] or
-                                not isinstance(fields[FLAG_COLOR], str)):
+                                 not isinstance(fields[FLAG_COLOR], str)):
         raise ValueError(f'Bad value for {fields.get(FLAG_COLOR)=}')
 
     result = dbc.update(COUNTRIES_COLLECTION, {NAME: name}, fields)
