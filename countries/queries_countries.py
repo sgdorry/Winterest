@@ -8,13 +8,14 @@ MIN_ID_LEN = 1
 ID = 'id'
 NAME = 'name'
 POPULATION = 'population'
-CONTENTIENT = 'contentient'
+CONTENTIENT = 'contentient' #Typo? Okay to change?
 CAPITAL = 'capital'
 GDP = 'gdp'
 AREA = 'area'
 FOUNDED = 'founded'
 PRESIDENT = 'president'
 FLAG_COLOR = 'flag_color'
+LANGUAGE = 'language'
 
 
 SAMPLE_COUNTRY = {
@@ -27,6 +28,7 @@ SAMPLE_COUNTRY = {
     FOUNDED: '1776',
     PRESIDENT: 'Donald Trump',
     FLAG_COLOR: 'Red, White, and Blue'
+    LANGUAGE: 'English'
 }
 
 
@@ -91,6 +93,8 @@ def create(fields: dict):
         raise ValueError(f'Bad value for {fields.get(PRESIDENT)=}')
     if (not fields.get(FLAG_COLOR) or not isinstance(fields[FLAG_COLOR], str)):
         raise ValueError(f'Bad value for {fields.get(FLAG_COLOR)=}')
+    if (not fields.get(LANGUAGE) or not isinstance(fields[LANGUAGE], str)):
+        raise ValueError(f'Bad value for {fields.get(LANGUAGE)=}')
     new_id = dbc.create(COUNTRIES_COLLECTION, fields)
     country_cache[new_id] = fields
     return new_id
@@ -135,6 +139,9 @@ def update(name: str, fields: dict):
     if FLAG_COLOR in fields and (not fields[FLAG_COLOR] or
                                  not isinstance(fields[FLAG_COLOR], str)):
         raise ValueError(f'Bad value for {fields.get(FLAG_COLOR)=}')
+    if LANGUAGE in fields and (not fields[LANGUAGE] or
+                               not isinstance(fields[LANGUAGE], str)):
+        raise ValueError(f'Bad value for {fields.get(LANGUAGE)=}')
 
     result = dbc.update(COUNTRIES_COLLECTION, {NAME: name}, fields)
     if result < 1:
