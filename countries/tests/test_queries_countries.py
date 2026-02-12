@@ -86,3 +86,8 @@ def test_create_bad_language():
         #try creating a country with an int value for language
         qry.create({'name': 'United States of America','population': 100, 'contentient': 'North America','capital': 'DC','gdp': '1.2 T','area': '1000 sq mi','founded': '1900','president': 'Test Person','flag_color': 'Red, White, Blue','language': 123})
     assert qry.num_countries() == old_count
+
+
+def test_update_bad_climate():
+    with pytest.raises(Exception):
+        qry.update('United States of America', {qry.CLIMATE: 123})
