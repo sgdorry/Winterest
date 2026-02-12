@@ -16,6 +16,7 @@ FOUNDED = 'founded'
 PRESIDENT = 'president'
 FLAG_COLOR = 'flag_color'
 LANGUAGE = 'language'
+CLIMATE = 'climate'
 
 
 SAMPLE_COUNTRY = {
@@ -27,8 +28,9 @@ SAMPLE_COUNTRY = {
     AREA: '3,810,000 sq mi',
     FOUNDED: '1776',
     PRESIDENT: 'Donald Trump',
-    FLAG_COLOR: 'Red, White, and Blue'
-    LANGUAGE: 'English'
+    FLAG_COLOR: 'Red, White, and Blue',
+    LANGUAGE: 'English',
+    CLIMATE: 'Varies widely by region; temperate to subtropical'
 }
 
 
@@ -95,6 +97,8 @@ def create(fields: dict):
         raise ValueError(f'Bad value for {fields.get(FLAG_COLOR)=}')
     if (not fields.get(LANGUAGE) or not isinstance(fields[LANGUAGE], str)):
         raise ValueError(f'Bad value for {fields.get(LANGUAGE)=}')
+    if (not fields.get(CLIMATE) or not isinstance(fields[CLIMATE], str)):
+        raise ValueError(f'Bad value for {fields.get(CLIMATE)=}')
     new_id = dbc.create(COUNTRIES_COLLECTION, fields)
     country_cache[new_id] = fields
     return new_id
@@ -142,6 +146,9 @@ def update(name: str, fields: dict):
     if LANGUAGE in fields and (not fields[LANGUAGE] or
                                not isinstance(fields[LANGUAGE], str)):
         raise ValueError(f'Bad value for {fields.get(LANGUAGE)=}')
+    if CLIMATE in fields and (not fields[CLIMATE] or
+                              not isinstance(fields[CLIMATE], str)):
+        raise ValueError(f'Bad value for {fields.get(CLIMATE)=}')
 
     result = dbc.update(COUNTRIES_COLLECTION, {NAME: name}, fields)
     if result < 1:
