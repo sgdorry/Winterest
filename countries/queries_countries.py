@@ -8,7 +8,7 @@ MIN_ID_LEN = 1
 ID = 'id'
 NAME = 'name'
 POPULATION = 'population'
-CONTENTIENT = 'contentient' #Typo? Okay to change?
+CONTINENT = 'continent'
 CAPITAL = 'capital'
 GDP = 'gdp'
 AREA = 'area'
@@ -22,7 +22,7 @@ CLIMATE = 'climate'
 SAMPLE_COUNTRY = {
     NAME: 'United States of America',
     POPULATION: 340000000,
-    CONTENTIENT: 'North America',
+    CONTINENT: 'North America',
     CAPITAL: 'Washington DC',
     GDP: '29.18 trillion USD',
     AREA: '3,810,000 sq mi',
@@ -80,9 +80,9 @@ def create(fields: dict):
         raise ValueError(f'Bad value for {fields.get(NAME)=}')
     if (not fields.get(POPULATION) or not isinstance(fields[POPULATION], int)):
         raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    if (not fields.get(CONTENTIENT) or not isinstance(fields[CONTENTIENT],
-                                                      str)):
-        raise ValueError(f'Bad value for {fields.get(CONTENTIENT)=}')
+    if (not fields.get(CONTINENT) or not isinstance(fields[CONTINENT],
+                                                    str)):
+        raise ValueError(f'Bad value for {fields.get(CONTINENT)=}')
     if (not fields.get(CAPITAL) or not isinstance(fields[CAPITAL], str)):
         raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
     if (not fields.get(GDP) or not isinstance(fields[GDP], str)):
@@ -122,9 +122,9 @@ def update(name: str, fields: dict):
     if POPULATION in fields and (not isinstance(fields[POPULATION], int) or
                                  fields[POPULATION] < 0):
         raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    if CONTENTIENT in fields and (not fields[CONTENTIENT] or
-                                  not isinstance(fields[CONTENTIENT], str)):
-        raise ValueError(f'Bad value for {fields.get(CONTENTIENT)=}')
+    if CONTINENT in fields and (not fields[CONTINENT] or
+                                not isinstance(fields[CONTINENT], str)):
+        raise ValueError(f'Bad value for {fields.get(CONTINENT)=}')
     if CAPITAL in fields and (not fields[CAPITAL] or
                               not isinstance(fields[CAPITAL], str)):
         raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
