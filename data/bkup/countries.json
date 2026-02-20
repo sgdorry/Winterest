@@ -1,0 +1,43 @@
+[
+    {
+        "NAME": "United States of America",
+        "POPULATION": 342620143,
+        "CONTINENT": "North America",
+        "CAPITAL": "Washington DC",
+        "GDP": "29.18 trillion USD",
+        "AREA": "3,810,000 sq mi",
+        "FOUNDED": "1776",
+        "PRESIDENT": "Donald Trump",
+        "FLAG_COLOR": "Red, White, and Blue",
+        "LANGUAGE": "English",
+        "CLIMATE": "Varies widely by region; temperate to subtropical"
+    },
+
+    {
+        "NAME": "Bangladesh",
+        "POPULATION": 177818044,
+        "CONTINENT": "Asia",
+        "CAPITAL": "Dhaka",
+        "GDP": "519.29 billion USD",
+        "AREA": "57,320 sq mi",
+        "FOUNDED": "1971",
+        "PRESIDENT": "Mohammad Shahabuddin",
+        "FLAG_COLOR": "Green and Red",
+        "LANGUAGE": "Bengali",
+        "CLIMATE": "Subtropical to tropical"
+    },
+
+    {
+        "NAME": "China",
+        "POPULATION": 1414104343,
+        "CONTINENT": "Asia",
+        "CAPITAL": "Beijing",
+        "GDP": "20.65 trillion USD",
+        "AREA": "3,705,407 sq mi",
+        "FOUNDED": "1949",
+        "PRESIDENT": "Xi Jingping",
+        "FLAG_COLOR": "Red and Yellow",
+        "LANGUAGE": "Chinese",
+        "CLIMATE": "Varies widely by region; subarctic to tropical"
+    }
+]
