@@ -1,2 +1,2 @@
-PKG = countries
+PKG = queries_countries
 include ../common.mk

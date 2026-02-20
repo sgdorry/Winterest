@@ -1,2 +1,2 @@
-PKG = server
+PKG = endpoints
 include ../common.mk

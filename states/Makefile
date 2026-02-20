@@ -1,2 +1,2 @@
-PKG = states
+PKG = queries_states
 include ../common.mk
