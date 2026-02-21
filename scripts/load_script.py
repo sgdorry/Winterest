@@ -2,34 +2,48 @@ import json
 import time
 from pathlib import Path
 
+from countries.queries_countries import (
+    ID,
+    NAME,
+    POPULATION,
+    CONTINENT,
+    CAPITAL,
+    GDP,
+    AREA,
+    FOUNDED,
+    PRESIDENT,
+    FLAG_COLOR,
+    LANGUAGE,
+    CLIMATE,
+    create,
+)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-INPUT_PATH = BASE_DIR / "data" / "bkup" / "countries.json"
+COUNTRIES_PATH = BASE_DIR / "data" / "bkup" / "countries.json"
 
 def main():
-    if INPUT_PATH.open():
-        with INPUT_PATH.open() as f:
+    if COUNTRIES_PATH.open():
+        with COUNTRIES_PATH.open() as f:
             countries = json.load(f)
     
-    for record in countries.items():
-        name = record["NAME"]
-        population = record["POPULATION"]
-        continent = record["CONTINENT"]
-        capital = record["CAPITAL"]
-        gdp = record["GDP"]
-        area = record["AREA"]
-        founded = record["FOUNDED"]
-        president = record["PRESIDENT"]
-        flag_color = record["FLAG_COLOR"]
-        language = record["LANGUAGE"]
-        climate = record["CLIMATE"]
-        
-        query = f"{name}, {population}, {continent}, {capital}, {gdp}, {area}, {founded}, {president}, {flag_color}, {language}, {climate}"
-
-        print("Countries:", query)
-        time.sleep(1)  # respect Nominatim rate limits
-
-    with OUTPUT_PATH.open("w") as f:
-        json.dump(countries, f, ensure_ascii=True, indent=2)
-        
+    for record in countries:
+        country_info = {}
+        country_info[ID] = record["ID"]
+        country_info[NAME] = record["NAME"]
+        country_info[POPULATION] = record["POPULATION"]
+        country_info[CONTINENT] = record["CONTINENT"]
+        country_info[CAPITAL] = record["CAPITAL"]
+        country_info[GDP] = record["GDP"]
+        country_info[AREA] = record["AREA"]
+        country_info[FOUNDED] = record["FOUNDED"]
+        country_info[PRESIDENT] = record["PRESIDENT"]
+        country_info[FLAG_COLOR] = record["FLAG_COLOR"]
+        country_info[LANGUAGE] = record["LANGUAGE"]
+        country_info[CLIMATE] = record["CLIMATE"]
+        create(country_info)
+       
 if __name__ == "__main__":
     main()
+
+
+
