@@ -87,5 +87,20 @@
         "FLAG_COLOR": "Blue, Red, and White",
         "LANGUAGE": "English",
         "CLIMATE": "Varies widely; tropical in the north, temperate in the south, arid in the interior"
+    },
+
+    {
+        "ID": "SA",
+        "NAME": "Saudi Arabia",
+        "POPULATION": 35007271,
+        "CONTINENT": "Asia",
+        "CAPITAL": "Riyadh",
+        "GDP": "842.3 billion USD",
+        "AREA": "2,150,000 sq mi",
+        "FOUNDED": "1901",
+        "PRESIDENT": "Salman bin Abdulaziz Al Saud",
+        "FLAG_COLOR": "Green and White",
+        "LANGUAGE": "Arabic",
+        "CLIMATE": "Hot Desert"
     }
 ]

@@ -73,6 +73,7 @@ def num_countries():
     return len(country_cache)
 
 
+@needs_cache
 def create(fields: dict):
     if (not isinstance(fields, dict)):
         raise ValueError(f'Bad type for {type(fields)=}')
