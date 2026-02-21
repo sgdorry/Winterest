@@ -1,5 +1,4 @@
 import json
-import time
 from pathlib import Path
 
 from countries.queries_countries import (
@@ -41,6 +40,7 @@ def main():
         country_info[LANGUAGE] = record["LANGUAGE"]
         country_info[CLIMATE] = record["CLIMATE"]
         create(country_info)
+        print(country_info)
        
 if __name__ == "__main__":
     main()
