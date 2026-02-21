@@ -39,5 +39,47 @@
         "FLAG_COLOR": "Red and Yellow",
         "LANGUAGE": "Chinese",
         "CLIMATE": "Varies widely by region; subarctic to tropical"
+    },
+
+    {
+        "NAME": "Malaysia",
+        "POPULATION": 35266618,
+        "CONTINENT": "Asia",
+        "CAPITAL": "Kuala Lumpur",
+        "GDP": "421.97 Billion USD",
+        "AREA": "127,724 sq mi",
+        "FOUNDED": "1963",
+        "PRESIDENT": "Ibrahim Sultan Iskandar",
+        "FLAG_COLOR": "Red, White, Yellow, and Blue",
+        "LANGUAGE": "Malay",
+        "CLIMATE": "Tropical"
+    },
+
+    {
+        "NAME": "Germany",
+        "POPULATION": 84552242,
+        "CONTINENT": "Europe",
+        "CAPITAL": "Berlin",
+        "GDP": "4.59 trillion USD",
+        "AREA": "137,988 sq mi",
+        "FOUNDED": "1871",
+        "PRESIDENT": "Frank-Walter Steinmeier",
+        "FLAG_COLOR": "Black, Red, and Gold",
+        "LANGUAGE": "German",
+        "CLIMATE": "Temperate seasonal"
+    },
+
+    {
+        "NAME": "Australia",
+        "POPULATION": 27400013,
+        "CONTINENT": "Oceania",
+        "CAPITAL": "Canberra",
+        "GDP": "1.72 trillion USD",
+        "AREA": "2,969,907 sq mi",
+        "FOUNDED": "1901",
+        "PRESIDENT": "Anthony Albanese",
+        "FLAG_COLOR": "Blue, Red, and White",
+        "LANGUAGE": "English",
+        "CLIMATE": "Varies widely; tropical in the north, temperate in the south, arid in the interior"
     }
 ]
