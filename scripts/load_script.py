@@ -21,9 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 COUNTRIES_PATH = BASE_DIR / "data" / "bkup" / "countries.json"
 
 def main():
-    if COUNTRIES_PATH.open():
-        with COUNTRIES_PATH.open() as f:
-            countries = json.load(f)
+    with COUNTRIES_PATH.open() as f:
+        countries = json.load(f)
     
     for record in countries:
         country_info = {}

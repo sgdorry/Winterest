@@ -54,6 +54,7 @@ def num_cities():
     return len(city_cache)
 
 
+@needs_cache
 def create(fields: dict):
     if (not isinstance(fields, dict)):
         raise ValueError(f'Bad type for {type(fields)=}')
