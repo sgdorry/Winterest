@@ -1,0 +1,23 @@
+{
+  "countries": [
+    { "country_id": "US", "name": "United States", "continent": "North America" },
+    { "country_id": "FR", "name": "France", "continent": "Europe" },
+    { "country_id": "JP", "name": "Japan", "continent": "Asia" }
+  ],
+  "states": [
+    { "id": "1", "name": "New York", "population": 19870000, "capital": "Albany", "governor": "Kathy Hochul", "country_code": "US", "code": "NY" },
+    { "id": "2", "name": "California", "population": 38970000, "capital": "Sacramento", "governor": "Gavin Newsom", "country_code": "US", "code": "CA" }
+  ],
+  "cities": [
+    { "id": "1", "name": "New York City", "population": "8,478,000", "state": "New York", "state_code": "NY", "area": "469 sq mi", "founded": "1624", "mayor": "Eric Adams" },
+    { "id": "2", "name": "Los Angeles", "population": "3,898,000", "state": "California", "state_code": "CA", "area": "503 sq mi", "founded": "1781", "mayor": "Karen Bass" }
+  ],
+  "counties": [
+    { "id": "1", "name": "Los Angeles County", "population": 10000000, "state": "California", "area": "4,751 sq mi", "founded": "1850", "county_seat": "Los Angeles", "STATE_CODE": "CA" }
+  ],
+  "prompts": [
+    { "id": "p1", "type": "COUNTRY_FLAG", "entity_type": "country", "entity_id": "US", "asset_url": "https://flagcdn.com/us.svg", "asset_text": "", "answer": "United States", "approved": true },
+    { "id": "p2", "type": "COUNTRY_FLAG", "entity_type": "country", "entity_id": "FR", "asset_url": "https://flagcdn.com/fr.svg", "asset_text": "", "answer": "France", "approved": true },
+    { "id": "p3", "type": "COUNTRY_FLAG", "entity_type": "country", "entity_id": "JP", "asset_url": "https://flagcdn.com/jp.svg", "asset_text": "", "answer": "Japan", "approved": true }
+  ]
+}

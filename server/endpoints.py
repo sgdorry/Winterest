@@ -4,8 +4,8 @@ The endpoint called `endpoints` will return all available endpoints.
 """
 # from http import HTTPStatus
 
-from flask import Flask  # , request
-from flask_restx import Resource, Api  # , fields  # Namespace
+from flask import Flask  
+from flask_restx import Resource, Api, reqparse
 from flask import request
 from flask_cors import CORS
 
@@ -13,6 +13,7 @@ import countries.queries_countries as countries
 import states.queries_states as states
 import cities.queries_cities as cities
 import counties.queries_counties as counties
+import prompts.queries_prompts as prompts
 
 # import werkzeug.exceptions as wz
 
@@ -33,6 +34,16 @@ HELLO_EP = '/hello'
 HELLO_RESP = 'hello'
 MESSAGE = 'Message'
 
+PROMPTS_EP = '/prompts'
+QUIZ_QUESTIONS_EP = '/quiz/questions'
+
+
+prompt_list_parser = reqparse.RequestParser()
+prompt_list_parser.add_argument('type', required=False, location='args')
+
+quiz_parser = reqparse.RequestParser()
+quiz_parser.add_argument('type', required=True, location='args')
+quiz_parser.add_argument('count', required=False, location='args', type=int, default=5)
 
 @api.route(HELLO_EP)
 class HelloWorld(Resource):
@@ -103,12 +114,53 @@ class Stats(Resource):
                 'countries': len(countries.read()),
                 'states': len(states.read()),
                 'cities': len(cities.read()),
-                'counties': len(counties.read())
+                'counties': len(counties.read()),
+                'prompts': len(prompts.read())
             }, 200
         except Exception as e:
             return {'error': str(e)}, 500
 
+@api.route(PROMPTS_EP)
+class Prompts(Resource):
+    @api.expect(prompt_list_parser)
+    def get(self):
+        args = prompt_list_parser.parse_args()
+        ptype = args.get('type')
+        return {'prompts': prompts.read(prompt_type=ptype)}, 200
 
+    def post(self):
+        try:
+            data = request.get_json(force=True) or {}
+            new_id = prompts.create(data)
+            return {'id': new_id, 'message': 'Prompt created successfully'}, 201
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(QUIZ_QUESTIONS_EP)
+class QuizQuestions(Resource):
+    @api.expect(quiz_parser)
+    def get(self):
+        try:
+            args = quiz_parser.parse_args()
+            ptype = args['type']
+
+            count_raw = args.get('count', 5)
+            try:
+                count = int(count_raw)
+            except (TypeError, ValueError):
+                count = 5
+
+            qs = prompts.random_questions(ptype, count)
+            return {'questions': qs}, 200
+
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+        
 @api.route('/countries')
 class Countries(Resource):
     """
