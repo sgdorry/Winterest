@@ -4,7 +4,7 @@ The endpoint called `endpoints` will return all available endpoints.
 """
 # from http import HTTPStatus
 
-from flask import Flask  
+from flask import Flask
 from flask_restx import Resource, Api, reqparse
 from flask import request
 from flask_cors import CORS
@@ -43,7 +43,9 @@ prompt_list_parser.add_argument('type', required=False, location='args')
 
 quiz_parser = reqparse.RequestParser()
 quiz_parser.add_argument('type', required=True, location='args')
-quiz_parser.add_argument('count', required=False, location='args', type=int, default=5)
+quiz_parser.add_argument('count', required=False, location='args',
+                         type=int, default=5)
+
 
 @api.route(HELLO_EP)
 class HelloWorld(Resource):
@@ -120,6 +122,7 @@ class Stats(Resource):
         except Exception as e:
             return {'error': str(e)}, 500
 
+
 @api.route(PROMPTS_EP)
 class Prompts(Resource):
     @api.expect(prompt_list_parser)
@@ -132,7 +135,8 @@ class Prompts(Resource):
         try:
             data = request.get_json(force=True) or {}
             new_id = prompts.create(data)
-            return {'id': new_id, 'message': 'Prompt created successfully'}, 201
+            return {'id': new_id,
+                    'message': 'Prompt created successfully'}, 201
         except ValueError as e:
             return {'error': str(e)}, 400
         except Exception as e:
@@ -160,7 +164,8 @@ class QuizQuestions(Resource):
             return {'error': str(e)}, 400
         except Exception as e:
             return {'error': str(e)}, 500
-        
+
+
 @api.route('/countries')
 class Countries(Resource):
     """
