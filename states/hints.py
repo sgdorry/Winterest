@@ -12,8 +12,10 @@ HINT_SLOT_ORDER = (
     CODE,
 )
 
+
 def _is_non_empty_string(value):
     return isinstance(value, str) and bool(value.strip())
+
 
 def _has_required_fields(states: dict) -> bool:
     if not isinstance(states, dict):
@@ -28,6 +30,7 @@ def _has_required_fields(states: dict) -> bool:
         return False
 
     return True
+
 
 def build_states_hints(states: dict) -> list[str]:
     if not _has_required_fields(states):
