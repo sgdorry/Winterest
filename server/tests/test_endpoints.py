@@ -39,6 +39,65 @@ def test_get_all_countries(mock_read):
     assert isinstance(resp_json['countries'], list)
 
 
+@patch('countries.queries_countries.read')
+def test_get_all_countries_includes_computed_hints(mock_read):
+    """Test GET /countries returns ordered computed hints for complete docs"""
+    mock_read.return_value = [{
+        'country_id': 'CA',
+        'name': 'Canada',
+        'continent': 'North America',
+        'climate': 'mostly cold with temperate regions in the south',
+        'language': 'English and French',
+        'population': 41000000,
+        'capital': 'Ottawa',
+        'gdp': '2.2 trillion USD',
+        'area': '3,855,100 sq mi',
+        'founded': '1867',
+        'president': 'N/A',
+        'flag_color': 'Red and White',
+    }]
+
+    resp = TEST_CLIENT.get('/countries')
+
+    assert resp.status_code == OK
+    resp_json = resp.get_json()
+    country = resp_json['countries'][0]
+
+    assert country['name'] == 'Canada'
+    assert 'hints' in country
+    assert len(country['hints']) == 5
+    assert country['hints'] == [
+        'This country is in North America.',
+        'Its climate is generally mostly cold with temperate regions in the south.',
+        'A primary language spoken here is English and French.',
+        'Its population is about 41,000,000.',
+        'Its capital city is Ottawa.',
+    ]
+
+
+@patch('countries.queries_countries.read')
+def test_get_all_countries_returns_empty_hints_when_required_field_missing(
+        mock_read):
+    """Test GET /countries returns [] hints for incomplete country docs"""
+    mock_read.return_value = [{
+        'country_id': 'FR',
+        'name': 'France',
+        'continent': 'Europe',
+        'language': 'French',
+        'population': 68000000,
+        'capital': 'Paris',
+    }]
+
+    resp = TEST_CLIENT.get('/countries')
+
+    assert resp.status_code == OK
+    resp_json = resp.get_json()
+    country = resp_json['countries'][0]
+
+    assert country['name'] == 'France'
+    assert country['hints'] == []
+
+
 @patch('states.queries_states.read')
 def test_get_all_states(mock_read):
     """Test GET /states endpoint"""
@@ -151,8 +210,10 @@ def test_create_county(mock_create):
     assert 'message' in resp_json
 
 
-def test_create_country_bad_data():
+@patch('countries.queries_countries.create')
+def test_create_country_bad_data(mock_create):
     """Test POST /countries with invalid data (missing required field)"""
+    mock_create.side_effect = ValueError('Bad value for population')
     bad_data = {
         'name': 'Test Country'
         # Missing required fields
@@ -365,13 +426,15 @@ def test_delete_county(mock_delete):
 @patch('states.queries_states.read')
 @patch('cities.queries_cities.read')
 @patch('counties.queries_counties.read')
+@patch('prompts.queries_prompts.read')
 def test_stats_endpoint(
-        mock_counties, mock_cities, mock_states, mock_countries):
+        mock_prompts, mock_counties, mock_cities, mock_states, mock_countries):
     """Test GET /stats endpoint"""
     mock_countries.return_value = []
     mock_states.return_value = []
     mock_cities.return_value = []
     mock_counties.return_value = []
+    mock_prompts.return_value = []
 
     resp = TEST_CLIENT.get('/stats')
     assert resp.status_code == OK
