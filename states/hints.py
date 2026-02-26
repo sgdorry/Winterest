@@ -29,7 +29,7 @@ def _has_required_fields(states: dict) -> bool:
 
     return True
 
-def build_country_hints(states: dict) -> list[str]:
+def build_states_hints(states: dict) -> list[str]:
     if not _has_required_fields(states):
         return []
 
