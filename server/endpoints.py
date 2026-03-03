@@ -13,6 +13,7 @@ import countries.queries_countries as countries
 from countries.hints import build_country_hints
 import states.queries_states as states
 import cities.queries_cities as cities
+from cities.hints import build_cities_hints
 import counties.queries_counties as counties
 import prompts.queries_prompts as prompts
 
@@ -347,7 +348,12 @@ class Cities(Resource):
             all_cities = cities.read()
             sorted_cities = sorted(all_cities,
                                    key=lambda x: x.get('name', ''))
-            return {'cities': sorted_cities}, 200
+            cities_with_hints = []
+            for city in sorted_cities:
+                city_payload = dict(city)
+                city_payload['hints'] = build_cities_hints(city)
+                cities_with_hints.append(city_payload)
+            return {'cities': cities_with_hints}, 200
         except Exception as e:
             return {'error': str(e)}, 500
 
