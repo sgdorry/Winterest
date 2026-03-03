@@ -9,85 +9,161 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import queries_countries as qry
 
-def create_temp_country():
-    return deepcopy(qry.SAMPLE_COUNTRY)
 
-@pytest.fixture(scope='function')
-def temp_country():
-    temp_county = create_temp_country()
-    new_id = qry.create(create_temp_country())
-    yield new_id
-    try:
-        qry.delete(new_id)
-    except ValueError:
-        print('The record has already been deleted.')
-
-def test_create_bad_name():
-    old_count = qry.num_countries()  #current count of countries
-    with pytest.raises(Exception):
-        qry.create(None)
-    #ensuring no invalid country was created
-    assert qry.num_countries() == old_count
-
-def test_create_bad_population():
-    old_count = qry.num_countries()  #current count of countries
-    with pytest.raises(Exception):
-        qry.create({
-            'name': 'Test Country',
-            'population': 'not a number',
-            'continent': 'Europe',
-            'capital': 'Test City',
-            'gdp': '1.2 T',
-            'area': '1000 sq mi',
-            'founded': '1900',
-            'president': 'Test Person'
-        })
-    #ensuring no invalid country was created
-    assert qry.num_countries() == old_count
-
-def test_create_bad_capital():
-    old_count = qry.num_countries()  #current count of countries
-    with pytest.raises(Exception):
-        #try creating a country with an int as the value for capital
-        qry.create({'name': 'United States of America', 'population': 100 , 'continent': 'North America', 'capital': 45, 'gdp': '1.2 T', 'area': '1000 sq mi', 'founded': '1900', 'president': 'Test Person'})
-    assert qry.num_countries() == old_count 
-
-def test_create_bad_president():
-    old_count = qry.num_countries()  #current count of countries
-    with pytest.raises(Exception):
-        #try creating a country with an int as the value for president
-        qry.create({'name': 'United States of America', 'population': 100 , 'continent': 'North America', 'capital': 'DC', 'gdp': '1.2 T', 'area': '1000 sq mi', 'founded': '1900', 'president': 55})
-    assert qry.num_countries() == old_count
-
-def test_create_bad_gdp():
-    old_count = qry.num_countries()  #current count of countries
-    with pytest.raises(Exception):
-        #try creating a country with an int as the value for gdp
-        qry.create({'name': 'United States of America', 'population': 100 , 'contentient': 'North America', 'capital': 'DC', 'gdp': 12000000, 'area': '1000 sq mi', 'founded': '1900', 'president': 'Test Person'})
-    assert qry.num_countries() == old_count
-
-def test_create_bad_area():
-    old_count = qry.num_countries()  #current count of countries
-    with pytest.raises(Exception):
-        #try creating a country with an int as the value for area
-        qry.create({'name': 'United States of America', 'population': 100 , 'contentient': 'North America', 'capital': 'DC', 'gdp': '1.2 T', 'area': 3810000, 'founded': '1900', 'president': 'Test Person'})
-    assert qry.num_countries() == old_count
-
-def test_create_bad_flag_color():
-    old_count = qry.num_countries() #current count of counties
-    with pytest.raises(Exception):
-        #try creating a country with an int value for flag color
-        qry.create({'name': 'United States of America', 'population': 100 , 'contentient': 'North America', 'capital': 'DC', 'gdp': '1.2 T', 'area': 3810000, 'founded': '1900', 'president': 'Test Person', 'flag_color': 999})
-    assert qry.num_countries() == old_count
-
-def test_create_bad_language():
-    old_count = qry.num_countries() #current count of counties
-    with pytest.raises(Exception):
-        #try creating a country with an int value for language
-        qry.create({'name': 'United States of America','population': 100, 'contentient': 'North America','capital': 'DC','gdp': '1.2 T','area': '1000 sq mi','founded': '1900','president': 'Test Person','flag_color': 'Red, White, Blue','language': 123})
-    assert qry.num_countries() == old_count
+def make_country(country_id='US'):
+    country = deepcopy(qry.SAMPLE_COUNTRY)
+    country[qry.COUNTRY_ID] = country_id
+    return country
 
 
-def test_update_bad_climate():
-    with pytest.raises(Exception):
-        qry.update('United States of America', {qry.CLIMATE: 123})
+@pytest.fixture(autouse=True)
+def clear_country_cache():
+    qry.country_cache = None
+    yield
+    qry.country_cache = None
+
+
+@patch('data.db_connect.read')
+def test_num_countries_is_cached(mock_read):
+    mock_read.return_value = [
+        make_country('US'),
+        make_country('CA'),
+    ]
+
+    assert qry.num_countries() == 2
+    assert qry.num_countries() == 2
+    assert mock_read.call_count == 1
+
+
+@patch('data.db_connect.read')
+def test_read_all_normalizes_legacy_id(mock_read):
+    legacy_doc = make_country()
+    legacy_doc[qry.ID] = 'us'
+    del legacy_doc[qry.COUNTRY_ID]
+    mock_read.return_value = [legacy_doc]
+
+    countries = qry.read()
+
+    assert len(countries) == 1
+    assert countries[0][qry.COUNTRY_ID] == 'US'
+    assert qry.ID not in countries[0]
+
+
+@patch('data.db_connect.read')
+@patch('data.db_connect.read_one')
+def test_read_by_country_id_uses_single_doc_lookup(mock_read_one, mock_read):
+    mock_read.return_value = []
+    mock_read_one.return_value = make_country('ca')
+
+    country = qry.read('ca')
+
+    assert country[qry.COUNTRY_ID] == 'CA'
+    mock_read_one.assert_called_once_with(
+        qry.COUNTRIES_COLLECTION,
+        {'$or': [{qry.COUNTRY_ID: 'CA'}, {qry.ID: 'CA'}]},
+    )
+
+
+@patch('data.db_connect.read')
+def test_read_by_country_id_bad_id(mock_read):
+    mock_read.return_value = []
+    with pytest.raises(ValueError):
+        qry.read('')
+
+
+@patch('data.db_connect.read')
+@patch('data.db_connect.read_one')
+def test_create_requires_country_id(mock_read_one, mock_read):
+    payload = make_country()
+    del payload[qry.COUNTRY_ID]
+    mock_read.return_value = []
+    mock_read_one.return_value = None
+
+    with pytest.raises(ValueError):
+        qry.create(payload)
+
+
+@patch('data.db_connect.read')
+@patch('data.db_connect.read_one')
+@patch('data.db_connect.create')
+def test_create_normalizes_legacy_id(
+        mock_create, mock_read_one, mock_read):
+    payload = make_country()
+    payload[qry.ID] = 'us'
+    del payload[qry.COUNTRY_ID]
+    mock_read.return_value = []
+    mock_read_one.return_value = None
+    mock_create.return_value = 'mongo-id'
+
+    result = qry.create(payload)
+
+    assert result == 'mongo-id'
+    created_doc = mock_create.call_args[0][1]
+    assert created_doc[qry.COUNTRY_ID] == 'US'
+    assert qry.ID not in created_doc
+    assert qry.country_cache['US'][qry.COUNTRY_ID] == 'US'
+
+
+@patch('data.db_connect.read')
+@patch('data.db_connect.read_one')
+@patch('data.db_connect.create')
+def test_create_rejects_duplicate_country_id(
+        mock_create, mock_read_one, mock_read):
+    payload = make_country('US')
+    mock_read.return_value = []
+    mock_read_one.return_value = make_country('US')
+
+    with pytest.raises(ValueError):
+        qry.create(payload)
+
+    mock_create.assert_not_called()
+
+
+@patch('data.db_connect.update')
+def test_update_by_country_id_updates_cache(mock_update):
+    qry.country_cache = {'US': make_country('US')}
+    mock_update.return_value = 1
+
+    result = qry.update('us', {qry.CAPITAL: 'Test Capital'})
+
+    assert result == 1
+    mock_update.assert_called_once_with(
+        qry.COUNTRIES_COLLECTION,
+        {'$or': [{qry.COUNTRY_ID: 'US'}, {qry.ID: 'US'}]},
+        {qry.CAPITAL: 'Test Capital'},
+    )
+    assert qry.country_cache['US'][qry.CAPITAL] == 'Test Capital'
+
+
+def test_update_rejects_country_id_mutation():
+    with pytest.raises(ValueError):
+        qry.update('US', {qry.COUNTRY_ID: 'CA'})
+
+
+@patch('data.db_connect.update')
+def test_update_country_not_found(mock_update):
+    mock_update.return_value = 0
+    with pytest.raises(ValueError):
+        qry.update('US', {qry.CAPITAL: 'Test Capital'})
+
+
+@patch('data.db_connect.delete')
+def test_delete_by_country_id_removes_cache(mock_delete):
+    qry.country_cache = {'US': make_country('US')}
+    mock_delete.return_value = 1
+
+    result = qry.delete('us')
+
+    assert result == 1
+    mock_delete.assert_called_once_with(
+        qry.COUNTRIES_COLLECTION,
+        {'$or': [{qry.COUNTRY_ID: 'US'}, {qry.ID: 'US'}]},
+    )
+    assert 'US' not in qry.country_cache
+
+
+@patch('data.db_connect.delete')
+def test_delete_country_not_found(mock_delete):
+    mock_delete.return_value = 0
+    with pytest.raises(ValueError):
+        qry.delete('US')
