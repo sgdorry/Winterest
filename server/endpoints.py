@@ -16,6 +16,7 @@ import cities.queries_cities as cities
 from cities.hints import build_cities_hints
 import counties.queries_counties as counties
 import prompts.queries_prompts as prompts
+import puzzles.queries_puzzles as puzzles
 
 # import werkzeug.exceptions as wz
 
@@ -38,7 +39,8 @@ MESSAGE = 'Message'
 
 PROMPTS_EP = '/prompts'
 QUIZ_QUESTIONS_EP = '/quiz/questions'
-
+PUZZLES_EP = '/puzzles'
+PUZZLE_QUIZ_EP = '/puzzle/quiz'
 
 prompt_list_parser = reqparse.RequestParser()
 prompt_list_parser.add_argument('type', required=False, location='args')
@@ -47,6 +49,16 @@ quiz_parser = reqparse.RequestParser()
 quiz_parser.add_argument('type', required=True, location='args')
 quiz_parser.add_argument('count', required=False, location='args',
                          type=int, default=5)
+
+puzzle_list_parser = reqparse.RequestParser()
+puzzle_list_parser.add_argument('entity_type',
+                                required=False, location='args')
+
+puzzle_quiz_parser = reqparse.RequestParser()
+puzzle_quiz_parser.add_argument('entity_type',
+                                required=True, location='args')
+puzzle_quiz_parser.add_argument('count',
+                                required=False, location='args', default=1)
 
 
 @api.route(HELLO_EP)
@@ -161,6 +173,49 @@ class QuizQuestions(Resource):
 
             qs = prompts.random_questions(ptype, count)
             return {'questions': qs}, 200
+
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(PUZZLES_EP)
+class Puzzles(Resource):
+    @api.expect(puzzle_list_parser)
+    def get(self):
+        args = puzzle_list_parser.parse_args()
+        entity_type = args.get('entity_type')
+        return {'puzzles': puzzles.read(entity_type=entity_type)}, 200
+
+    def post(self):
+        try:
+            data = request.get_json(force=True) or {}
+            new_id = puzzles.create(data)
+            return {'id': new_id,
+                    'message': 'Puzzle created successfully'}, 201
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(PUZZLE_QUIZ_EP)
+class PuzzleQuiz(Resource):
+    @api.expect(puzzle_quiz_parser)
+    def get(self):
+        try:
+            args = puzzle_quiz_parser.parse_args()
+            entity_type = args['entity_type']
+
+            count_raw = args.get('count', 1)
+            try:
+                count = int(count_raw)
+            except (TypeError, ValueError):
+                count = 1
+
+            qs = puzzles.random_puzzles(entity_type, count)
+            return {'puzzles': qs}, 200
 
         except ValueError as e:
             return {'error': str(e)}, 400

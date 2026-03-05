@@ -99,104 +99,196 @@
       "climate": "temperate with distinct seasons"
     },
     {
-        "ID": "BD",
-        "NAME": "Bangladesh",
-        "POPULATION": 177818044,
-        "CONTINENT": "Asia",
-        "CAPITAL": "Dhaka",
-        "GDP": "519.29 billion USD",
-        "AREA": "57,320 sq mi",
-        "FOUNDED": "1971",
-        "PRESIDENT": "Mohammad Shahabuddin",
-        "FLAG_COLOR": "Green and Red",
-        "LANGUAGE": "Bengali",
-        "CLIMATE": "Subtropical to tropical"
+      "country_id": "BD",
+      "name": "Bangladesh",
+      "population": 177818044,
+      "continent": "Asia",
+      "capital": "Dhaka",
+      "gdp": "519.29 billion USD",
+      "area": "57,320 sq mi",
+      "founded": "1971",
+      "president": "Mohammad Shahabuddin",
+      "flag_color": "Green and Red",
+      "language": "Bengali",
+      "climate": "Subtropical to tropical"
     },
     {
-        "ID": "CN",
-        "NAME": "China",
-        "POPULATION": 1414104343,
-        "CONTINENT": "Asia",
-        "CAPITAL": "Beijing",
-        "GDP": "20.65 trillion USD",
-        "AREA": "3,705,407 sq mi",
-        "FOUNDED": "1949",
-        "PRESIDENT": "Xi Jingping",
-        "FLAG_COLOR": "Red and Yellow",
-        "LANGUAGE": "Chinese",
-        "CLIMATE": "Varies widely by region; subarctic to tropical"
+      "country_id": "CN",
+      "name": "China",
+      "population": 1414104343,
+      "continent": "Asia",
+      "capital": "Beijing",
+      "gdp": "20.65 trillion USD",
+      "area": "3,705,407 sq mi",
+      "founded": "1949",
+      "president": "Xi Jingping",
+      "flag_color": "Red and Yellow",
+      "language": "Chinese",
+      "climate": "Varies widely by region; subarctic to tropical"
     },
     {
-        "ID": "MY",
-        "NAME": "Malaysia",
-        "POPULATION": 35266618,
-        "CONTINENT": "Asia",
-        "CAPITAL": "Kuala Lumpur",
-        "GDP": "421.97 billion USD",
-        "AREA": "127,724 sq mi",
-        "FOUNDED": "1963",
-        "PRESIDENT": "Ibrahim Sultan Iskandar",
-        "FLAG_COLOR": "Red, White, Yellow, and Blue",
-        "LANGUAGE": "Malay",
-        "CLIMATE": "Tropical"
+      "country_id": "MY",
+      "name": "Malaysia",
+      "population": 35266618,
+      "continent": "Asia",
+      "capital": "Kuala Lumpur",
+      "gdp": "421.97 billion USD",
+      "area": "127,724 sq mi",
+      "founded": "1963",
+      "president": "Ibrahim Sultan Iskandar",
+      "flag_color": "Red, White, Yellow, and Blue",
+      "language": "Malay",
+      "climate": "Tropical"
     },
     {
-        "ID": "DE",
-        "NAME": "Germany",
-        "POPULATION": 84552242,
-        "CONTINENT": "Europe",
-        "CAPITAL": "Berlin",
-        "GDP": "4.59 trillion USD",
-        "AREA": "137,988 sq mi",
-        "FOUNDED": "1871",
-        "PRESIDENT": "Frank-Walter Steinmeier",
-        "FLAG_COLOR": "Black, Red, and Gold",
-        "LANGUAGE": "German",
-        "CLIMATE": "Temperate seasonal"
+      "country_id": "DE",
+      "name": "Germany",
+      "population": 84552242,
+      "continent": "Europe",
+      "capital": "Berlin",
+      "gdp": "4.59 trillion USD",
+      "area": "137,988 sq mi",
+      "founded": "1871",
+      "president": "Frank-Walter Steinmeier",
+      "flag_color": "Black, Red, and Gold",
+      "language": "German",
+      "climate": "Temperate seasonal"
     },
     {
-        "ID": "AU",
-        "NAME": "Australia",
-        "POPULATION": 27400013,
-        "CONTINENT": "Oceania",
-        "CAPITAL": "Canberra",
-        "GDP": "1.72 trillion USD",
-        "AREA": "2,969,907 sq mi",
-        "FOUNDED": "1901",
-        "PRESIDENT": "Anthony Albanese",
-        "FLAG_COLOR": "Blue, Red, and White",
-        "LANGUAGE": "English",
-        "CLIMATE": "Varies widely; tropical in the north, temperate in the south, arid in the interior"
+      "country_id": "AU",
+      "name": "Australia",
+      "population": 27400013,
+      "continent": "Oceania",
+      "capital": "Canberra",
+      "gdp": "1.72 trillion USD",
+      "area": "2,969,907 sq mi",
+      "founded": "1901",
+      "president": "Anthony Albanese",
+      "flag_color": "Blue, Red, and White",
+      "language": "English",
+      "climate": "Varies widely; tropical in the north, temperate in the south, arid in the interior"
     },
     {
-        "ID": "SA",
-        "NAME": "Saudi Arabia",
-        "POPULATION": 35007271,
-        "CONTINENT": "Asia",
-        "CAPITAL": "Riyadh",
-        "GDP": "842.3 billion USD",
-        "AREA": "2,150,000 sq mi",
-        "FOUNDED": "1901",
-        "PRESIDENT": "Salman bin Abdulaziz Al Saud",
-        "FLAG_COLOR": "Green and White",
-        "LANGUAGE": "Arabic",
-        "CLIMATE": "Hot desert climate"
+      "country_id": "SA",
+      "name": "Saudi Arabia",
+      "population": 35007271,
+      "continent": "Asia",
+      "capital": "Riyadh",
+      "gdp": "842.3 billion USD",
+      "area": "2,150,000 sq mi",
+      "founded": "1901",
+      "president": "Salman bin Abdulaziz Al Saud",
+      "flag_color": "Green and White",
+      "language": "Arabic",
+      "climate": "Hot desert climate"
     }
   ],
   "states": [
-    { "id": "1", "name": "New York", "population": 19870000, "capital": "Albany", "governor": "Kathy Hochul", "country_code": "US", "code": "NY" },
-    { "id": "2", "name": "California", "population": 38970000, "capital": "Sacramento", "governor": "Gavin Newsom", "country_code": "US", "code": "CA" }
+    {
+      "id": "1",
+      "name": "New York",
+      "population": 19870000,
+      "capital": "Albany",
+      "governor": "Kathy Hochul",
+      "country_code": "US",
+      "code": "NY"
+    },
+    {
+      "id": "2",
+      "name": "California",
+      "population": 38970000,
+      "capital": "Sacramento",
+      "governor": "Gavin Newsom",
+      "country_code": "US",
+      "code": "CA"
+    }
   ],
   "cities": [
-    { "id": "1", "name": "New York City", "population": "8,478,000", "state": "New York", "state_code": "NY", "area": "469 sq mi", "founded": "1624", "mayor": "Eric Adams" },
-    { "id": "2", "name": "Los Angeles", "population": "3,898,000", "state": "California", "state_code": "CA", "area": "503 sq mi", "founded": "1781", "mayor": "Karen Bass" }
+    {
+      "id": "1",
+      "name": "New York City",
+      "population": "8,478,000",
+      "state": "New York",
+      "state_code": "NY",
+      "area": "469 sq mi",
+      "founded": "1624",
+      "mayor": "Eric Adams"
+    },
+    {
+      "id": "2",
+      "name": "Los Angeles",
+      "population": "3,898,000",
+      "state": "California",
+      "state_code": "CA",
+      "area": "503 sq mi",
+      "founded": "1781",
+      "mayor": "Karen Bass"
+    }
   ],
   "counties": [
-    { "id": "1", "name": "Los Angeles County", "population": 10000000, "state": "California", "area": "4,751 sq mi", "founded": "1850", "county_seat": "Los Angeles", "STATE_CODE": "CA" }
+    {
+      "id": "1",
+      "name": "Los Angeles County",
+      "population": 10000000,
+      "state": "California",
+      "area": "4,751 sq mi",
+      "founded": "1850",
+      "county_seat": "Los Angeles",
+      "state_code": "CA"
+    }
   ],
   "prompts": [
-    { "id": "p1", "type": "COUNTRY_FLAG", "entity_type": "country", "entity_id": "US", "asset_url": "https://flagcdn.com/us.svg", "asset_text": "", "answer": "United States", "approved": true },
-    { "id": "p2", "type": "COUNTRY_FLAG", "entity_type": "country", "entity_id": "FR", "asset_url": "https://flagcdn.com/fr.svg", "asset_text": "", "answer": "France", "approved": true },
-    { "id": "p3", "type": "COUNTRY_FLAG", "entity_type": "country", "entity_id": "JP", "asset_url": "https://flagcdn.com/jp.svg", "asset_text": "", "answer": "Japan", "approved": true }
-  ]
+    {
+      "id": "p1",
+      "type": "COUNTRY_FLAG",
+      "entity_type": "country",
+      "entity_id": "US",
+      "asset_url": "https://flagcdn.com/us.svg",
+      "asset_text": "",
+      "answer": "United States",
+      "approved": true
+    },
+    {
+      "id": "p2",
+      "type": "COUNTRY_FLAG",
+      "entity_type": "country",
+      "entity_id": "FR",
+      "asset_url": "https://flagcdn.com/fr.svg",
+      "asset_text": "",
+      "answer": "France",
+      "approved": true
+    },
+    {
+      "id": "p3",
+      "type": "COUNTRY_FLAG",
+      "entity_type": "country",
+      "entity_id": "JP",
+      "asset_url": "https://flagcdn.com/jp.svg",
+      "asset_text": "",
+      "answer": "Japan",
+      "approved": true
+    }
+  ],
+  "puzzles": [
+  {
+    "id": "z1",
+    "entity_type": "country",
+    "answer": "United States",
+    "population": "331,900,000",
+    "climate": "Varies: continental, arid, tropical, polar",
+    "language": "English (de facto)",
+    "flag_url": "https://flagcdn.com/us.svg",
+    "approved": true
+  },
+  {
+    "id": "z2",
+    "entity_type": "country",
+    "answer": "France",
+    "population": "68,000,000",
+    "climate": "Temperate",
+    "language": "French",
+    "flag_url": "https://flagcdn.com/fr.svg",
+    "approved": true
+  }
+]
 }
