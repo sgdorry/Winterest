@@ -73,21 +73,25 @@ def num_states():
 
 
 def create(fields: dict):
-    if (not isinstance(fields, dict)):
+    if not isinstance(fields, dict):
         raise ValueError(f'Bad type for {type(fields)=}')
-    if (not fields.get(NAME) or not isinstance(fields[NAME], str)):
+    
+    if not fields.get(NAME) or not isinstance(fields[NAME], str):
         raise ValueError(f'Bad value for {fields.get(NAME)=}')
-    if (not fields.get(CAPITAL) or not isinstance(fields[CAPITAL], str)):
+    
+    if not fields.get(CAPITAL) or not isinstance(fields[CAPITAL], str):
         raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
-    if (not fields.get(POPULATION) 
-        or not isinstance(fields[POPULATION], int)):
+    
+    if not fields.get(POPULATION) or not isinstance(fields[POPULATION], int):
         raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    if (not fields.get(AREA) or not isinstance(fields[AREA], str)):
+    
+    if not fields.get(AREA) or not isinstance(fields[AREA], str):
         raise ValueError(f'Bad value for {fields.get(AREA)=}')
-    if (not fields.get(STATEHOOD_DATE) or 
-        not isinstance(fields[STATEHOOD_DATE], str)):
-        raise ValueError(f'Bad value for {fields.get(AREA)=}')
-    if (not fields.get(GDP) or not isinstance(fields[GDP], str)):
+    
+    if not fields.get(STATEHOOD_DATE) or not isinstance(fields[STATEHOOD_DATE], str):
+        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
+    
+    if not fields.get(GDP) or not isinstance(fields[GDP], str):
         raise ValueError(f'Bad value for {fields.get(GDP)=}')
     
     new_id = dbc.create(COLLECTION, fields)
@@ -101,36 +105,38 @@ def read(state_id=None):
 
 
 def update(state_id: str, fields: dict):
-    if not isinstance(fields, dict):
-        raise ValueError(f'Bad type for {type(fields)=}')
-    if not state_id or not isinstance(state_id, str):
-        raise ValueError(f'Bad value for {state_id=}')
-
     # Validate fields if provided
-    if NAME in fields and (not fields[NAME] or
-                           not isinstance(fields[NAME], str)):
-        raise ValueError(f'Bad value for {fields.get(NAME)=}')
-    if CAPITAL in fields and (not fields[CAPITAL] or
-                              not isinstance(fields[CAPITAL], str)):
-        raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
-    if POPULATION in fields and (not isinstance(fields[POPULATION], int) or
-                                 fields[POPULATION] < 0):
-        raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    if CODE in fields and (not fields[CODE] or
-                           not isinstance(fields[CODE], str)):
-        raise ValueError(f'Bad value for {fields.get(CODE)=}')
-    if GOVERNOR in fields and (not fields[GOVERNOR] or
-                               not isinstance(fields[GOVERNOR], str)):
-        raise ValueError(f'Bad value for {fields.get(GOVERNOR)=}')
-    if AREA in fields and (not fields[AREA] or
-                               not isinstance(fields[AREA], str)):
-        raise ValueError(f'Bad value for {fields.get(AREA)=}')
-    if GDP in fields and (not fields[GDP] or
-                               not isinstance(fields[GDP], str)):
-        raise ValueError(f'Bad value for {fields.get(GDP)=}')
-    if STATEHOOD_DATE in fields and (not fields[STATEHOOD_DATE] or
-                               not isinstance(fields[STATEHOOD_DATE], str)):
-        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
+    if NAME in fields:
+        if not fields[NAME] or not isinstance(fields[NAME], str):
+            raise ValueError(f'Bad value for {fields.get(NAME)=}')
+
+    if CAPITAL in fields:
+        if not fields[CAPITAL] or not isinstance(fields[CAPITAL], str):
+            raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
+
+    if POPULATION in fields:
+        if not isinstance(fields[POPULATION], int) or fields[POPULATION] < 0:
+            raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
+
+    if CODE in fields:
+        if not fields[CODE] or not isinstance(fields[CODE], str):
+            raise ValueError(f'Bad value for {fields.get(CODE)=}')
+
+    if GOVERNOR in fields:
+        if not fields[GOVERNOR] or not isinstance(fields[GOVERNOR], str):
+            raise ValueError(f'Bad value for {fields.get(GOVERNOR)=}')
+
+    if AREA in fields:
+        if not fields[AREA] or not isinstance(fields[AREA], str):
+            raise ValueError(f'Bad value for {fields.get(AREA)=}')
+
+    if GDP in fields:
+        if not fields[GDP] or not isinstance(fields[GDP], str):
+            raise ValueError(f'Bad value for {fields.get(GDP)=}')
+
+    if STATEHOOD_DATE in fields:
+        if not fields[STATEHOOD_DATE] or not isinstance(fields[STATEHOOD_DATE], str):
+            raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
 
     result = dbc.update(COLLECTION, {ID: state_id}, fields)
     if result < 1:
