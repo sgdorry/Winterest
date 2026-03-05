@@ -51,11 +51,16 @@ quiz_parser.add_argument('count', required=False, location='args',
                          type=int, default=5)
 
 puzzle_list_parser = reqparse.RequestParser()
-puzzle_list_parser.add_argument('entity_type', required=False, location='args')
+puzzle_list_parser.add_argument('entity_type', 
+                                required=False, location='args')
 
 puzzle_quiz_parser = reqparse.RequestParser()
-puzzle_quiz_parser.add_argument('entity_type', required=True, location='args')
-puzzle_quiz_parser.add_argument('count', required=False, location='args', default=1)
+puzzle_quiz_parser.add_argument('entity_type', 
+                                required=True, location='args')
+puzzle_quiz_parser.add_argument('count', 
+                                required=False, location='args', default=1)
+
+
 @api.route(HELLO_EP)
 class HelloWorld(Resource):
     """
@@ -173,6 +178,8 @@ class QuizQuestions(Resource):
             return {'error': str(e)}, 400
         except Exception as e:
             return {'error': str(e)}, 500
+            
+
 @api.route(PUZZLES_EP)
 class Puzzles(Resource):
     @api.expect(puzzle_list_parser)
@@ -185,7 +192,8 @@ class Puzzles(Resource):
         try:
             data = request.get_json(force=True) or {}
             new_id = puzzles.create(data)
-            return {'id': new_id, 'message': 'Puzzle created successfully'}, 201
+            return {'id': new_id, 
+                    'message': 'Puzzle created successfully'}, 201
         except ValueError as e:
             return {'error': str(e)}, 400
         except Exception as e:
@@ -213,6 +221,7 @@ class PuzzleQuiz(Resource):
             return {'error': str(e)}, 400
         except Exception as e:
             return {'error': str(e)}, 500
+
 
 @api.route('/countries')
 class Countries(Resource):
