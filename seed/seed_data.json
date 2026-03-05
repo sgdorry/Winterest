@@ -184,24 +184,6 @@
     }
   ],
   "states": [
-    {
-      "id": "1",
-      "name": "New York",
-      "population": 19870000,
-      "capital": "Albany",
-      "governor": "Kathy Hochul",
-      "country_code": "US",
-      "code": "NY"
-    },
-    {
-      "id": "2",
-      "name": "California",
-      "population": 38970000,
-      "capital": "Sacramento",
-      "governor": "Gavin Newsom",
-      "country_code": "US",
-      "code": "CA"
-    }
   ],
   "cities": [
     {
