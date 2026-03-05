@@ -75,25 +75,26 @@ def num_states():
 def create(fields: dict):
     if not isinstance(fields, dict):
         raise ValueError(f'Bad type for {type(fields)=}')
-    
+
     if not fields.get(NAME) or not isinstance(fields[NAME], str):
         raise ValueError(f'Bad value for {fields.get(NAME)=}')
-    
+
     if not fields.get(CAPITAL) or not isinstance(fields[CAPITAL], str):
         raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
-    
+
     if not fields.get(POPULATION) or not isinstance(fields[POPULATION], int):
         raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    
+
     if not fields.get(AREA) or not isinstance(fields[AREA], str):
         raise ValueError(f'Bad value for {fields.get(AREA)=}')
-    
-    if not fields.get(STATEHOOD_DATE) or not isinstance(fields[STATEHOOD_DATE], str):
-        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
-    
+
+    if (not fields.get(STATEHOOD_DATE) or
+                not isinstance(fields[STATEHOOD_DATE], str)):
+            raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
+
     if not fields.get(GDP) or not isinstance(fields[GDP], str):
         raise ValueError(f'Bad value for {fields.get(GDP)=}')
-    
+
     new_id = dbc.create(COLLECTION, fields)
     state_cache[new_id] = fields
     return new_id
@@ -134,8 +135,8 @@ def update(state_id: str, fields: dict):
         if not fields[GDP] or not isinstance(fields[GDP], str):
             raise ValueError(f'Bad value for {fields.get(GDP)=}')
 
-    if STATEHOOD_DATE in fields:
-        if not fields[STATEHOOD_DATE] or not isinstance(fields[STATEHOOD_DATE], str):
+    if (not fields[STATEHOOD_DATE] or
+                not isinstance(fields[STATEHOOD_DATE], str)):
             raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
 
     result = dbc.update(COLLECTION, {ID: state_id}, fields)
