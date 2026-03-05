@@ -113,15 +113,21 @@ def update(state_id: str, fields: dict):
     if POPULATION in fields and (not isinstance(fields[POPULATION], int) or
                                  fields[POPULATION] < 0):
         raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    if COUNTRY_CODE in fields and (not fields[COUNTRY_CODE] or
-                                   not isinstance(fields[COUNTRY_CODE], str)):
-        raise ValueError(f'Bad value for {fields.get(COUNTRY_CODE)=}')
     if CODE in fields and (not fields[CODE] or
                            not isinstance(fields[CODE], str)):
         raise ValueError(f'Bad value for {fields.get(CODE)=}')
     if GOVERNOR in fields and (not fields[GOVERNOR] or
                                not isinstance(fields[GOVERNOR], str)):
         raise ValueError(f'Bad value for {fields.get(GOVERNOR)=}')
+    if AREA in fields and (not fields[AREA] or
+                               not isinstance(fields[AREA], str)):
+        raise ValueError(f'Bad value for {fields.get(AREA)=}')
+    if GDP in fields and (not fields[GDP] or
+                               not isinstance(fields[GDP], str)):
+        raise ValueError(f'Bad value for {fields.get(GDP)=}')
+    if STATEHOOD_DATE in fields and (not fields[STATEHOOD_DATE] or
+                               not isinstance(fields[STATEHOOD_DATE], str)):
+        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
 
     result = dbc.update(COLLECTION, {ID: state_id}, fields)
     if result < 1:
