@@ -7,17 +7,21 @@ MIN_ID_LEN = 1
 ID = 'id'
 NAME = 'name'
 POPULATION = 'population'
+AREA = 'area'
+STATEHOOD_DATE = 'statehood_date'
+GDP = 'gdp'
 CAPITAL = 'capital'
 GOVERNOR = 'governor'
-COUNTRY_CODE = 'country_code'
 CODE = 'code'
 
 SAMPLE_STATE = {
     NAME: 'New York',
     POPULATION: 19870000,
+    AREA: '54,556 sq miles',
+    STATEHOOD_DATE: '07/26/1788',
+    GDP: '2.32 trillion USD',
     CAPITAL: 'Albany',
     GOVERNOR: 'Kathy Hochul',
-    COUNTRY_CODE: 'US',
     CODE: 'NY'
 }
 
@@ -77,9 +81,12 @@ def create(fields: dict):
         raise ValueError(f'Bad value for {fields.get(CAPITAL)=}')
     if (not fields.get(POPULATION) or not isinstance(fields[POPULATION], int)):
         raise ValueError(f'Bad value for {fields.get(POPULATION)=}')
-    if (not fields.get(COUNTRY_CODE) or
-            not isinstance(fields[COUNTRY_CODE], str)):
-        raise ValueError(f'Bad value for {fields.get(COUNTRY_CODE)=}')
+    if (not fields.get(AREA) or not isinstance(fields[AREA], str)):
+        raise ValueError(f'Bad value for {fields.get(AREA)=}')
+    if (not fields.get(STATEHOOD_DATE) or not isinstance(fields[STATEHOOD_DATE], str)):
+        raise ValueError(f'Bad value for {fields.get(AREA)=}')
+    if (not fields.get(GDP) or not isinstance(fields[GDP], str)):
+        raise ValueError(f'Bad value for {fields.get(GDP)=}')
     new_id = dbc.create(COLLECTION, fields)
     state_cache[new_id] = fields
     return new_id
