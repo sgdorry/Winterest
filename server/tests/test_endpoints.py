@@ -422,6 +422,51 @@ def test_delete_county(mock_delete):
     assert 'message' in resp_json
 
 
+@patch('scores.queries_scores.read')
+def test_get_scores(mock_read):
+    """Test GET /scores endpoint"""
+    mock_read.return_value = [
+        {'id': 'a', 'player': 'Alice', 'score': 200,
+         'guesses_used': 2, 'entity_type': 'cities'},
+        {'id': 'b', 'player': 'anonymous', 'score': 100,
+         'guesses_used': 5, 'entity_type': 'states'},
+    ]
+    resp = TEST_CLIENT.get(ep.SCORES_EP)
+    assert resp.status_code == OK
+    resp_json = resp.get_json()
+    assert 'scores' in resp_json
+    assert isinstance(resp_json['scores'], list)
+    assert resp_json['scores'][0]['score'] >= resp_json['scores'][1]['score']
+
+
+@patch('scores.queries_scores.create')
+def test_post_score(mock_create):
+    """Test POST /scores endpoint"""
+    mock_create.return_value = 'new-score-id'
+    score_data = {
+        'entity_type': 'cities',
+        'score': 150,
+        'guesses_used': 3,
+        'player': 'Bob',
+    }
+    resp = TEST_CLIENT.post(ep.SCORES_EP, json=score_data)
+    assert resp.status_code == CREATED
+    resp_json = resp.get_json()
+    assert 'id' in resp_json
+    assert resp_json['id'] == 'new-score-id'
+    assert 'message' in resp_json
+
+
+@patch('scores.queries_scores.create')
+def test_post_score_bad_data(mock_create):
+    """Test POST /scores with invalid data"""
+    mock_create.side_effect = ValueError('Missing/invalid score')
+    resp = TEST_CLIENT.post(ep.SCORES_EP, json={'entity_type': 'cities'})
+    assert resp.status_code == BAD_REQUEST
+    resp_json = resp.get_json()
+    assert 'error' in resp_json
+
+
 @patch('countries.queries_countries.read')
 @patch('states.queries_states.read')
 @patch('cities.queries_cities.read')

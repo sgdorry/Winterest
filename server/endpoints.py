@@ -17,6 +17,7 @@ from cities.hints import build_cities_hints
 import counties.queries_counties as counties
 import prompts.queries_prompts as prompts
 import puzzles.queries_puzzles as puzzles
+import scores.queries_scores as scores_mod
 
 # import werkzeug.exceptions as wz
 
@@ -41,6 +42,7 @@ PROMPTS_EP = '/prompts'
 QUIZ_QUESTIONS_EP = '/quiz/questions'
 PUZZLES_EP = '/puzzles'
 PUZZLE_QUIZ_EP = '/puzzle/quiz'
+SCORES_EP = '/scores'
 
 prompt_list_parser = reqparse.RequestParser()
 prompt_list_parser.add_argument('type', required=False, location='args')
@@ -217,6 +219,23 @@ class PuzzleQuiz(Resource):
             qs = puzzles.random_puzzles(entity_type, count)
             return {'puzzles': qs}, 200
 
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(SCORES_EP)
+class Scores(Resource):
+    def get(self):
+        return {'scores': scores_mod.read()}, 200
+
+    def post(self):
+        try:
+            data = request.get_json(force=True) or {}
+            new_id = scores_mod.create(data)
+            return {'id': new_id,
+                    'message': 'Score created successfully'}, 201
         except ValueError as e:
             return {'error': str(e)}, 400
         except Exception as e:
