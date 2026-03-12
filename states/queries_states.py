@@ -88,9 +88,9 @@ def create(fields: dict):
     if not fields.get(AREA) or not isinstance(fields[AREA], str):
         raise ValueError(f'Bad value for {fields.get(AREA)=}')
 
-    if (not fields.get(STATEHOOD_DATE) or
-                not isinstance(fields[STATEHOOD_DATE], str)):
-            raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
+    if (not fields.get(STATEHOOD_DATE)
+            or not isinstance(fields[STATEHOOD_DATE], str)):
+        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
 
     if not fields.get(GDP) or not isinstance(fields[GDP], str):
         raise ValueError(f'Bad value for {fields.get(GDP)=}')
@@ -135,9 +135,9 @@ def update(state_id: str, fields: dict):
         if not fields[GDP] or not isinstance(fields[GDP], str):
             raise ValueError(f'Bad value for {fields.get(GDP)=}')
 
-    if (not fields[STATEHOOD_DATE] or
-                not isinstance(fields[STATEHOOD_DATE], str)):
-            raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
+    if (not fields[STATEHOOD_DATE]
+            or not isinstance(fields[STATEHOOD_DATE], str)):
+        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
 
     result = dbc.update(COLLECTION, {ID: state_id}, fields)
     if result < 1:
