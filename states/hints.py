@@ -1,3 +1,5 @@
+import random
+
 POPULATION = "population"
 CAPITAL = "capital"
 GOVERNOR = "governor"
@@ -5,6 +7,23 @@ CODE = "code"
 GDP = "gdp"
 STATEHOOD_DATE = "statehood_date"
 AREA = "area"
+
+"""
+Ranking of Hints (subject to change based on discussion with team members):
+1 (Easiest to use): CODE
+2: CAPITAL
+3: GOVERNOR, POPULATION
+4: STATEHOOD_DATE
+5 (Hardest to use): AREA, GDP
+"""
+
+HINT_DIFFICULTIES = {
+    1: {CODE},
+    2: {CAPITAL},
+    3: {GOVERNOR, POPULATION},
+    4: {STATEHOOD_DATE},
+    5: {AREA, GDP}
+}
 
 HINT_SLOT_ORDER = (
     POPULATION,
@@ -15,7 +34,6 @@ HINT_SLOT_ORDER = (
     STATEHOOD_DATE,
     AREA
 )
-
 
 def _is_non_empty_string(value):
     return isinstance(value, str) and bool(value.strip())
@@ -58,3 +76,17 @@ def build_states_hints(states: dict) -> list[str]:
         f"The GDP is about {gdp}",
         f"The date the state was founded is {statehood_date}"
     ]
+    
+
+def get_random_hint(difficulty: int) -> str:
+    hints_for_difficulty = HINT_DIFFICULTIES.get(difficulty)
+    
+    return random.choice(list(hints_for_difficulty)) if hints_for_difficulty else None
+
+
+def generate_hint_list() -> list[str]:
+    hint_list = []
+    for i in range(5, 0, -1):
+        hint_list.append(get_random_hint(i))
+    
+    return hint_list

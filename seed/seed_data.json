@@ -184,6 +184,116 @@
     }
   ],
   "states": [
+    {
+      "id": "1",
+      "name": "California",
+      "population": 39538223,
+      "country": "United States",
+      "area": "163,696 sq mi",
+      "founded": "1850",
+      "capital": "Sacramento",
+      "governor": "Gavin Newsom",
+      "state_code": "CA"
+    },
+    {
+      "id": "2",
+      "name": "Texas",
+      "population": 29145505,
+      "country": "United States",
+      "area": "268,596 sq mi",
+      "founded": "1845",
+      "capital": "Austin",
+      "governor": "Greg Abbott",
+      "state_code": "TX"
+    },
+    {
+      "id": "3",
+      "name": "Florida",
+      "population": 21538187,
+      "country": "United States",
+      "area": "65,755 sq mi",
+      "founded": "1845",
+      "capital": "Tallahassee",
+      "governor": "Ron DeSantis",
+      "state_code": "FL"
+    },
+    {
+      "id": "4",
+      "name": "New York",
+      "population": 20201249,
+      "country": "United States",
+      "area": "54,555 sq mi",
+      "founded": "1788",
+      "capital": "Albany",
+      "governor": "Kathy Hochul",
+      "state_code": "NY"
+    },
+    {
+      "id": "5",
+      "name": "Illinois",
+      "population": 12812508,
+      "country": "United States",
+      "area": "57,914 sq mi",
+      "founded": "1818",
+      "capital": "Springfield",
+      "governor": "J.B. Pritzker",
+      "state_code": "IL"
+    },
+    {
+      "id": "6",
+      "name": "Pennsylvania",
+      "population": 13002700,
+      "country": "United States",
+      "area": "46,054 sq mi",
+      "founded": "1787",
+      "capital": "Harrisburg",
+      "governor": "Tom Wolf",
+      "state_code": "PA"
+    },
+    {
+      "id": "7",
+      "name": "Ohio",
+      "population": 11799448,
+      "country": "United States",
+      "area": "44,825 sq mi",
+      "founded": "1803",
+      "capital": "Columbus",
+      "governor": "Mike DeWine",
+      "state_code": "OH"
+    },
+    {
+      "id": "8",
+      "name": "Georgia",
+      "population": 10711908,
+      "country": "United States",
+      "area": "59,425 sq mi",
+      "founded": "1788",
+      "capital": "Atlanta",
+      "governor": "Brian Kemp",
+      "state_code": "GA"
+    },
+    {
+      "id": "9",
+      "name": "North Carolina",
+      "population": 10439388,
+      "country": "United States",
+      "area": "53,819 sq mi",
+      "founded": "1789",
+      "capital": "Raleigh",
+      "governor": "Roy Cooper",
+      "state_code": "NC"
+    },
+    {
+      "id": "10",
+      "name": "Michigan",
+      "population": 10077331,
+      "country": "United States",
+      "area": "96,716 sq mi",
+      "founded": "1837",
+      "capital": "Lansing",
+      "governor": "Gretchen Whitmer",
+      "state_code": "MI"
+    }
   ],
   "cities": [
     {
