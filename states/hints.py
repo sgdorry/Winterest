@@ -81,7 +81,12 @@ def build_states_hints(states: dict) -> list[str]:
 def get_random_hint(difficulty: int) -> str:
     hints_for_difficulty = HINT_DIFFICULTIES.get(difficulty)
     
-    return random.choice(list(hints_for_difficulty)) if hints_for_difficulty else None
+    if hints_for_difficulty is None:
+        raise ValueError(f"Invalid difficulty level: {difficulty}")
+    else:
+        one_hint = random.choice(list(hints_for_difficulty))
+    
+    return one_hint
 
 
 def generate_hint_list() -> list[str]:
