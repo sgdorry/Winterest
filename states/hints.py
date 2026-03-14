@@ -76,16 +76,16 @@ def build_states_hints(states: dict) -> list[str]:
         f"The GDP is about {gdp}",
         f"The date the state was founded is {statehood_date}"
     ]
-    
+
 
 def get_random_hint(difficulty: int) -> str:
     hints_for_difficulty = HINT_DIFFICULTIES.get(difficulty)
-    
+
     if hints_for_difficulty is None:
         raise ValueError(f"Invalid difficulty level: {difficulty}")
     else:
         one_hint = random.choice(list(hints_for_difficulty))
-    
+
     return one_hint
 
 
@@ -93,5 +93,5 @@ def generate_hint_list() -> list[str]:
     hint_list = []
     for i in range(5, 0, -1):
         hint_list.append(get_random_hint(i))
-    
+
     return hint_list
