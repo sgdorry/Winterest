@@ -11,6 +11,7 @@ SCORE = "score"
 GUESSES_USED = "guesses_used"
 ENTITY_TYPE = "entity_type"
 TIMESTAMP = "timestamp"
+USER_ID = "user_id"
 
 VALID_ENTITY_TYPES = {"cities", "states", "countries"}
 
@@ -68,6 +69,9 @@ def create(fields: dict) -> str:
         TIMESTAMP: now,
     }
 
+    if fields.get(USER_ID):
+        doc[USER_ID] = fields[USER_ID]
+
     dbc.create(COLLECTION, doc)
     score_cache[sid] = doc
     return sid
@@ -76,5 +80,18 @@ def create(fields: dict) -> str:
 @needs_cache
 def read() -> list:
     docs = list(score_cache.values())
+    docs.sort(key=lambda d: d.get(SCORE, 0), reverse=True)
+    return docs
+
+
+@needs_cache
+def read_by_user_ids(user_ids: list) -> list:
+    if not user_ids:
+        return []
+    uid_set = set(user_ids)
+    docs = [
+        doc for doc in score_cache.values()
+        if doc.get(USER_ID) in uid_set
+    ]
     docs.sort(key=lambda d: d.get(SCORE, 0), reverse=True)
     return docs

@@ -20,6 +20,7 @@ import prompts.queries_prompts as prompts
 import puzzles.queries_puzzles as puzzles
 import scores.queries_scores as scores_mod
 from users import queries_users as qu
+import friends.queries_friends as friends_mod
 
 # import werkzeug.exceptions as wz
 
@@ -45,6 +46,8 @@ QUIZ_QUESTIONS_EP = '/quiz/questions'
 PUZZLES_EP = '/puzzles'
 PUZZLE_QUIZ_EP = '/puzzle/quiz'
 SCORES_EP = '/scores'
+FRIENDS_EP = '/friends'
+SCORES_FRIENDS_EP = '/scores/friends'
 
 prompt_list_parser = reqparse.RequestParser()
 prompt_list_parser.add_argument('type', required=False, location='args')
@@ -240,6 +243,81 @@ class Scores(Resource):
                     'message': 'Score created successfully'}, 201
         except ValueError as e:
             return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(FRIENDS_EP)
+class Friends(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if not user_id:
+            return {'error': 'user_id is required'}, 400
+        try:
+            friend_ids = friends_mod.read(user_id)
+            friends_list = []
+            for fid in friend_ids:
+                for user in qu.read():
+                    if user.get(qu.ID) == fid:
+                        friends_list.append({
+                            'id': fid,
+                            'email': user.get(qu.EMAIL),
+                        })
+                        break
+            return {'friends': friends_list}, 200
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+    def post(self):
+        try:
+            data = request.get_json(force=True) or {}
+            user_id = data.get('user_id')
+            friend_email = data.get('friend_email', '').strip().lower()
+            if not user_id or not friend_email:
+                return {'error': 'user_id and friend_email are required'}, 400
+            friend = qu.find_by_email(friend_email)
+            if not friend:
+                return {'error': 'No user found with that email'}, 404
+            friend_id = friend.get(qu.ID)
+            friends_mod.create(user_id, friend_id)
+            return {
+                'message': 'Friend added',
+                'friend': {
+                    'id': friend_id,
+                    'email': friend.get(qu.EMAIL),
+                },
+            }, 201
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+    def delete(self):
+        try:
+            data = request.get_json(force=True) or {}
+            user_id = data.get('user_id')
+            friend_id = data.get('friend_id')
+            if not user_id or not friend_id:
+                return {'error': 'user_id and friend_id are required'}, 400
+            friends_mod.delete(user_id, friend_id)
+            return {'message': 'Friend removed'}, 200
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(SCORES_FRIENDS_EP)
+class ScoresFriends(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if not user_id:
+            return {'error': 'user_id is required'}, 400
+        try:
+            friend_ids = friends_mod.read(user_id)
+            all_ids = friend_ids + [user_id]
+            scores = scores_mod.read_by_user_ids(all_ids)
+            return {'scores': scores}, 200
         except Exception as e:
             return {'error': str(e)}, 500
 
