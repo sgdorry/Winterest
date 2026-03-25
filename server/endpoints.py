@@ -8,6 +8,7 @@ from flask import Flask
 from flask_restx import Resource, Api, reqparse
 from flask import request
 from flask_cors import CORS
+import bcrypt
 
 import countries.queries_countries as countries
 from countries.hints import build_country_hints
@@ -18,6 +19,7 @@ import counties.queries_counties as counties
 import prompts.queries_prompts as prompts
 import puzzles.queries_puzzles as puzzles
 import scores.queries_scores as scores_mod
+from users import queries_users as qu
 
 # import werkzeug.exceptions as wz
 
@@ -573,3 +575,67 @@ class County(Resource):
             return {'error': str(e)}, 404
         except Exception as e:
             return {'error': str(e)}, 500
+        
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
+
+    if not data:
+        return {"error": "Missing JSON body"}, 400
+
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not email or not password:
+        return {"error": "Email and password are required"}, 400
+
+    if len(password) < 6:
+        return {"error": "Password must be at least 6 characters"}, 400
+
+    hashed_password = bcrypt.hashpw(
+        password.encode("utf-8"),
+        bcrypt.gensalt()
+    ).decode("utf-8")
+
+    try:
+        qu.create({
+            qu.EMAIL: email,
+            qu.PASSWORD: hashed_password,
+        })
+    except ValueError as e:
+        return {"error": str(e)}, 409
+
+    return {"message": "Account created successfully"}, 201
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+
+    if not data:
+        return {"error": "Missing JSON body"}, 400
+
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not email or not password:
+        return {"error": "Email and password are required"}, 400
+
+    user = qu.find_by_email(email)
+    if not user:
+        return {"error": "Invalid email or password"}, 401
+
+    stored_password = user.get(qu.PASSWORD, "")
+
+    if not bcrypt.checkpw(
+        password.encode("utf-8"),
+        stored_password.encode("utf-8")
+    ):
+        return {"error": "Invalid email or password"}, 401
+
+    return {
+        "message": "Login successful",
+        "user": {
+            "id": user.get(qu.ID),
+            "email": user.get(qu.EMAIL),
+        }
+    }, 200
