@@ -575,7 +575,8 @@ class County(Resource):
             return {'error': str(e)}, 404
         except Exception as e:
             return {'error': str(e)}, 500
-        
+
+
 @app.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
@@ -607,13 +608,12 @@ def signup():
 
     return {"message": "Account created successfully"}, 201
 
+
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-
     if not data:
         return {"error": "Missing JSON body"}, 400
-
     email = data.get("email", "").strip().lower()
     password = data.get("password", "")
 
