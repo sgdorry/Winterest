@@ -315,6 +315,106 @@
       "area": "503 sq mi",
       "founded": "1781",
       "mayor": "Karen Bass"
+    },
+    {
+      "id": "3",
+      "name": "Chicago",
+      "population": "2,746,000",
+      "state": "Illinois",
+      "state_code": "IL",
+      "area": "234 sq mi",
+      "founded": "1833",
+      "mayor": "Brandon Johnson"
+    },
+    {
+      "id": "4",
+      "name": "Houston",
+      "population": "2,314,000",
+      "state": "Texas",
+      "state_code": "TX",
+      "area": "671 sq mi",
+      "founded": "1836",
+      "mayor": "John Whitmire"
+    },
+    {
+      "id": "5",
+      "name": "Phoenix",
+      "population": "1,650,000",
+      "state": "Arizona",
+      "state_code": "AZ",
+      "area": "518 sq mi",
+      "founded": "1881",
+      "mayor": "Kate Gallego"
+    },
+    {
+      "id": "6",
+      "name": "Philadelphia",
+      "population": "1,573,000",
+      "state": "Pennsylvania",
+      "state_code": "PA",
+      "area": "142 sq mi",
+      "founded": "1682",
+      "mayor": "Cherelle Parker"
+    },
+    {
+      "id": "7",
+      "name": "San Antonio",
+      "population": "1,495,000",
+      "state": "Texas",
+      "state_code": "TX",
+      "area": "505 sq mi",
+      "founded": "1718",
+      "mayor": "Ron Nirenberg"
+    },
+    {
+      "id": "8",
+      "name": "San Diego",
+      "population": "1,381,000",
+      "state": "California",
+      "state_code": "CA",
+      "area": "372 sq mi",
+      "founded": "1769",
+      "mayor": "Todd Gloria"
+    },
+    {
+      "id": "9",
+      "name": "Dallas",
+      "population": "1,304,000",
+      "state": "Texas",
+      "state_code": "TX",
+      "area": "386 sq mi",
+      "founded": "1841",
+      "mayor": "Eric Johnson"
+    },
+    {
+      "id": "10",
+      "name": "San Jose",
+      "population": "1,013,000",
+      "state": "California",
+      "state_code": "CA",
+      "area": "181 sq mi",
+      "founded": "1777",
+      "mayor": "Matt Mahan"
+    },
+    {
+      "id": "11",
+      "name": "Austin",
+      "population": "979,000",
+      "state": "Texas",
+      "state_code": "TX",
+      "area": "326 sq mi",
+      "founded": "1839",
+      "mayor": "Kirk Watson"
+    },
+    {
+      "id": "12",
+      "name": "Jacksonville",
+      "population": "971,000",
+      "state": "Florida",
+      "state_code": "FL",
+      "area": "875 sq mi",
+      "founded": "1822",
+      "mayor": "Donna Deegan"
     }
   ],
   "counties": [
