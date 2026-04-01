@@ -48,6 +48,7 @@ PUZZLE_QUIZ_EP = '/puzzle/quiz'
 SCORES_EP = '/scores'
 FRIENDS_EP = '/friends'
 SCORES_FRIENDS_EP = '/scores/friends'
+LEADERBOARD_FILTERS_EP = '/leaderboard/filters'
 
 prompt_list_parser = reqparse.RequestParser()
 prompt_list_parser.add_argument('type', required=False, location='args')
@@ -320,6 +321,17 @@ class ScoresFriends(Resource):
             return {'scores': scores}, 200
         except Exception as e:
             return {'error': str(e)}, 500
+
+
+@api.route(LEADERBOARD_FILTERS_EP)
+class LeaderboardFilters(Resource):
+    def get(self):
+        return {
+            'filters': [
+                {'value': 'all', 'label': 'All Players'},
+                {'value': 'friends', 'label': 'Friends Only'},
+            ]
+        }, 200
 
 
 @api.route('/countries')

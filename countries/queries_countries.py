@@ -5,8 +5,8 @@ from functools import wraps
 COUNTRIES_COLLECTION = "countries"
 
 MIN_ID_LEN = 1
-ID = 'id'
 COUNTRY_ID = 'country_id'
+ID = 'id'
 NAME = 'name'
 POPULATION = 'population'
 CONTINENT = 'continent'

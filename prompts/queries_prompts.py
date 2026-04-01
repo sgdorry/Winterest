@@ -1,4 +1,3 @@
-# prompts/queries_prompts.py
 from functools import wraps
 from uuid import uuid4
 import random
@@ -7,15 +6,15 @@ import data.db_connect as dbc
 COLLECTION = "prompts"
 
 ID = "id"
-TYPE = "type"                 # "COUNTRY_FLAG" | "STATE_FACT" | "CITY_LANDMARK"
-ENTITY_TYPE = "entity_type"   # "country" | "state" | "city"
-ENTITY_ID = "entity_id"       # "US" | "NY" | etc
-ASSET_URL = "asset_url"       # image url
-ASSET_TEXT = "asset_text"     # fun fact text
-ANSWER = "answer"             # string
-APPROVED = "approved"         # bool
+TYPE = "type"
+ENTITY_TYPE = "entity_type"
+ENTITY_ID = "entity_id"
+ASSET_URL = "asset_url"
+ASSET_TEXT = "asset_text"
+ANSWER = "answer"
+APPROVED = "approved"
 
-prompt_cache = {}  # id -> doc
+prompt_cache = {}
 
 def needs_cache(fn):
     @wraps(fn)
@@ -35,12 +34,10 @@ def create(fields: dict) -> str:
     if not isinstance(fields, dict):
         raise ValueError("fields must be a dict")
 
-    # Required keys
     for k in [TYPE, ENTITY_TYPE, ENTITY_ID, ANSWER]:
         if not fields.get(k) or not isinstance(fields[k], str):
             raise ValueError(f"Missing/invalid {k}")
 
-    # Must have an asset
     if not fields.get(ASSET_URL) and not fields.get(ASSET_TEXT):
         raise ValueError("Must provide asset_url or asset_text")
 

@@ -41,7 +41,7 @@ def create(fields: dict) -> str:
 
     existing_user = find_by_email(email)
     if existing_user:
-        raise ValueError("User already exists")
+        raise ValueError("User alrcoeady exists")
 
     uid = fields.get(ID) or uuid4().hex
 
