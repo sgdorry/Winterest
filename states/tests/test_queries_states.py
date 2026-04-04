@@ -73,7 +73,7 @@ def test_good_create(state_delta):
         assert qry.is_valid_population(temp_state_data["population"]) #check if the population entered is valid
         assert qry.is_valid_governor(temp_state_data["governor"]) #check if the governor entered is valid
         assert qry.is_valid_capital(temp_state_data["capital"]) #check if the capital entered is valid
-        assert qry.is_valid_code(temp_state_data["state_code"]) #check if the state code entered is valid
+        assert qry.is_valid_code(temp_state_data["code"]) #check if the state code entered is valid
 
    
 def test_create_bad_param_type(state_delta):
