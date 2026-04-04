@@ -90,7 +90,8 @@ def generate_hint_list() -> list[str]:
     hint_list = []
     for i in range(5, 0, -1):
         hint_list.append(get_random_hint(i))
-        
+
     return hint_list
+
 
 HINT_SLOT_ORDER = generate_hint_list()
