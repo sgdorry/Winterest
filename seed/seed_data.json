@@ -293,7 +293,172 @@
       "capital": "Lansing",
       "governor": "Gretchen Whitmer",
       "state_code": "MI"
-    }
+    },
+    {
+      "id": "11",
+      "name": "New Jersey",
+      "population": 9288994,
+      "country": "United States",
+      "area": "8,723 sq mi",
+      "founded": "1787",
+      "capital": "Trenton",
+      "governor": "Phil Murphy",
+      "state_code": "NJ"
+    },
+    {
+      "id": "12",
+      "name": "Virginia",
+      "population": 8631393,
+      "country": "United States",
+      "area": "42,774 sq mi",
+      "founded": "1788",
+      "capital": "Richmond",
+      "governor": "Glenn Youngkin",
+      "state_code": "VA"
+    },
+    {
+      "id": "13",
+      "name": "Washington",
+      "population": 7693612,
+      "country": "United States",
+      "area": "71,298 sq mi",
+      "founded": "1889",
+      "capital": "Olympia",
+      "governor": "Jay Inslee",
+      "state_code": "WA"
+    },
+    {
+      "id": "14",
+      "name": "Arizona",
+      "population": 7151502,
+      "country": "United States",
+      "area": "113,990 sq mi",
+      "founded": "1912",
+      "capital": "Phoenix",
+      "governor": "Katie Hobbs",
+      "state_code": "AZ"
+    },
+    {
+      "id": "15",
+      "name": "Massachusetts",
+      "population": 7029917,
+      "country": "United States",
+      "area": "10,565 sq mi",
+      "founded": "1788",
+      "capital": "Boston",
+      "governor": "Maura Healey",
+      "state_code": "MA"
+    },
+    {
+      "id": "16",
+      "name": "Tennessee",
+      "population": 6910840,
+      "country": "United States",
+      "area": "42,143 sq mi",
+      "founded": "1796",
+      "capital": "Nashville",
+      "governor": "Bill Lee",
+      "state_code": "TN"
+    },
+    {
+      "id": "17",
+      "name": "Indiana",
+      "population": 6785528,
+      "country": "United States",
+      "area": "36,420 sq mi",
+      "founded": "1816",
+      "capital": "Indianapolis",
+      "governor": "Eric Holcomb",
+      "state_code": "IN"
+    },
+    {
+      "id": "18",
+      "name": "Missouri",
+      "population": 6154913,
+      "country": "United States",
+      "area": "69,707 sq mi",
+      "founded": "1821",
+      "capital": "Jefferson City",
+      "governor": "Mike Parson",
+      "state_code": "MO"
+    },
+    {
+      "id": "19",
+      "name": "Maryland",
+      "population": 6177224,
+      "country": "United States",
+      "area": "12,406 sq mi",
+      "founded": "1788",
+      "capital": "Annapolis",
+      "governor": "Larry Hogan",
+      "state_code": "MD"
+    },
+    {
+        "id": "20",
+        "name": "Wisconsin",
+        "population": 5893718,
+        "country": "United States",
+        "area": "65,498 sq mi",
+        "founded": "1848",
+        "capital": "Madison",
+        "governor": "Tony Evers",
+        "state_code": "WI"
+    },
+    {
+        "id": "21",
+        "name": "Colorado",
+        "population": 5773714,
+        "country": "United States",
+        "area": "104,094 sq mi",
+        "founded": "1876",
+        "capital": "Denver",
+        "governor": "Jared Polis",
+        "state_code": "CO"
+    },
+    {
+        "id": "22",
+        "name": "Minnesota",
+        "population": 5706494,
+        "country": "United States",
+        "area": "86,936 sq mi",
+        "founded": "1858",
+        "capital": "St. Paul",
+        "governor": "Tim Walz",
+        "state_code": "MN"
+    },
+    {
+      "id": "23",
+      "name": "South Carolina",
+      "population": 5118425,
+      "country": "United States",
+      "area": "32,020 sq mi",
+      "founded": "1788",
+      "capital":  "Columbia",
+      "governor":  "Henry McMaster",
+      "state_code": "SC"
+    },
+    {
+      "id": "24",
+      "name": "Alabama",
+      "population": 5024279,
+      "country": "United States",
+      "area": "52,420 sq mi",
+      "founded": "1819",
+      "capital":  "Montgomery",
+      "governor":  "Kay Ivey",
+      "state_code": "AL"
+    },
+    {
+      "id": "25",
+      "name": "Louisiana",
+      "population": 4657757,
+      "country": "United States",
+      "area": "52,378 sq mi",
+      "founded": "1812",
+      "capital":  "Baton Rouge",
+      "governor":  "John Bel Edwards",
+      "state_code": "LA"
+    } 
   ],
   "cities": [
     {
