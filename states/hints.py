@@ -7,6 +7,8 @@ CODE = "code"
 GDP = "gdp"
 STATEHOOD_DATE = "statehood_date"
 AREA = "area"
+CLIMATE = "climate"
+STATE_BIRD = "state_bird"
 
 """
 Ranking of Hints (subject to change based on discussion with team members):
@@ -21,19 +23,9 @@ HINT_DIFFICULTIES = {
     1: {CODE},
     2: {CAPITAL},
     3: {GOVERNOR, POPULATION},
-    4: {STATEHOOD_DATE},
-    5: {AREA, GDP}
+    4: {STATEHOOD_DATE, CLIMATE},
+    5: {AREA, GDP, STATE_BIRD}
 }
-
-HINT_SLOT_ORDER = (
-    POPULATION,
-    CAPITAL,
-    GOVERNOR,
-    CODE,
-    GDP,
-    STATEHOOD_DATE,
-    AREA
-)
 
 
 def _is_non_empty_string(value):
@@ -66,6 +58,8 @@ def build_states_hints(states: dict) -> list[str]:
     statehood_date = states[STATEHOOD_DATE].strip()
     gdp = states[GDP].strip()
     area = states[AREA].strip()
+    climate = states[CLIMATE].strip()
+    state_bird = states[STATE_BIRD].strip()
     capital_period = "" if capital.endswith((".", "!", "?")) else "."
 
     return [
@@ -75,7 +69,9 @@ def build_states_hints(states: dict) -> list[str]:
         f"The state code is {code}.",
         f"The area is about {area}",
         f"The GDP is about {gdp}",
-        f"The date the state was founded is {statehood_date}"
+        f"The date the state was founded is {statehood_date}",
+        f"The climate of the state is {climate}",
+        f"The state bird is {state_bird}"
     ]
 
 
@@ -94,5 +90,7 @@ def generate_hint_list() -> list[str]:
     hint_list = []
     for i in range(5, 0, -1):
         hint_list.append(get_random_hint(i))
-
+        
     return hint_list
+
+HINT_SLOT_ORDER = generate_hint_list()

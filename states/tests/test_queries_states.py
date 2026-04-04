@@ -62,11 +62,6 @@ def test_num_states(state_delta):
     with state_delta(+1):
         qry.create(create_temp_state()) #adding a new state
 
-    '''
-    old_count = qry.num_states() #current count of states in database
-    qry.create(create_temp_state()) #adding a new state
-    assert qry.num_states() == old_count + 1 #checking if a new state was created'''
-
     
 def test_good_create(state_delta):
     with state_delta(+1):
@@ -75,48 +70,11 @@ def test_good_create(state_delta):
         assert qry.is_valid_id(new_rec_id) #checking if the new id created is a valid one
         assert qry.is_valid_population(temp_state_data["population"]) #check if the population entered is valid
         assert qry.is_valid_governor(temp_state_data["governor"]) #check if the governor entered is valid
-
-    '''
-    old_count = qry.num_states() #current count of states
-    new_rec_id = qry.create(create_temp_state()) #new record
-    assert qry.is_valid_id(new_rec_id) #checking if the new id created is a valid one
-    assert qry.is_valid_population(temp_state_data["population"]) #check if the population entered is valid
-    assert qry.num_states() == old_count + 1 #sees if the new state was created'';'''
-
-
-def test_create_bad_name(state_delta):
-    with state_delta():
-        with pytest.raises(Exception):
-            qry.create({'id': '1', 'name': 5, 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with an integer as the name
-
-    '''
-    old_count = qry.num_states() #current count of states
-    with pytest.raises(Exception):
-        qry.create({'id': '1', 'name': 5, 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with an integer as the name
-    assert qry.num_states() == old_count #ensuring no invalid state was created'''
     
-def test_create_bad_population(state_delta):
-    with state_delta():
-        with pytest.raises(Exception):
-            qry.create({'id': '1', 'name': 'New York', 'population': '19870000', 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with a string as the population
-    
-    '''
-    old_count = qry.num_states() #current count of states
-    with pytest.raises(Exception):
-        qry.create({'id': '1', 'name': 'New York', 'population': '19870000', 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with a string as the population
-    assert qry.num_states() == old_count #ensuring no invalid state was created'''
-
 def test_create_bad_param_type(state_delta):
     with state_delta():
         with pytest.raises(Exception):
             qry.create([1, 2, 3])
-    
-    '''
-    old_count = qry.num_states() #current count of states
-    with pytest.raises(Exception):
-        qry.create([1, 2, 3])
-    assert qry.num_states() == old_count #make sure number of states did not change'''
-
 
 @patch('data.db_connect.read')
 def test_read(mock_dbc_read, temp_state):
@@ -136,12 +94,52 @@ def test_read_cant_connect(mock_dbc_read):
 
     with pytest.raises(DBError):
         states = qry.read()
+
+def test_create_bad_name(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 5, 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with an integer as the name
+    
+def test_create_bad_population(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 'New York', 'population': '19870000', 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with a string as the population
                 
         
 def test_create_bad_capital(state_delta):
     with state_delta():
         with pytest.raises(Exception):
             qry.create({'id': '1', 'name': 'New York', 'population': 19870000, 'capital': 293745, 'governor': 'Kathy Hochul'})
+            
+def test_create_bad_governor(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 'New York', 'population': 19870000, 'capital': 'Albany', 'governor': 293745})
+            
+def test_create_bad_id(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': 123, 'name': 'New York', 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul'})
+            
+def test_create_bad_climate(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 'New York', 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul', 'climate': 293745})
+
+def test_create_bad_state_bird(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 'New York', 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul', 'state_bird': 293745})
+
+def test_create_bad_statehood_date(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 'New York', 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul', 'statehood_date': 293745})
+            
+def test_create_bad_gdp(state_delta):
+    with state_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': '1', 'name': 'New York', 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul', 'gdp': 293745})
 
 
 @pytest.mark.skip
@@ -162,13 +160,3 @@ def test_delete(temp_state, state_delta):
 def test_delete_not_there():
     with pytest.raises(ValueError):
         qry.delete('a state that has not yet been created')
-
-'''
-def test_delete(temp_city,city_delta):
-    
-    assert temp_city in qry.city_cache
-    with city_delta(-1): #expecting num_cities to decrease -1
-        # delete the city
-        qry.delete(temp_city)
-    # verify it's no longer in the cache
-    assert temp_city not in qry.city_cache'''

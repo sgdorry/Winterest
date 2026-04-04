@@ -13,6 +13,9 @@ GDP = 'gdp'
 CAPITAL = 'capital'
 GOVERNOR = 'governor'
 CODE = 'code'
+CLIMATE = 'climate'
+STATE_BIRD = 'state_bird'
+
 
 SAMPLE_STATE = {
     NAME: 'New York',
@@ -22,7 +25,9 @@ SAMPLE_STATE = {
     GDP: '2.32 trillion USD',
     CAPITAL: 'Albany',
     GOVERNOR: 'Kathy Hochul',
-    CODE: 'NY'
+    CODE: 'NY',
+    CLIMATE: 'Humid continental',
+    STATE_BIRD: 'Eastern Bluebird'
 }
 
 state_cache = {
@@ -58,7 +63,6 @@ def is_valid_population(_population):
         return False
     return True
 
-
 def is_valid_governor(_governor: str):
     if not isinstance(_governor, str):
         return False
@@ -66,11 +70,66 @@ def is_valid_governor(_governor: str):
         return False
     return True
 
+def is_valid_capital(_capital: str):
+    if not isinstance(_capital, str):
+        return False
+    if len(_capital) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_code(_code: str):
+    if not isinstance(_code, str):
+        return False
+    if len(_code) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_area(_area: str):
+    if not isinstance(_area, str):
+        return False
+    if len(_area) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_gdp(_gdp: str):
+    if not isinstance(_gdp, str):
+        return False
+    if len(_gdp) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_statehood_date(_statehood_date: str):
+    if not isinstance(_statehood_date, str):
+        return False
+    if len(_statehood_date) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_name(_name: str):
+    if not isinstance(_name, str):
+        return False
+    if len(_name) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_climate(_climate: str):
+    if not isinstance(_climate, str):
+        return False
+    if len(_climate) < MIN_ID_LEN:
+        return False
+    return True
+
+def is_valid_state_bird(_state_bird: str):
+    if not isinstance(_state_bird, str):
+        return False
+    if len(_state_bird) < MIN_ID_LEN:
+        return False
+    return True
+
 
 @needs_cache
 def num_states():
     return len(state_cache)
-
 
 def create(fields: dict):
     if not isinstance(fields, dict):
