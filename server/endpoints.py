@@ -8,7 +8,6 @@ from flask import Flask
 from flask_restx import Resource, Api, reqparse
 from flask import request
 from flask_cors import CORS
-import bcrypt
 
 import countries.queries_countries as countries
 from countries.hints import build_country_hints
@@ -675,6 +674,7 @@ def signup():
         return {"error": "Missing JSON body"}, 400
 
     email = data.get("email", "").strip().lower()
+    username = data.get("username", "").strip().lower()
     password = data.get("password", "")
 
     if not email or not password:
@@ -683,20 +683,25 @@ def signup():
     if len(password) < 6:
         return {"error": "Password must be at least 6 characters"}, 400
 
-    hashed_password = bcrypt.hashpw(
-        password.encode("utf-8"),
-        bcrypt.gensalt()
-    ).decode("utf-8")
-
     try:
-        qu.create({
+        user_id = qu.create({
             qu.EMAIL: email,
-            qu.PASSWORD: hashed_password,
+            qu.USERNAME: username,
+            qu.PASSWORD: password,
         })
     except ValueError as e:
         return {"error": str(e)}, 409
 
-    return {"message": "Account created successfully"}, 201
+    user = qu.find_by_email(email)
+
+    return {
+        "message": "Account created successfully",
+        "user": {
+            "id": user_id,
+            "email": user.get(qu.EMAIL) if user else email,
+            "username": user.get(qu.USERNAME) if user else username,
+        },
+    }, 201
 
 
 @app.route("/login", methods=["POST"])
@@ -705,27 +710,30 @@ def login():
     if not data:
         return {"error": "Missing JSON body"}, 400
     email = data.get("email", "").strip().lower()
+    username = data.get("username", "").strip().lower()
+    login_id = data.get("login", "").strip().lower()
     password = data.get("password", "")
 
-    if not email or not password:
-        return {"error": "Email and password are required"}, 400
+    identifier = login_id or email or username
 
-    user = qu.find_by_email(email)
+    if not identifier or not password:
+        return {
+            "error": "A login identifier (login/email/username) "
+                     + "and password are required"
+        }, 400
+
+    user = qu.verify(identifier, password)
     if not user:
-        return {"error": "Invalid email or password"}, 401
-
-    stored_password = user.get(qu.PASSWORD, "")
-
-    if not bcrypt.checkpw(
-        password.encode("utf-8"),
-        stored_password.encode("utf-8")
-    ):
-        return {"error": "Invalid email or password"}, 401
+        return {"error": "Invalid credentials"}, 401
 
     return {
         "message": "Login successful",
         "user": {
             "id": user.get(qu.ID),
             "email": user.get(qu.EMAIL),
+            "username": user.get(qu.USERNAME),
+            "score": user.get(qu.SCORE, 0),
+            "games_played": user.get(qu.GAMES_PLAYED, 0),
+            "friends": user.get(qu.FRIENDS, []),
         }
     }, 200
