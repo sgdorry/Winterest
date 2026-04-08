@@ -190,10 +190,13 @@
       "population": 39538223,
       "country": "United States",
       "area": "163,696 sq mi",
-      "founded": "1850",
+      "statehood_date": "1850",
       "capital": "Sacramento",
       "governor": "Gavin Newsom",
-      "state_code": "CA"
+      "code": "CA",
+      "gdp": "3.6 trillion USD",
+      "climate": "Mediterranean to desert",
+      "state_bird": "California Quail"
     },
     {
       "id": "2",
@@ -201,10 +204,13 @@
       "population": 29145505,
       "country": "United States",
       "area": "268,596 sq mi",
-      "founded": "1845",
+      "statehood_date": "1845",
       "capital": "Austin",
       "governor": "Greg Abbott",
-      "state_code": "TX"
+      "code": "TX",
+      "gdp": "2.0 trillion USD",
+      "climate": "Subtropical to arid",
+      "state_bird": "Northern Mockingbird"
     },
     {
       "id": "3",
@@ -212,10 +218,13 @@
       "population": 21538187,
       "country": "United States",
       "area": "65,755 sq mi",
-      "founded": "1845",
+      "statehood_date": "1845",
       "capital": "Tallahassee",
       "governor": "Ron DeSantis",
-      "state_code": "FL"
+      "code": "FL",
+      "gdp": "1.4 trillion USD",
+      "climate": "Tropical to subtropical",
+      "state_bird": "Northern Mockingbird"
     },
     {
       "id": "4",
@@ -223,10 +232,13 @@
       "population": 20201249,
       "country": "United States",
       "area": "54,555 sq mi",
-      "founded": "1788",
+      "statehood_date": "1788",
       "capital": "Albany",
       "governor": "Kathy Hochul",
-      "state_code": "NY"
+      "code": "NY",
+      "gdp": "2.0 trillion USD",
+      "climate": "Humid continental",
+      "state_bird": "Eastern Bluebird"
     },
     {
       "id": "5",
@@ -234,10 +246,13 @@
       "population": 12812508,
       "country": "United States",
       "area": "57,914 sq mi",
-      "founded": "1818",
+      "statehood_date": "1818",
       "capital": "Springfield",
       "governor": "J.B. Pritzker",
-      "state_code": "IL"
+      "code": "IL",
+      "gdp": "1.0 trillion USD",
+      "climate": "Humid continental",
+      "state_bird": "Northern Cardinal"
     },
     {
       "id": "6",
@@ -245,10 +260,13 @@
       "population": 13002700,
       "country": "United States",
       "area": "46,054 sq mi",
-      "founded": "1787",
+      "statehood_date": "1787",
       "capital": "Harrisburg",
       "governor": "Tom Wolf",
-      "state_code": "PA"
+      "code": "PA",
+      "gdp": "923 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "Ruffed Grouse"
     },
     {
       "id": "7",
@@ -256,10 +274,13 @@
       "population": 11799448,
       "country": "United States",
       "area": "44,825 sq mi",
-      "founded": "1803",
+      "statehood_date": "1803",
       "capital": "Columbus",
       "governor": "Mike DeWine",
-      "state_code": "OH"
+      "code": "OH",
+      "gdp": "822 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "Northern Cardinal"
     },
     {
       "id": "8",
@@ -267,10 +288,13 @@
       "population": 10711908,
       "country": "United States",
       "area": "59,425 sq mi",
-      "founded": "1788",
+      "statehood_date": "1788",
       "capital": "Atlanta",
       "governor": "Brian Kemp",
-      "state_code": "GA"
+      "code": "GA",
+      "gdp": "756 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Brown Thrasher"
     },
     {
       "id": "9",
@@ -278,10 +302,13 @@
       "population": 10439388,
       "country": "United States",
       "area": "53,819 sq mi",
-      "founded": "1789",
+      "statehood_date": "1789",
       "capital": "Raleigh",
       "governor": "Roy Cooper",
-      "state_code": "NC"
+      "code": "NC",
+      "gdp": "706 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Northern Cardinal"
     },
     {
       "id": "10",
@@ -289,10 +316,13 @@
       "population": 10077331,
       "country": "United States",
       "area": "96,716 sq mi",
-      "founded": "1837",
+      "statehood_date": "1837",
       "capital": "Lansing",
       "governor": "Gretchen Whitmer",
-      "state_code": "MI"
+      "code": "MI",
+      "gdp": "621 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "American Robin"
     },
     {
       "id": "11",
@@ -300,10 +330,13 @@
       "population": 9288994,
       "country": "United States",
       "area": "8,723 sq mi",
-      "founded": "1787",
+      "statehood_date": "1787",
       "capital": "Trenton",
       "governor": "Phil Murphy",
-      "state_code": "NJ"
+      "code": "NJ",
+      "gdp": "745 billion USD",
+      "climate": "Humid subtropical to humid continental",
+      "state_bird": "Eastern Goldfinch"
     },
     {
       "id": "12",
@@ -311,10 +344,13 @@
       "population": 8631393,
       "country": "United States",
       "area": "42,774 sq mi",
-      "founded": "1788",
+      "statehood_date": "1788",
       "capital": "Richmond",
       "governor": "Glenn Youngkin",
-      "state_code": "VA"
+      "code": "VA",
+      "gdp": "660 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Northern Cardinal"
     },
     {
       "id": "13",
@@ -322,10 +358,13 @@
       "population": 7693612,
       "country": "United States",
       "area": "71,298 sq mi",
-      "founded": "1889",
+      "statehood_date": "1889",
       "capital": "Olympia",
       "governor": "Jay Inslee",
-      "state_code": "WA"
+      "code": "WA",
+      "gdp": "725 billion USD",
+      "climate": "Oceanic to semi-arid",
+      "state_bird": "Willow Goldfinch"
     },
     {
       "id": "14",
@@ -333,10 +372,13 @@
       "population": 7151502,
       "country": "United States",
       "area": "113,990 sq mi",
-      "founded": "1912",
+      "statehood_date": "1912",
       "capital": "Phoenix",
       "governor": "Katie Hobbs",
-      "state_code": "AZ"
+      "code": "AZ",
+      "gdp": "461 billion USD",
+      "climate": "Arid to semi-arid",
+      "state_bird": "Cactus Wren"
     },
     {
       "id": "15",
@@ -344,10 +386,13 @@
       "population": 7029917,
       "country": "United States",
       "area": "10,565 sq mi",
-      "founded": "1788",
+      "statehood_date": "1788",
       "capital": "Boston",
       "governor": "Maura Healey",
-      "state_code": "MA"
+      "code": "MA",
+      "gdp": "688 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "Black-capped Chickadee"
     },
     {
       "id": "16",
@@ -355,10 +400,13 @@
       "population": 6910840,
       "country": "United States",
       "area": "42,143 sq mi",
-      "founded": "1796",
+      "statehood_date": "1796",
       "capital": "Nashville",
       "governor": "Bill Lee",
-      "state_code": "TN"
+      "code": "TN",
+      "gdp": "457 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Northern Mockingbird"
     },
     {
       "id": "17",
@@ -366,10 +414,13 @@
       "population": 6785528,
       "country": "United States",
       "area": "36,420 sq mi",
-      "founded": "1816",
+      "statehood_date": "1816",
       "capital": "Indianapolis",
       "governor": "Eric Holcomb",
-      "state_code": "IN"
+      "code": "IN",
+      "gdp": "449 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "Northern Cardinal"
     },
     {
       "id": "18",
@@ -377,10 +428,13 @@
       "population": 6154913,
       "country": "United States",
       "area": "69,707 sq mi",
-      "founded": "1821",
+      "statehood_date": "1821",
       "capital": "Jefferson City",
       "governor": "Mike Parson",
-      "state_code": "MO"
+      "code": "MO",
+      "gdp": "393 billion USD",
+      "climate": "Humid continental to humid subtropical",
+      "state_bird": "Eastern Bluebird"
     },
     {
       "id": "19",
@@ -388,43 +442,55 @@
       "population": 6177224,
       "country": "United States",
       "area": "12,406 sq mi",
-      "founded": "1788",
+      "statehood_date": "1788",
       "capital": "Annapolis",
       "governor": "Larry Hogan",
-      "state_code": "MD"
+      "code": "MD",
+      "gdp": "470 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Baltimore Oriole"
     },
     {
-        "id": "20",
-        "name": "Wisconsin",
-        "population": 5893718,
-        "country": "United States",
-        "area": "65,498 sq mi",
-        "founded": "1848",
-        "capital": "Madison",
-        "governor": "Tony Evers",
-        "state_code": "WI"
+      "id": "20",
+      "name": "Wisconsin",
+      "population": 5893718,
+      "country": "United States",
+      "area": "65,498 sq mi",
+      "statehood_date": "1848",
+      "capital": "Madison",
+      "governor": "Tony Evers",
+      "code": "WI",
+      "gdp": "382 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "American Robin"
     },
     {
-        "id": "21",
-        "name": "Colorado",
-        "population": 5773714,
-        "country": "United States",
-        "area": "104,094 sq mi",
-        "founded": "1876",
-        "capital": "Denver",
-        "governor": "Jared Polis",
-        "state_code": "CO"
+      "id": "21",
+      "name": "Colorado",
+      "population": 5773714,
+      "country": "United States",
+      "area": "104,094 sq mi",
+      "statehood_date": "1876",
+      "capital": "Denver",
+      "governor": "Jared Polis",
+      "code": "CO",
+      "gdp": "484 billion USD",
+      "climate": "Semi-arid to alpine",
+      "state_bird": "Lark Bunting"
     },
     {
-        "id": "22",
-        "name": "Minnesota",
-        "population": 5706494,
-        "country": "United States",
-        "area": "86,936 sq mi",
-        "founded": "1858",
-        "capital": "St. Paul",
-        "governor": "Tim Walz",
-        "state_code": "MN"
+      "id": "22",
+      "name": "Minnesota",
+      "population": 5706494,
+      "country": "United States",
+      "area": "86,936 sq mi",
+      "statehood_date": "1858",
+      "capital": "St. Paul",
+      "governor": "Tim Walz",
+      "code": "MN",
+      "gdp": "434 billion USD",
+      "climate": "Humid continental",
+      "state_bird": "Common Loon"
     },
     {
       "id": "23",
@@ -432,10 +498,13 @@
       "population": 5118425,
       "country": "United States",
       "area": "32,020 sq mi",
-      "founded": "1788",
-      "capital":  "Columbia",
-      "governor":  "Henry McMaster",
-      "state_code": "SC"
+      "statehood_date": "1788",
+      "capital": "Columbia",
+      "governor": "Henry McMaster",
+      "code": "SC",
+      "gdp": "295 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Carolina Wren"
     },
     {
       "id": "24",
@@ -443,10 +512,13 @@
       "population": 5024279,
       "country": "United States",
       "area": "52,420 sq mi",
-      "founded": "1819",
-      "capital":  "Montgomery",
-      "governor":  "Kay Ivey",
-      "state_code": "AL"
+      "statehood_date": "1819",
+      "capital": "Montgomery",
+      "governor": "Kay Ivey",
+      "code": "AL",
+      "gdp": "272 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Yellowhammer"
     },
     {
       "id": "25",
@@ -454,10 +526,13 @@
       "population": 4657757,
       "country": "United States",
       "area": "52,378 sq mi",
-      "founded": "1812",
-      "capital":  "Baton Rouge",
-      "governor":  "John Bel Edwards",
-      "state_code": "LA"
+      "statehood_date": "1812",
+      "capital": "Baton Rouge",
+      "governor": "John Bel Edwards",
+      "code": "LA",
+      "gdp": "281 billion USD",
+      "climate": "Humid subtropical",
+      "state_bird": "Brown Pelican"
     } 
   ],
   "cities": [
