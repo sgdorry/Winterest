@@ -12,6 +12,7 @@ from flask_cors import CORS
 import countries.queries_countries as countries
 from countries.hints import build_country_hints
 import states.queries_states as states
+from states.hints import build_states_hints
 import cities.queries_cities as cities
 from cities.hints import build_cities_hints
 import counties.queries_counties as counties
@@ -433,7 +434,12 @@ class States(Resource):
             all_states = states.read()
             sorted_states = sorted(all_states,
                                    key=lambda x: x.get('name', ''))
-            return {'states': sorted_states}, 200
+            states_with_hints = []
+            for state in sorted_states:
+                state_payload = dict(state)
+                state_payload['hints'] = build_states_hints(state)
+                states_with_hints.append(state_payload)
+            return {'states': states_with_hints}, 200
         except Exception as e:
             return {'error': str(e)}, 500
 
