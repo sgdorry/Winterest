@@ -1,75 +1,50 @@
 import json
+import os
 from pathlib import Path
+import pymongo as pm
 
-from countries.queries_countries import (
-    ID,
-    NAME,
-    POPULATION,
-    CONTINENT,
-    CAPITAL,
-    GDP,
-    AREA,
-    FOUNDED,
-    PRESIDENT,
-    FLAG_COLOR,
-    LANGUAGE,
-    CLIMATE,
-    create,
-)
+SE_DB = "seDB"
+DEFAULT_URI = "mongodb://localhost:27017"
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-COUNTRIES_PATH = BASE_DIR / "data" / "bkup" / "countries.json"
+COLLECTIONS = ["countries", "states", "cities", "counties", "prompts", "puzzles"]
 
-FIELDS = [
-    ID,
-    NAME,
-    POPULATION, 
-    CONTINENT, 
-    CAPITAL, 
-    GDP,
-    AREA, 
-    FOUNDED, 
-    PRESIDENT, 
-    FLAG_COLOR, 
-    LANGUAGE, 
-    CLIMATE
-    ]
+def get_client():
+    uri = os.getenv("MONGO_URI", DEFAULT_URI)
+    return pm.MongoClient(uri)
 
-def load_country(record: dict) -> dict:
-    country_info = {}
-    for field in FIELDS:
-        country_info[field] = record.get(field.upper())
-    return country_info
+def load_seed_json():
+    seed_path = Path(__file__).parent / "seed_data.json"
+    with seed_path.open("r", encoding="utf-8") as f:
+        return json.load(f)
 
+def upsert_many(col, docs, unique_key):
+    for d in docs:
+        if unique_key not in d:
+            raise ValueError(f"Missing {unique_key} in doc: {d}")
+        col.update_one({unique_key: d[unique_key]}, {"$set": d}, upsert=True)
 
 def main():
+    data = load_seed_json()
+    client = get_client()
+    db = client[SE_DB]
 
-    if not COUNTRIES_PATH.exists():
-        print(f"[ERROR] file not found: {COUNTRIES_PATH}")
-        return
+    keys = {
+        "countries": "country_id",
+        "states": "id",
+        "cities": "id",
+        "counties": "id",
+        "prompts": "id",
+        "puzzles": "id",
+    }
 
-    with COUNTRIES_PATH.open() as f:
-        countries = json.load(f)
+    for name in COLLECTIONS:
+        docs = data.get(name, [])
+        if not docs:
+            continue
+        upsert_many(db[name], docs, keys[name])
+        print(f"Seeded {name}: {len(docs)} docs")
 
-    for record in countries:
-            try:
-                country_info = load_country(record)
-                data_missing = []
-                for field, data in country_info.items():
-                    if data is None:
-                        data_missing.append(field)
+    print("Done.")
 
-                if data_missing:
-                    print(f"[WARNING] {record.get('NAME')} is missing fields: {data_missing}")
-
-                create(country_info)
-                print(f"Successfully inserted: {country_info}")
-
-            except Exception as e:
-                print(f"[ERROR] Failed to insert {record.get('NAME')}: {e}")
-       
 if __name__ == "__main__":
     main()
-
-
-
