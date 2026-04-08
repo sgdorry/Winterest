@@ -1,19 +1,15 @@
 POPULATION = "population"
 CAPITAL = "capital"
-CODE = "code"
-STATEHOOD_DATE = "statehood_date"
+STATE_CODE = "state_code"
+FOUNDED = "founded"
 AREA = "area"
-GDP = "gdp"
-CLIMATE = "climate"
-STATE_BIRD = "state_bird"
-GOVERNOR = "governor"
 
 HINT_SLOT_ORDER = (
     AREA,
-    STATEHOOD_DATE,
+    FOUNDED,
     POPULATION,
     CAPITAL,
-    CODE,
+    STATE_CODE,
 )
 
 
@@ -25,7 +21,9 @@ def _has_required_fields(state: dict) -> bool:
     if not isinstance(state, dict):
         return False
 
-    for field in (CAPITAL, CODE, STATEHOOD_DATE, AREA):
+    for field in HINT_SLOT_ORDER:
+        if field == POPULATION:
+            continue
         if not _is_non_empty_string(state.get(field)):
             return False
 
@@ -41,15 +39,15 @@ def build_states_hints(state: dict) -> list[str]:
         return []
 
     area = state[AREA].strip()
-    statehood_date = state[STATEHOOD_DATE].strip()
+    founded = state[FOUNDED].strip()
     population_formatted = f"{state[POPULATION]:,}"
     capital = state[CAPITAL].strip()
-    code = state[CODE].strip()
+    state_code = state[STATE_CODE].strip()
 
     return [
         f"The area is about {area}.",
-        f"This state was founded in {statehood_date}.",
+        f"This state was founded in {founded}.",
         f"Its population is about {population_formatted}.",
         f"Its capital city is {capital}.",
-        f"The state code is {code}.",
+        f"The state code is {state_code}.",
     ]
