@@ -157,7 +157,7 @@ def create(fields: dict):
 
     if not fields.get(AREA) or not isinstance(fields[AREA], str):
         raise ValueError(f'Bad value for {fields.get(AREA)=}')
-    
+
     if not fields.get(CODE) or not isinstance(fields[CODE], str):
         raise ValueError(f'Bad value for {fields.get(CODE)=}')
 
@@ -216,7 +216,7 @@ def update(state_id: str, fields: dict):
     if GDP in fields:
         if not fields[GDP] or not isinstance(fields[GDP], str):
             raise ValueError(f'Bad value for {fields.get(GDP)=}')
-  
+
     if CLIMATE in fields:
         if not fields[CLIMATE] or not isinstance(fields[CLIMATE], str):
             raise ValueError(f'Bad value for {fields.get(CLIMATE)=}')
