@@ -590,6 +590,7 @@ class City(Resource):
         except Exception as e:
             return {'error': str(e)}, 500
 
+
 @app.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
