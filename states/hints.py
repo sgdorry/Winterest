@@ -39,10 +39,10 @@ def build_states_hints(state: dict) -> list[str]:
         return []
 
     area = state[AREA].strip()
-    founded = state[STATEHOOD_DATE].strip()
+    founded = state[FOUNDED].strip()
     population_formatted = f"{state[POPULATION]:,}"
     capital = state[CAPITAL].strip()
-    code = state[CODE].strip()
+    code = state[STATE_CODE].strip()
 
     return [
         f"The area is about {area}.",
