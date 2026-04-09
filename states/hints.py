@@ -9,11 +9,7 @@ HINT_SLOT_ORDER = (
     FOUNDED,
     POPULATION,
     CAPITAL,
-<<<<<<< HEAD
-    CODE
-=======
     STATE_CODE,
->>>>>>> parent of 5631a51 (deleted counties data and endpoints)
 )
 
 
