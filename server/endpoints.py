@@ -593,8 +593,6 @@ class City(Resource):
             return {'error': str(e)}, 500
 
 
-<<<<<<< HEAD
-=======
 @api.route('/counties')
 class Counties(Resource):
     """
@@ -677,7 +675,6 @@ class County(Resource):
             return {'error': str(e)}, 500
 
 
->>>>>>> parent of 5631a51 (deleted counties data and endpoints)
 @app.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
