@@ -1,20 +1,19 @@
-NAME = 'name'
-POPULATION = 'population'
-AREA = 'area'
-STATEHOOD_DATE = 'statehood_date'
-GDP = 'gdp'
-CAPITAL = 'capital'
-GOVERNOR = 'governor'
-CODE = 'code'
-CLIMATE = 'climate'
-STATE_BIRD = 'state_bird'
+POPULATION = "population"
+CAPITAL = "capital"
+STATE_CODE = "state_code"
+FOUNDED = "founded"
+AREA = "area"
 
 HINT_SLOT_ORDER = (
     AREA,
-    STATEHOOD_DATE,
+    FOUNDED,
     POPULATION,
     CAPITAL,
+<<<<<<< HEAD
     CODE
+=======
+    STATE_CODE,
+>>>>>>> parent of 5631a51 (deleted counties data and endpoints)
 )
 
 
