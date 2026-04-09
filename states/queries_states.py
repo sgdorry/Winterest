@@ -30,6 +30,7 @@ SAMPLE_STATE = {
     STATE_BIRD: 'Eastern Bluebird'
 }
 
+
 state_cache = {
     "1": SAMPLE_STATE,
 }
@@ -134,6 +135,7 @@ def is_valid_state_bird(_state_bird: str):
     if len(_state_bird) < MIN_ID_LEN:
         return False
     return True
+
 
 @needs_cache
 def num_states():
