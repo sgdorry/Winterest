@@ -1,15 +1,20 @@
-POPULATION = "population"
-CAPITAL = "capital"
-STATE_CODE = "state_code"
-FOUNDED = "founded"
-AREA = "area"
+NAME = 'name'
+POPULATION = 'population'
+AREA = 'area'
+STATEHOOD_DATE = 'statehood_date'
+GDP = 'gdp'
+CAPITAL = 'capital'
+GOVERNOR = 'governor'
+CODE = 'code'
+CLIMATE = 'climate'
+STATE_BIRD = 'state_bird'
 
 HINT_SLOT_ORDER = (
     AREA,
-    FOUNDED,
+    STATEHOOD_DATE,
     POPULATION,
     CAPITAL,
-    STATE_CODE,
+    CODE
 )
 
 
@@ -39,15 +44,15 @@ def build_states_hints(state: dict) -> list[str]:
         return []
 
     area = state[AREA].strip()
-    founded = state[FOUNDED].strip()
+    founded = state[STATEHOOD_DATE].strip()
     population_formatted = f"{state[POPULATION]:,}"
     capital = state[CAPITAL].strip()
-    state_code = state[STATE_CODE].strip()
+    code = state[CODE].strip()
 
     return [
         f"The area is about {area}.",
         f"This state was founded in {founded}.",
         f"Its population is about {population_formatted}.",
         f"Its capital city is {capital}.",
-        f"The state code is {state_code}.",
+        f"The state code is {code}.",
     ]
