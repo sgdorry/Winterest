@@ -234,10 +234,7 @@ class PuzzleQuiz(Resource):
 @api.route(SCORES_EP)
 class Scores(Resource):
     def get(self):
-        try:
-            return {'scores': scores_mod.read()}, 200
-        except Exception as e:
-            return {'error': str(e)}, 500
+        return {'scores': scores_mod.read()}, 200
 
     def post(self):
         try:
