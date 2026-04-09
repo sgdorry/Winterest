@@ -1,4 +1,4 @@
-import random 
+import random
 
 NAME = 'name'
 POPULATION = 'population'
@@ -28,7 +28,7 @@ def get_random_stat(difficulty):
 
 def generate_hint_slots():
     hint_slots = []
-    for difficulty in range(5,0,-1):
+    for difficulty in range(5, 0, -1):
         stat = get_random_stat(difficulty)
         if stat:
             hint_slots.append(stat)
@@ -72,7 +72,6 @@ def build_states_hints(state: dict) -> list[str]:
     gdp = state[GDP].strip()
     climate = state[CLIMATE].strip()
     state_bird = state[STATE_BIRD].strip()
-
 
     return [
         f"The area is about {area}.",
