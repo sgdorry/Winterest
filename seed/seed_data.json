@@ -192,7 +192,7 @@
       "founded": "1850",
       "capital": "Sacramento",
       "governor": "Gavin Newsom",
-      "state_code": "CA",
+      "code": "CA",
       "gdp": "3.6 trillion USD",
       "climate": "Mediterranean to desert",
       "state_bird": "California Quail"
@@ -205,7 +205,7 @@
       "founded": "1845",
       "capital": "Austin",
       "governor": "Greg Abbott",
-      "state_code": "TX",
+      "code": "TX",
       "gdp": "2.0 trillion USD",
       "climate": "Subtropical to arid",
       "state_bird": "Northern Mockingbird"
@@ -218,7 +218,7 @@
       "founded": "1845",
       "capital": "Tallahassee",
       "governor": "Ron DeSantis",
-      "state_code": "FL",
+      "code": "FL",
       "gdp": "1.4 trillion USD",
       "climate": "Tropical to subtropical",
       "state_bird": "Northern Mockingbird"
@@ -231,7 +231,7 @@
       "founded": "1788",
       "capital": "Albany",
       "governor": "Kathy Hochul",
-      "state_code": "NY",
+      "code": "NY",
       "gdp": "2.0 trillion USD",
       "climate": "Humid continental",
       "state_bird": "Eastern Bluebird"
@@ -244,7 +244,7 @@
       "founded": "1818",
       "capital": "Springfield",
       "governor": "J.B. Pritzker",
-      "state_code": "IL",
+      "code": "IL",
       "gdp": "1.0 trillion USD",
       "climate": "Humid continental",
       "state_bird": "Northern Cardinal"
@@ -257,7 +257,7 @@
       "founded": "1787",
       "capital": "Harrisburg",
       "governor": "Tom Wolf",
-      "state_code": "PA",
+      "code": "PA",
       "gdp": "923 billion USD",
       "climate": "Humid continental",
       "state_bird": "Ruffed Grouse"
@@ -270,7 +270,7 @@
       "founded": "1803",
       "capital": "Columbus",
       "governor": "Mike DeWine",
-      "state_code": "OH",
+      "code": "OH",
       "gdp": "822 billion USD",
       "climate": "Humid continental",
       "state_bird": "Northern Cardinal"
@@ -283,7 +283,7 @@
       "founded": "1788",
       "capital": "Atlanta",
       "governor": "Brian Kemp",
-      "state_code": "GA",
+      "code": "GA",
       "gdp": "756 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Brown Thrasher"
@@ -296,7 +296,7 @@
       "founded": "1789",
       "capital": "Raleigh",
       "governor": "Roy Cooper",
-      "state_code": "NC",
+      "code": "NC",
       "gdp": "706 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Northern Cardinal"
@@ -309,7 +309,7 @@
       "founded": "1837",
       "capital": "Lansing",
       "governor": "Gretchen Whitmer",
-      "state_code": "MI",
+      "code": "MI",
       "gdp": "621 billion USD",
       "climate": "Humid continental",
       "state_bird": "American Robin"
@@ -322,7 +322,7 @@
       "founded": "1787",
       "capital": "Trenton",
       "governor": "Phil Murphy",
-      "state_code": "NJ",
+      "code": "NJ",
       "gdp": "745 billion USD",
       "climate": "Humid subtropical to humid continental",
       "state_bird": "Eastern Goldfinch"
@@ -335,7 +335,7 @@
       "founded": "1788",
       "capital": "Richmond",
       "governor": "Glenn Youngkin",
-      "state_code": "VA",
+      "code": "VA",
       "gdp": "660 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Northern Cardinal"
@@ -348,7 +348,7 @@
       "founded": "1889",
       "capital": "Olympia",
       "governor": "Jay Inslee",
-      "state_code": "WA",
+      "code": "WA",
       "gdp": "725 billion USD",
       "climate": "Oceanic to semi-arid",
       "state_bird": "Willow Goldfinch"
@@ -361,7 +361,7 @@
       "founded": "1912",
       "capital": "Phoenix",
       "governor": "Katie Hobbs",
-      "state_code": "AZ",
+      "code": "AZ",
       "gdp": "461 billion USD",
       "climate": "Arid to semi-arid",
       "state_bird": "Cactus Wren"
@@ -374,7 +374,7 @@
       "founded": "1788",
       "capital": "Boston",
       "governor": "Maura Healey",
-      "state_code": "MA",
+      "code": "MA",
       "gdp": "688 billion USD",
       "climate": "Humid continental",
       "state_bird": "Black-capped Chickadee"
@@ -387,7 +387,7 @@
       "founded": "1796",
       "capital": "Nashville",
       "governor": "Bill Lee",
-      "state_code": "TN",
+      "code": "TN",
       "gdp": "457 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Northern Mockingbird"
@@ -400,7 +400,7 @@
       "founded": "1816",
       "capital": "Indianapolis",
       "governor": "Eric Holcomb",
-      "state_code": "IN",
+      "code": "IN",
       "gdp": "449 billion USD",
       "climate": "Humid continental",
       "state_bird": "Northern Cardinal"
@@ -413,7 +413,7 @@
       "founded": "1821",
       "capital": "Jefferson City",
       "governor": "Mike Parson",
-      "state_code": "MO",
+      "code": "MO",
       "gdp": "393 billion USD",
       "climate": "Humid continental to humid subtropical",
       "state_bird": "Eastern Bluebird"
@@ -426,7 +426,7 @@
       "founded": "1788",
       "capital": "Annapolis",
       "governor": "Larry Hogan",
-      "state_code": "MD",
+      "code": "MD",
       "gdp": "470 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Baltimore Oriole"
@@ -439,7 +439,7 @@
       "founded": "1848",
       "capital": "Madison",
       "governor": "Tony Evers",
-      "state_code": "WI",
+      "code": "WI",
       "gdp": "382 billion USD",
       "climate": "Humid continental",
       "state_bird": "American Robin"
@@ -452,7 +452,7 @@
       "founded": "1876",
       "capital": "Denver",
       "governor": "Jared Polis",
-      "state_code": "CO",
+      "code": "CO",
       "gdp": "484 billion USD",
       "climate": "Semi-arid to alpine",
       "state_bird": "Lark Bunting"
@@ -465,7 +465,7 @@
       "founded": "1858",
       "capital": "St. Paul",
       "governor": "Tim Walz",
-      "state_code": "MN",
+      "code": "MN",
       "gdp": "434 billion USD",
       "climate": "Humid continental",
       "state_bird": "Common Loon"
@@ -478,7 +478,7 @@
       "founded": "1788",
       "capital": "Columbia",
       "governor": "Henry McMaster",
-      "state_code": "SC",
+      "code": "SC",
       "gdp": "295 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Carolina Wren"
@@ -491,7 +491,7 @@
       "founded": "1819",
       "capital": "Montgomery",
       "governor": "Kay Ivey",
-      "state_code": "AL",
+      "code": "AL",
       "gdp": "272 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Yellowhammer"
@@ -504,7 +504,7 @@
       "founded": "1812",
       "capital": "Baton Rouge",
       "governor": "John Bel Edwards",
-      "state_code": "LA",
+      "code": "LA",
       "gdp": "281 billion USD",
       "climate": "Humid subtropical",
       "state_bird": "Brown Pelican"
@@ -517,7 +517,7 @@
       "founded": "1792",
       "capital": "Frankfort",
       "governor": "Andy Beshear",
-      "state_code": "KY",
+      "code": "KY",
       "gdp": "212 billion USD",
       "climate": "Humid subtropical to humid continental",
       "state_bird": "Northern Cardinal"
@@ -530,7 +530,7 @@
       "founded": "1859",
       "capital": "Salem",
       "governor": "Tina Kotek",
-      "state_code": "OR",
+      "code": "OR",
       "gdp": "270 billion USD",
       "climate": "Oceanic to semi-arid",
       "state_bird": "Western Meadowlark"
@@ -543,7 +543,7 @@
       "founded": "1907",
       "capital": "Oklahoma City",
       "governor": "Kevin Stitt",
-      "state_code": "OK",
+      "code": "OK",
       "gdp": "200 billion USD",
       "climate": "Humid subtropical to semi-arid",
       "state_bird": "Scissor-tailed Flycatcher"
@@ -556,7 +556,7 @@
       "founded": "1788",
       "capital": "Hartford",
       "governor": "Ned Lamont",
-      "state_code": "CT",
+      "code": "CT",
       "gdp": "290 billion USD",
       "climate": "Humid continental",
       "state_bird": "American Robin"
@@ -569,7 +569,7 @@
       "founded": "1846",
       "capital": "Des Moines",
       "governor": "Kim Reynolds",
-      "state_code": "IA",
+      "code": "IA",
       "gdp": "190 billion USD",
       "climate": "Humid continental",
       "state_bird": "Eastern Goldfinch"
@@ -582,7 +582,7 @@
       "founded": "1896",
       "capital": "Salt Lake City",
       "governor": "Spencer Cox",
-      "state_code": "UT",
+      "code": "UT",
       "gdp": "190 billion USD",
       "climate": "Semi-arid to alpine",
       "state_bird": "California Gull"
@@ -595,7 +595,7 @@
       "founded": "1864",
       "capital": "Carson City",
       "governor": "Joe Lombardo",
-      "state_code": "NV",
+      "code": "NV",
       "gdp": "180 billion USD",
       "climate": "Arid to semi-arid",
       "state_bird": "Mountain Bluebird"
@@ -608,7 +608,7 @@
       "founded": "1912",
       "capital": "Santa Fe",
       "governor": "Michelle Lujan Grisham",
-      "state_code": "NM",
+      "code": "NM",
       "gdp": "100 billion USD",
       "climate": "Semi-arid to alpine",
       "state_bird": "Greater Roadrunner"
@@ -621,7 +621,7 @@
       "founded": "1863",
       "capital": "Charleston",
       "governor": "Jim Justice",
-      "state_code": "WV",
+      "code": "WV",
       "gdp": "80 billion USD",
       "climate": "Humid subtropical to humid continental",
       "state_bird": "Northern Cardinal"
@@ -634,7 +634,7 @@
       "founded": "1867",
       "capital": "Lincoln",
       "governor": "Pete Ricketts",
-      "state_code": "NE",
+      "code": "NE",
       "gdp": "90 billion USD",
       "climate": "Humid continental to semi-arid",
       "state_bird": "Western Meadowlark"
@@ -647,7 +647,7 @@
       "founded": "1890",
       "capital": "Boise",
       "governor": "Brad Little",
-      "state_code": "ID",
+      "code": "ID",
       "gdp": "80 billion USD",
       "climate": "Semi-arid to alpine",
       "state_bird": "Mountain Bluebird"
@@ -660,7 +660,7 @@
       "founded": "1820",
       "capital": "Augusta",
       "governor": "Janet Mills",
-      "state_code": "ME",
+      "code": "ME",
       "gdp": "60 billion USD",
       "climate": "Humid continental",
       "state_bird": "Black-capped Chickadee"
@@ -673,7 +673,7 @@
       "founded": "1788",
       "capital": "Concord",
       "governor": "Chris Sununu",
-      "state_code": "NH",
+      "code": "NH",
       "gdp": "80 billion USD",
       "climate": "Humid continental",
       "state_bird": "Purple Finch"
@@ -686,7 +686,7 @@
       "founded": "1790",
       "capital": "Providence",
       "governor": "Dan McKee",
-      "state_code": "RI",
+      "code": "RI",
       "gdp": "60 billion USD",
       "climate": "Humid subtropical to humid continental",
       "state_bird": "Rhode Island Red"
@@ -699,7 +699,7 @@
       "founded": "1791",
       "capital": "Montpelier",
       "governor": "Phil Scott",
-      "state_code": "VT",
+      "code": "VT",
       "gdp": "35 billion USD",
       "climate": "Humid continental",
       "state_bird": "Hermit Thrush"
@@ -712,7 +712,7 @@
       "founded": "1959",
       "capital": "Juneau",
       "governor": "Mike Dunleavy",
-      "state_code": "AK",
+      "code": "AK",
       "gdp": "70 billion USD",
       "climate": "Subarctic to arctic",
       "state_bird": "Willow Ptarmigan"   
@@ -725,7 +725,7 @@
       "founded": "1959",
       "capital": "Honolulu",
       "governor": "Josh Green",
-      "state_code": "HI",
+      "code": "HI",
       "gdp": "100 billion USD",
       "climate": "Tropical",
       "state_bird": "Nene (Hawaiian Goose)"

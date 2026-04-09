@@ -1,15 +1,20 @@
-POPULATION = "population"
-CAPITAL = "capital"
-STATE_CODE = "state_code"
-FOUNDED = "founded"
-AREA = "area"
+NAME = 'name'
+POPULATION = 'population'
+AREA = 'area'
+STATEHOOD_DATE = 'statehood_date'
+GDP = 'gdp'
+CAPITAL = 'capital'
+GOVERNOR = 'governor'
+CODE = 'code'
+CLIMATE = 'climate'
+STATE_BIRD = 'state_bird'
 
 HINT_SLOT_ORDER = (
     AREA,
-    FOUNDED,
+    STATEHOOD_DATE,
     POPULATION,
     CAPITAL,
-    STATE_CODE,
+    CODE,
 )
 
 
