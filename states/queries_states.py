@@ -157,6 +157,7 @@ def create(fields: dict):
 
     if not fields.get(AREA) or not isinstance(fields[AREA], str):
         raise ValueError(f'Bad value for {fields.get(AREA)=}')
+<<<<<<< HEAD
 
     if not fields.get(CODE) or not isinstance(fields[CODE], str):
         raise ValueError(f'Bad value for {fields.get(CODE)=}')
@@ -169,6 +170,8 @@ def create(fields: dict):
 
     if not fields.get(STATE_BIRD) or not isinstance(fields[STATE_BIRD], str):
         raise ValueError(f'Bad value for {fields.get(STATE_BIRD)=}')
+=======
+>>>>>>> parent of 78020a5 (fixed state query functions, incorrect state data labelling in load)
 
     if (not fields.get(STATEHOOD_DATE)
             or not isinstance(fields[STATEHOOD_DATE], str)):
@@ -216,19 +219,17 @@ def update(state_id: str, fields: dict):
     if GDP in fields:
         if not fields[GDP] or not isinstance(fields[GDP], str):
             raise ValueError(f'Bad value for {fields.get(GDP)=}')
+<<<<<<< HEAD
 
     if CLIMATE in fields:
         if not fields[CLIMATE] or not isinstance(fields[CLIMATE], str):
             raise ValueError(f'Bad value for {fields.get(CLIMATE)=}')
+=======
+>>>>>>> parent of 78020a5 (fixed state query functions, incorrect state data labelling in load)
 
-    if STATE_BIRD in fields:
-        if not fields[STATE_BIRD] or not isinstance(fields[STATE_BIRD], str):
-            raise ValueError(f'Bad value for {fields.get(STATE_BIRD)=}')
-
-    if STATEHOOD_DATE in fields:
-        if (not fields[STATEHOOD_DATE]
-                or not isinstance(fields[STATEHOOD_DATE], str)):
-            raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
+    if (not fields[STATEHOOD_DATE]
+            or not isinstance(fields[STATEHOOD_DATE], str)):
+        raise ValueError(f'Bad value for {fields.get(STATEHOOD_DATE)=}')
 
     result = dbc.update(COLLECTION, {ID: state_id}, fields)
     if result < 1:
