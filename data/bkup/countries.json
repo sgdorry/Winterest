@@ -90,12 +90,26 @@
     },
     
     {
-        "ID": "",
+        "ID": "SA",
         "NAME": "Saudi Arabia",
         "POPULATION": 35007271,
         "CONTINENT": "Asia",
         "CAPITAL": "Riyadh",
         "GDP": "842.3 billion USD",
+        "AREA": "2,150,000 sq mi",
+        "FOUNDED": "1901",
+        "PRESIDENT": "Salman bin Abdulaziz Al Saud",
+        "FLAG_COLOR": "Green and White",
+        "LANGUAGE": "Arabic",
+        "CLIMATE": "Dry Desert Climate"
+    },
+        {
+        "ID": "",
+        "NAME": "Purposeful error-filled example of Saudi Arabia",
+        "POPULATION": 0,
+        "CONTINENT": "Asia",
+        "CAPITAL": "Riyadh",
+        "GDP": "",
         "AREA": "2,150,000 sq mi",
         "FOUNDED": "1901",
         "PRESIDENT": "Salman bin Abdulaziz Al Saud",
