@@ -13,7 +13,7 @@ def get_client():
     return pm.MongoClient(uri)
 
 def load_seed_json():
-    seed_path = Path(__file__).parent / "seed_data.json"
+    seed_path = Path(__file__).parent.parent / "seed" / "seed_data.json"
     with seed_path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
