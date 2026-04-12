@@ -33,3 +33,11 @@ dev_env: FORCE
 
 docs: FORCE
 	cd $(API_DIR); make docs
+
+# --- Local development targets ---
+
+seed: FORCE
+	PYTHONPATH=$(shell pwd):$$PYTHONPATH python -m scripts.load_script
+
+start: FORCE
+	./local.sh

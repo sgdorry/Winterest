@@ -121,6 +121,7 @@ def create(collection, doc, db=SE_DB):
     """
     print(f'{db=}')
     ret = client[db][collection].insert_one(doc)
+    doc.pop(MONGO_ID, None)
     return str(ret.inserted_id)
 
 @handle_errors
