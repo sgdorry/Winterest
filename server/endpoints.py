@@ -48,6 +48,8 @@ PUZZLE_QUIZ_EP = '/puzzle/quiz'
 SCORES_EP = '/scores'
 FRIENDS_EP = '/friends'
 SCORES_FRIENDS_EP = '/scores/friends'
+SCORES_AGGREGATED_EP = '/scores/aggregated'
+SCORES_FRIENDS_AGGREGATED_EP = '/scores/friends/aggregated'
 LEADERBOARD_FILTERS_EP = '/leaderboard/filters'
 
 prompt_list_parser = reqparse.RequestParser()
@@ -326,13 +328,50 @@ class ScoresFriends(Resource):
             return {'error': str(e)}, 500
 
 
+def _enrich_usernames(scores):
+    user_map = {}
+    for user in qu.read():
+        uid = user.get(qu.ID)
+        if uid:
+            user_map[uid] = user.get(qu.USERNAME) or user.get(
+                qu.EMAIL, '').split('@')[0] or 'Unknown'
+    for entry in scores:
+        entry['username'] = user_map.get(entry.get('user_id'), 'Unknown')
+    return scores
+
+
+@api.route(SCORES_AGGREGATED_EP)
+class ScoresAggregated(Resource):
+    def get(self):
+        try:
+            scores = scores_mod.read_aggregated()
+            return {'scores': _enrich_usernames(scores)}, 200
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
+@api.route(SCORES_FRIENDS_AGGREGATED_EP)
+class ScoresFriendsAggregated(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if not user_id:
+            return {'error': 'user_id is required'}, 400
+        try:
+            friend_ids = friends_mod.read(user_id)
+            all_ids = friend_ids + [user_id]
+            scores = scores_mod.read_aggregated_by_user_ids(all_ids)
+            return {'scores': _enrich_usernames(scores)}, 200
+        except Exception as e:
+            return {'error': str(e)}, 500
+
+
 @api.route(LEADERBOARD_FILTERS_EP)
 class LeaderboardFilters(Resource):
     def get(self):
         return {
             'filters': [
                 {'value': 'all', 'label': 'All Players'},
-                {'value': 'friends', 'label': 'Friends Only'},
+                {'value': 'friends', 'label': 'Following'},
             ]
         }, 200
 

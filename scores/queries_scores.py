@@ -95,3 +95,41 @@ def read_by_user_ids(user_ids: list) -> list:
     ]
     docs.sort(key=lambda d: d.get(SCORE, 0), reverse=True)
     return docs
+
+
+def _aggregate(docs: list) -> list:
+    buckets = {}
+    for doc in docs:
+        uid = doc.get(USER_ID)
+        if not uid:
+            continue
+        if uid not in buckets:
+            buckets[uid] = {
+                "user_id": uid,
+                "score": 0,
+                "guesses_used": 0,
+                "games_played": 0,
+            }
+        buckets[uid]["score"] += doc.get(SCORE, 0)
+        buckets[uid]["guesses_used"] += doc.get(GUESSES_USED, 0)
+        buckets[uid]["games_played"] += 1
+    result = list(buckets.values())
+    result.sort(key=lambda d: d["score"], reverse=True)
+    return result
+
+
+@needs_cache
+def read_aggregated() -> list:
+    return _aggregate(score_cache.values())
+
+
+@needs_cache
+def read_aggregated_by_user_ids(user_ids: list) -> list:
+    if not user_ids:
+        return []
+    uid_set = set(user_ids)
+    docs = [
+        doc for doc in score_cache.values()
+        if doc.get(USER_ID) in uid_set
+    ]
+    return _aggregate(docs)
