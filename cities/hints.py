@@ -49,13 +49,13 @@ def build_cities_hints(city: dict) -> list[str]:
         difficulty_fields = HINT_DIFFICULTY.get(difficulty, [])
         if not difficulty_fields:
             continue
-          
+
         selected_field = random.choice(difficulty_fields)
-     
+
         hint = _generate_hint_for_field(city, selected_field)
         if hint:
             hints.append(hint)
- 
+
     return hints
 
 

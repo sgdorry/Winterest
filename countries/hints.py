@@ -10,11 +10,11 @@ CAPITAL = "capital"
 
 # Difficulty levels for country hints (1 = easiest, 5 = hardest)
 HINT_DIFFICULTY = {
-    1: [CONTINENT],           
-    2: [CAPITAL],             
-    3: [LANGUAGE],            
-    4: [POPULATION],          
-    5: [CLIMATE],             
+    1: [CONTINENT],
+    2: [CAPITAL],
+    3: [LANGUAGE],
+    4: [POPULATION],
+    5: [CLIMATE],
 }
 
 
@@ -55,9 +55,9 @@ def build_country_hints(country: dict) -> list[str]:
         difficulty_fields = HINT_DIFFICULTY.get(difficulty, [])
         if not difficulty_fields:
             continue
-  
+
         selected_field = random.choice(difficulty_fields)
-        
+
         hint = _generate_hint_for_field(country, selected_field)
         if hint:
             hints.append(hint)
@@ -71,12 +71,15 @@ def _generate_hint_for_field(country: dict, field: str) -> str:
     elif field == CLIMATE:
         return f"Its climate is generally {country[CLIMATE].strip()}."
     elif field == LANGUAGE:
-        return f"A primary language spoken here is {country[LANGUAGE].strip()}."
+        language = country[LANGUAGE].strip()
+        return f"A primary language spoken here is {language}."
     elif field == POPULATION:
         population_formatted = f"{country[POPULATION]:,}"
         return f"Its population is about {population_formatted}."
     elif field == CAPITAL:
         capital = country[CAPITAL].strip()
         capital_period = "" if capital.endswith((".", "!", "?")) else "."
-        return f"Its capital city is {capital}{capital_period}"
+        return (
+            f"Its capital city is {capital}{capital_period}"
+        )
     return None

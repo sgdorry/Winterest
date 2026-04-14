@@ -18,8 +18,16 @@ lint: $(patsubst %.py,%.pylint,$(PYTHONFILES))
 %.pylint:
 	$(LINTER) $(PYLINTFLAGS) $*.py
 
+ifeq ($(OS),Windows_NT)
+    PYPATH := $(shell cd .. && cd)
+    SET_PYTHONPATH = set PYTHONPATH=$(PYPATH) &&
+else
+    PYPATH := $(shell cd .. && pwd)
+    SET_PYTHONPATH = PYTHONPATH=$(PYPATH)
+endif
+
 pytests: FORCE
-	PYTHONPATH=$(shell cd .. && pwd) pytest $(PYTESTFLAGS) --cov=$(PKG)
+	$(SET_PYTHONPATH) pytest $(PYTESTFLAGS) --cov=$(PKG)
 
 # test a python file:
 %.py: FORCE

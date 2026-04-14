@@ -19,12 +19,11 @@ github: FORCE
 	git push origin master
 
 all_tests: FORCE
-	cd $(API_DIR); make tests
-	cd $(STATES_DIR); make tests
-	cd $(COUNTIES_DIR); make tests
-	cd $(COUNTRIES_DIR); make tests
-	cd $(CITIES_DIR); make tests
-	# cd $(DB_DIR); make tests
+	$(MAKE) -C $(API_DIR) tests
+	$(MAKE) -C $(STATES_DIR) tests
+	$(MAKE) -C $(COUNTIES_DIR) tests
+	$(MAKE) -C $(COUNTRIES_DIR) tests
+	$(MAKE) -C $(CITIES_DIR) tests
 
 dev_env: FORCE
 	pip install -r $(REQ_DIR)/requirements-dev.txt
@@ -32,7 +31,7 @@ dev_env: FORCE
 	@echo $(shell pwd)
 
 docs: FORCE
-	cd $(API_DIR); make docs
+	$(MAKE) -C $(API_DIR) docs
 
 # --- Local development targets ---
 
