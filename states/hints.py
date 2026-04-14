@@ -3,11 +3,11 @@ import random
 NAME = 'name'
 POPULATION = 'population'
 AREA = 'area'
-STATEHOOD_DATE = 'statehood_date'
+STATEHOOD_DATE = 'founded'
 GDP = 'gdp'
 CAPITAL = 'capital'
 GOVERNOR = 'governor'
-CODE = 'code'
+CODE = 'state_code'
 CLIMATE = 'climate'
 STATE_BIRD = 'state_bird'
 
@@ -19,7 +19,6 @@ HINT_DIFFICULTY = {
     4: [POPULATION, CLIMATE],
     5: [GDP, STATE_BIRD],
 }
-
 
 def get_random_stat(difficulty):
     difficulty_list = HINT_DIFFICULTY.get(difficulty)
@@ -35,9 +34,6 @@ def generate_hint_slots():
     return hint_slots
 
 
-HINT_SLOT_ORDER = generate_hint_slots()
-
-
 def _is_non_empty_string(value):
     return isinstance(value, str) and bool(value.strip())
 
@@ -46,15 +42,16 @@ def _has_required_fields(state: dict) -> bool:
     if not isinstance(state, dict):
         return False
 
-    for field in HINT_SLOT_ORDER:
+    required_fields = [NAME,CODE,GOVERNOR,CAPITAL,AREA,STATEHOOD_DATE,POPULATION,CLIMATE,GDP,STATE_BIRD]
+    
+    for field in required_fields:
         if field == POPULATION:
-            continue
-        if not _is_non_empty_string(state.get(field)):
-            return False
-
-    population = state.get(POPULATION)
-    if not isinstance(population, int) or population < 0:
-        return False
+            population = state.get(POPULATION)
+            if not isinstance(population, int) or population < 0:
+                return False
+        else:
+            if not _is_non_empty_string(state.get(field)):
+                return False
 
     return True
 
@@ -63,24 +60,41 @@ def build_states_hints(state: dict) -> list[str]:
     if not _has_required_fields(state):
         return []
 
-    area = state[AREA].strip()
-    founded = state[STATEHOOD_DATE].strip()
-    population_formatted = f"{state[POPULATION]:,}"
-    capital = state[CAPITAL].strip()
-    governor = state[GOVERNOR].strip()
-    code = state[CODE].strip()
-    gdp = state[GDP].strip()
-    climate = state[CLIMATE].strip()
-    state_bird = state[STATE_BIRD].strip()
+    hints = []
+    
+    for difficulty in range(5, 0, -1):
+        difficulty_fields = HINT_DIFFICULTY.get(difficulty, [])
+        if not difficulty_fields:
+            continue
+            
+        selected_field = random.choice(difficulty_fields)
+        
+        hint = _generate_hint_for_field(state, selected_field)
+        if hint:
+            hints.append(hint)
+    
+    return hints
 
-    return [
-        f"The area is about {area}.",
-        f"This state was founded in {founded}.",
-        f"Its population is about {population_formatted}.",
-        f"Its capital city is {capital}.",
-        f"The state's governor is {governor}.",
-        f"The state code is {code}.",
-        f"The state's GDP is {gdp}.",
-        f"The state's climate is {climate}.",
-        f"The state bird is {state_bird}.",
-    ]
+
+def _generate_hint_for_field(state: dict, field: str) -> str:
+    if field == NAME:
+        return f"The state is called {state[NAME].strip()}."
+    elif field == POPULATION:
+        return f"Its population is about {state[POPULATION]:,}."
+    elif field == AREA:
+        return f"The area is about {state[AREA].strip()}."
+    elif field == STATEHOOD_DATE:
+        return f"This state was founded in {state[STATEHOOD_DATE].strip()}."
+    elif field == GDP:
+        return f"The state's GDP is {state[GDP].strip()}."
+    elif field == CAPITAL:
+        return f"Its capital city is {state[CAPITAL].strip()}."
+    elif field == GOVERNOR:
+        return f"The state's governor is {state[GOVERNOR].strip()}."
+    elif field == CODE:
+        return f"The state code is {state[CODE].strip()}."
+    elif field == CLIMATE:
+        return f"The state's climate is {state[CLIMATE].strip()}."
+    elif field == STATE_BIRD:
+        return f"The state bird is {state[STATE_BIRD].strip()}."
+    return None
