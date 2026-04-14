@@ -67,11 +67,11 @@ def test_get_all_countries_includes_computed_hints(mock_read):
     assert 'hints' in country
     assert len(country['hints']) == 5
     assert country['hints'] == [
-        'This country is in North America.',
         'Its climate is generally mostly cold with temperate regions in the south.',
-        'A primary language spoken here is English and French.',
         'Its population is about 41,000,000.',
+        'A primary language spoken here is English and French.',
         'Its capital city is Ottawa.',
+        'This country is in North America.',
     ]
 
 
