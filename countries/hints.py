@@ -32,7 +32,7 @@ def _has_required_fields(country: dict) -> bool:
         return False
 
     required_fields = [CONTINENT, CLIMATE, LANGUAGE, POPULATION, CAPITAL]
-    
+
     for field in required_fields:
         if field == POPULATION:
             population = country.get(POPULATION)
@@ -50,18 +50,18 @@ def build_country_hints(country: dict) -> list[str]:
         return []
 
     hints = []
-    
+
     for difficulty in range(5, 0, -1):
         difficulty_fields = HINT_DIFFICULTY.get(difficulty, [])
         if not difficulty_fields:
             continue
-            
+  
         selected_field = random.choice(difficulty_fields)
         
         hint = _generate_hint_for_field(country, selected_field)
         if hint:
             hints.append(hint)
-    
+
     return hints
 
 

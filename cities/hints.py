@@ -31,7 +31,7 @@ def _has_required_fields(city: dict) -> bool:
         return False
 
     required_fields = [POPULATION, STATE, FOUNDED, MAYOR, AREA]
-    
+
     for field in required_fields:
         if not _is_non_empty_string(city.get(field)):
             return False
@@ -44,18 +44,18 @@ def build_cities_hints(city: dict) -> list[str]:
         return []
 
     hints = []
-    
+
     for difficulty in range(5, 0, -1):
         difficulty_fields = HINT_DIFFICULTY.get(difficulty, [])
         if not difficulty_fields:
             continue
-            
+          
         selected_field = random.choice(difficulty_fields)
-        
+     
         hint = _generate_hint_for_field(city, selected_field)
         if hint:
             hints.append(hint)
-    
+ 
     return hints
 
 
