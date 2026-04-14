@@ -27,15 +27,11 @@ def _is_non_empty_string(value):
     return isinstance(value, str) and bool(value.strip())
 
 
-def _is_non_empty_string(value):
-    return isinstance(value, str) and bool(value.strip())
-
-
 def _has_required_fields(country: dict) -> bool:
     if not isinstance(country, dict):
         return False
 
-    required_fields = [CONTINENT,CLIMATE,LANGUAGE,POPULATION,CAPITAL]
+    required_fields = [CONTINENT, CLIMATE, LANGUAGE, POPULATION, CAPITAL]
     
     for field in required_fields:
         if field == POPULATION:

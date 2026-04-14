@@ -7,11 +7,9 @@ from http.client import (
     SERVICE_UNAVAILABLE,
     CREATED,
 )
-
 from unittest.mock import patch
 
 import pytest
-
 import sys
 from pathlib import Path
 
@@ -130,11 +128,11 @@ def test_get_all_counties(mock_read):
     assert 'counties' in resp_json
     assert isinstance(resp_json['counties'], list)
 
+
 @patch('countries.queries_countries.create')
 def test_create_country(mock_create):
     """Test POST /countries endpoint"""
     mock_create.return_value = 'test-id'
-
     country_data = {
         'name': 'Test Country',
         'population': 1000000,
@@ -145,7 +143,9 @@ def test_create_country(mock_create):
         'founded': '2000',
         'president': 'Test President'
     }
+
     resp = TEST_CLIENT.post('/countries', json=country_data)
+
     assert resp.status_code == CREATED
     resp_json = resp.get_json()
     assert 'id' in resp_json
@@ -164,7 +164,9 @@ def test_create_state(mock_create):
         'country_code': 'US',
         'code': 'TS'
     }
+
     resp = TEST_CLIENT.post('/states', json=state_data)
+
     assert resp.status_code == CREATED
     resp_json = resp.get_json()
     assert 'id' in resp_json
@@ -184,7 +186,9 @@ def test_create_city(mock_create):
         'founded': '1950',
         'mayor': 'Test Mayor'
     }
+
     resp = TEST_CLIENT.post('/cities', json=city_data)
+
     assert resp.status_code == CREATED
     resp_json = resp.get_json()
     assert 'id' in resp_json
@@ -203,7 +207,9 @@ def test_create_county(mock_create):
         'founded': '1900',
         'county_seat': 'Test City'
     }
+
     resp = TEST_CLIENT.post('/counties', json=county_data)
+
     assert resp.status_code == CREATED
     resp_json = resp.get_json()
     assert 'id' in resp_json
@@ -218,7 +224,9 @@ def test_create_country_bad_data(mock_create):
         'name': 'Test Country'
         # Missing required fields
     }
+
     resp = TEST_CLIENT.post('/countries', json=bad_data)
+
     assert resp.status_code == BAD_REQUEST
     resp_json = resp.get_json()
     assert 'error' in resp_json
@@ -230,7 +238,9 @@ def test_create_state_bad_data():
         'name': 'Test State',
         'population': 'not a number'
     }
+
     resp = TEST_CLIENT.post('/states', json=bad_data)
+
     assert resp.status_code == BAD_REQUEST
     resp_json = resp.get_json()
     assert 'error' in resp_json
@@ -244,7 +254,9 @@ def test_get_single_country(mock_read):
         'name': 'Test Country',
         'population': 1000000
     }
+
     resp = TEST_CLIENT.get('/countries/test-id')
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'name' in resp_json
@@ -268,7 +280,9 @@ def test_get_single_state(mock_read):
         'name': 'Test State',
         'population': 5000000
     }
+
     resp = TEST_CLIENT.get('/states/test-id')
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'name' in resp_json
@@ -282,7 +296,9 @@ def test_get_single_city(mock_read):
         'name': 'Test City',
         'population': '100,000'
     }
+
     resp = TEST_CLIENT.get('/cities/test-id')
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'name' in resp_json
@@ -296,7 +312,9 @@ def test_get_single_county(mock_read):
         'name': 'Test County',
         'population': 2000000
     }
+
     resp = TEST_CLIENT.get('/counties/test-id')
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'name' in resp_json
@@ -310,7 +328,9 @@ def test_update_country(mock_update):
         'population': 2000000,
         'president': 'New President'
     }
+
     resp = TEST_CLIENT.put('/countries/test-id', json=update_data)
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'message' in resp_json
@@ -336,7 +356,9 @@ def test_update_state(mock_update):
         'population': 6000000,
         'governor': 'New Governor'
     }
+
     resp = TEST_CLIENT.put('/states/test-id', json=update_data)
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'message' in resp_json
@@ -350,7 +372,9 @@ def test_update_city(mock_update):
         'population': '200,000',
         'mayor': 'New Mayor'
     }
+
     resp = TEST_CLIENT.put('/cities/test-id', json=update_data)
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'message' in resp_json
@@ -365,7 +389,9 @@ def test_update_county(mock_update):
         'STATE_CODE': 'CA',
         'county_seat': 'New Seat'
     }
+
     resp = TEST_CLIENT.put('/counties/test-id', json=update_data)
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'message' in resp_json
@@ -431,7 +457,9 @@ def test_get_scores(mock_read):
         {'id': 'b', 'player': 'anonymous', 'score': 100,
          'guesses_used': 5, 'entity_type': 'states'},
     ]
+
     resp = TEST_CLIENT.get(ep.SCORES_EP)
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'scores' in resp_json
@@ -449,7 +477,9 @@ def test_post_score(mock_create):
         'guesses_used': 3,
         'player': 'Bob',
     }
+
     resp = TEST_CLIENT.post(ep.SCORES_EP, json=score_data)
+
     assert resp.status_code == CREATED
     resp_json = resp.get_json()
     assert 'id' in resp_json
@@ -482,6 +512,7 @@ def test_stats_endpoint(
     mock_prompts.return_value = []
 
     resp = TEST_CLIENT.get('/stats')
+
     assert resp.status_code == OK
     resp_json = resp.get_json()
     assert 'countries' in resp_json

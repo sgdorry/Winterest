@@ -42,7 +42,7 @@ def _has_required_fields(state: dict) -> bool:
     if not isinstance(state, dict):
         return False
 
-    required_fields = [NAME,CODE,GOVERNOR,CAPITAL,AREA,STATEHOOD_DATE,POPULATION,CLIMATE,GDP,STATE_BIRD]
+    required_fields = [NAME, CODE, GOVERNOR, CAPITAL, AREA, STATEHOOD_DATE, POPULATION, CLIMATE, GDP, STATE_BIRD]
     
     for field in required_fields:
         if field == POPULATION:

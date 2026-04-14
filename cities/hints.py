@@ -30,7 +30,7 @@ def _has_required_fields(city: dict) -> bool:
     if not isinstance(city, dict):
         return False
 
-    required_fields = [POPULATION,STATE,FOUNDED,MAYOR,AREA]
+    required_fields = [POPULATION, STATE, FOUNDED, MAYOR, AREA]
     
     for field in required_fields:
         if not _is_non_empty_string(city.get(field)):
