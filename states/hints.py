@@ -20,6 +20,7 @@ HINT_DIFFICULTY = {
     5: [GDP, STATE_BIRD],
 }
 
+
 def get_random_stat(difficulty):
     difficulty_list = HINT_DIFFICULTY.get(difficulty)
     return random.choice(difficulty_list) if difficulty_list else None
@@ -42,9 +43,19 @@ def _has_required_fields(state: dict) -> bool:
     if not isinstance(state, dict):
         return False
 
-    required_fields = [NAME, CODE, GOVERNOR, CAPITAL, AREA, 
-                       STATEHOOD_DATE, POPULATION, CLIMATE, GDP, STATE_BIRD]
-    
+    required_fields = [
+        NAME,
+        CODE,
+        GOVERNOR,
+        CAPITAL,
+        AREA,
+        STATEHOOD_DATE,
+        POPULATION,
+        CLIMATE,
+        GDP,
+        STATE_BIRD,
+    ]
+
     for field in required_fields:
         if field == POPULATION:
             population = state.get(POPULATION)
