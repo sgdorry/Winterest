@@ -1,5 +1,6 @@
 from functools import wraps
 from uuid import uuid4
+import re
 import bcrypt
 import data.db_connect as dbc
 
@@ -14,6 +15,7 @@ SCORE = "score"
 GAMES_PLAYED = "games_played"
 
 user_cache = {}
+USERNAME_PATTERN = re.compile(r"^[a-z0-9_]+$")
 
 
 def needs_cache(fn):
@@ -69,20 +71,17 @@ def create(fields: dict) -> str:
         raise ValueError("fields must be a dict")
 
     _require_str(fields, EMAIL)
+    _require_str(fields, USERNAME)
     _require_str(fields, PASSWORD)
 
     email = fields[EMAIL].strip().lower()
-
-    username_raw = fields.get(USERNAME)
-    if isinstance(username_raw, str) and username_raw.strip():
-        username = username_raw.strip().lower()
-    else:
-        username = email.split("@", 1)[0]
-        base_username = username
-        suffix = 1
-        while find_by_username(username):
-            username = f"{base_username}{suffix}"
-            suffix += 1
+    username = fields[USERNAME].strip().lower()
+    if not username:
+        raise ValueError("Missing/invalid username")
+    if not USERNAME_PATTERN.fullmatch(username):
+        raise ValueError(
+            "Username can only include letters, numbers, and underscores"
+        )
 
     existing_user = find_by_email(email)
     if existing_user:

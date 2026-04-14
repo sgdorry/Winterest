@@ -23,7 +23,7 @@ ifeq ($(OS),Windows_NT)
     SET_PYTHONPATH = set PYTHONPATH=$(PYPATH) &&
 else
     PYPATH := $(shell cd .. && pwd)
-    SET_PYTHONPATH = PYTHONPATH=$(PYPATH)
+    SET_PYTHONPATH = PYTHONPATH="$(PYPATH)"
 endif
 
 pytests: FORCE

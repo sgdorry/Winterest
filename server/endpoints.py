@@ -725,8 +725,8 @@ def signup():
     username = data.get("username", "").strip().lower()
     password = data.get("password", "")
 
-    if not email or not password:
-        return {"error": "Email and password are required"}, 400
+    if not email or not username or not password:
+        return {"error": "Email, username, and password are required"}, 400
 
     if len(password) < 6:
         return {"error": "Password must be at least 6 characters"}, 400
