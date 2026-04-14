@@ -1,6 +1,5 @@
 import random
 
-NAME = 'name'
 POPULATION = 'population'
 AREA = 'area'
 STATEHOOD_DATE = 'founded'
@@ -10,10 +9,11 @@ GOVERNOR = 'governor'
 CODE = 'state_code'
 CLIMATE = 'climate'
 STATE_BIRD = 'state_bird'
+NAME = 'name'
 
 
 HINT_DIFFICULTY = {
-    1: [NAME, CODE],
+    1: [CODE, NAME],
     2: [GOVERNOR, CAPITAL],
     3: [AREA, STATEHOOD_DATE],
     4: [POPULATION, CLIMATE],
@@ -44,8 +44,8 @@ def _has_required_fields(state: dict) -> bool:
         return False
 
     required_fields = [
-        NAME,
         CODE,
+        NAME,
         GOVERNOR,
         CAPITAL,
         AREA,
@@ -90,7 +90,7 @@ def build_states_hints(state: dict) -> list[str]:
 
 def _generate_hint_for_field(state: dict, field: str) -> str:
     if field == NAME:
-        return f"The state is called {state[NAME].strip()}."
+        return f"The name of this state is {state[NAME].strip()}."
     elif field == POPULATION:
         return f"Its population is about {state[POPULATION]:,}."
     elif field == AREA:

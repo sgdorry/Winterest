@@ -843,7 +843,10 @@
       "state_code": "NY",
       "area": "469 sq mi",
       "founded": "1624",
-      "mayor": "Eric Adams"
+      "mayor": "Zohran Mamdani",
+      "gdp": "1.5 trillion USD",
+      "climate": "Humid subtropical",
+      "nickname": "The Big Apple"
     },
     {
       "id": "2",
@@ -853,7 +856,10 @@
       "state_code": "CA",
       "area": "503 sq mi",
       "founded": "1781",
-      "mayor": "Karen Bass"
+      "mayor": "Karen Bass",
+      "gdp": "1.0 trillion USD",
+      "climate": "Mediterranean",
+      "nickname": "City of Angels"
     },
     {
       "id": "3",
@@ -863,7 +869,10 @@
       "state_code": "IL",
       "area": "234 sq mi",
       "founded": "1833",
-      "mayor": "Brandon Johnson"
+      "mayor": "Brandon Johnson",
+      "gdp": "180 billion USD",
+      "climate": "Humid continental",
+      "nickname": "Windy City"
     },
     {
       "id": "4",
@@ -873,7 +882,10 @@
       "state_code": "TX",
       "area": "671 sq mi",
       "founded": "1836",
-      "mayor": "John Whitmire"
+      "mayor": "John Whitmire",
+      "gdp": "150 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "Space City"
     },
     {
       "id": "5",
@@ -883,7 +895,10 @@
       "state_code": "AZ",
       "area": "518 sq mi",
       "founded": "1881",
-      "mayor": "Kate Gallego"
+      "mayor": "Kate Gallego",
+      "gdp": "400 billion USD",
+      "climate": "Arid",
+      "nickname": "Valley of the Sun"
     },
     {
       "id": "6",
@@ -893,7 +908,10 @@
       "state_code": "PA",
       "area": "142 sq mi",
       "founded": "1682",
-      "mayor": "Cherelle Parker"
+      "mayor": "Cherelle Parker",
+      "gdp": "120 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "Philly"
     },
     {
       "id": "7",
@@ -903,7 +921,10 @@
       "state_code": "TX",
       "area": "505 sq mi",
       "founded": "1718",
-      "mayor": "Ron Nirenberg"
+      "mayor": "Ron Nirenberg",
+      "gdp": "130 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "Alamo City"
     },
     {
       "id": "8",
@@ -913,7 +934,10 @@
       "state_code": "CA",
       "area": "372 sq mi",
       "founded": "1769",
-      "mayor": "Todd Gloria"
+      "mayor": "Todd Gloria",
+      "gdp": "215 billion USD",
+      "climate": "Semi-arid to Mediterranean",
+      "nickname": "America's Finest City"
     },
     {
       "id": "9",
@@ -923,7 +947,10 @@
       "state_code": "TX",
       "area": "386 sq mi",
       "founded": "1841",
-      "mayor": "Eric Johnson"
+      "mayor": "Eric Johnson",
+      "gdp": "512 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "Big D"
     },
     {
       "id": "10",
@@ -933,7 +960,10 @@
       "state_code": "CA",
       "area": "181 sq mi",
       "founded": "1777",
-      "mayor": "Matt Mahan"
+      "mayor": "Matt Mahan",
+      "gdp": "275 billion USD",
+      "climate": "Mediterranean",
+      "nickname": "Capital of Silicon Valley"
     },
     {
       "id": "11",
@@ -943,7 +973,10 @@
       "state_code": "TX",
       "area": "326 sq mi",
       "founded": "1839",
-      "mayor": "Kirk Watson"
+      "mayor": "Kirk Watson",
+      "gdp": "150 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "Live Music Capital of the World"
     },
     {
       "id": "12",
@@ -953,7 +986,10 @@
       "state_code": "FL",
       "area": "875 sq mi",
       "founded": "1822",
-      "mayor": "Donna Deegan"
+      "mayor": "Donna Deegan",
+      "gdp": "100 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "Jacksonville"
     }
   ],
   "counties": [

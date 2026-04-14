@@ -2,19 +2,25 @@
 
 import random
 
-CONTINENT = "continent"
-CLIMATE = "climate"
-LANGUAGE = "language"
-POPULATION = "population"
-CAPITAL = "capital"
+NAME = 'name'
+POPULATION = 'population'
+CONTINENT = 'continent'
+CAPITAL = 'capital'
+GDP = 'gdp'
+AREA = 'area'
+FOUNDED = 'founded'
+PRESIDENT = 'president'
+FLAG_COLOR = 'flag_color'
+LANGUAGE = 'language'
+CLIMATE = 'climate'
 
 # Difficulty levels for country hints (1 = easiest, 5 = hardest)
 HINT_DIFFICULTY = {
-    1: [CONTINENT],
-    2: [CAPITAL],
-    3: [LANGUAGE],
-    4: [POPULATION],
-    5: [CLIMATE],
+    1: [CONTINENT, CAPITAL, NAME],
+    2: [PRESIDENT, LANGUAGE],
+    3: [FLAG_COLOR, GDP],
+    4: [POPULATION, CLIMATE],
+    5: [AREA, FOUNDED],
 }
 
 
@@ -31,7 +37,10 @@ def _has_required_fields(country: dict) -> bool:
     if not isinstance(country, dict):
         return False
 
-    required_fields = [CONTINENT, CLIMATE, LANGUAGE, POPULATION, CAPITAL]
+    required_fields = [
+        CONTINENT, CAPITAL, PRESIDENT, LANGUAGE, FLAG_COLOR,
+        GDP, POPULATION, CLIMATE, AREA, FOUNDED, NAME
+    ]
 
     for field in required_fields:
         if field == POPULATION:
@@ -66,7 +75,9 @@ def build_country_hints(country: dict) -> list[str]:
 
 
 def _generate_hint_for_field(country: dict, field: str) -> str:
-    if field == CONTINENT:
+    if field == NAME:
+        return f"The name of this country is {country[NAME].strip()}."
+    elif field == CONTINENT:
         return f"This country is in {country[CONTINENT].strip()}."
     elif field == CLIMATE:
         return f"Its climate is generally {country[CLIMATE].strip()}."
@@ -82,4 +93,14 @@ def _generate_hint_for_field(country: dict, field: str) -> str:
         return (
             f"Its capital city is {capital}{capital_period}"
         )
+    elif field == AREA:
+        return f"The area of this country is {country[AREA].strip()}."
+    elif field == FOUNDED:
+        return f"This country was founded in {country[FOUNDED].strip()}."
+    elif field == PRESIDENT:
+        return f"The current president is {country[PRESIDENT].strip()}."
+    elif field == FLAG_COLOR:
+        return f"The colors on the flag are {country[FLAG_COLOR].strip()}."
+    elif field == GDP:
+        return f"The GDP of this country is {country[GDP].strip()}."
     return None

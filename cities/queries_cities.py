@@ -11,6 +11,10 @@ AREA = 'area'
 FOUNDED = 'founded'
 MAYOR = 'mayor'
 STATE_CODE = 'state_code'
+GDP = 'gdp'
+CLIMATE = 'climate'
+NICKNAME = 'nickname'
+
 
 SAMPLE_CITY = {
     NAME: 'New York City',
@@ -19,7 +23,10 @@ SAMPLE_CITY = {
     STATE_CODE: 'NY',
     AREA: '469 sq mi',
     FOUNDED: '1624',
-    MAYOR: 'Eric Adams'
+    MAYOR: 'Zohran Mamdani',
+    GDP: '1.5 trillion USD',
+    CLIMATE: 'Humid subtropical',
+    NICKNAME: 'The Big Apple'
 }
 
 
@@ -105,6 +112,15 @@ def update(name: str, fields: dict):
     if MAYOR in fields and (not fields[MAYOR] or
                             not isinstance(fields[MAYOR], str)):
         raise ValueError(f'Bad value for {fields.get(MAYOR)=}')
+    if GDP in fields and (not fields[GDP] or
+                          not isinstance(fields[GDP], str)):
+        raise ValueError(f'Bad value for {fields.get(GDP)=}')
+    if CLIMATE in fields and (not fields[CLIMATE] or
+                              not isinstance(fields[CLIMATE], str)):
+        raise ValueError(f'Bad value for {fields.get(CLIMATE)=}')
+    if NICKNAME in fields and (not fields[NICKNAME] or
+                               not isinstance(fields[NICKNAME], str)):
+        raise ValueError(f'Bad value for {fields.get(NICKNAME)=}')
 
     result = dbc.update(COLLECTION, {NAME: name}, fields)
     if result < 1:

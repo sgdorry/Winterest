@@ -21,7 +21,7 @@ SAMPLE_STATE = {
     NAME: 'New York',
     POPULATION: 19870000,
     AREA: '54,556 sq miles',
-    FOUNDED: '07/26/1788',
+    FOUNDED: '1788',
     GDP: '2.32 trillion USD',
     CAPITAL: 'Albany',
     GOVERNOR: 'Kathy Hochul',
