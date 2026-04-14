@@ -145,7 +145,7 @@ def num_states():
 def create(fields: dict):
     if not isinstance(fields, dict):
         raise ValueError(f'Bad type for {type(fields)=}')
-    
+
     if not fields.get(STATE_CODE) or not isinstance(fields[STATE_CODE], str):
         raise ValueError(f'Bad value for {fields.get(STATE_CODE)=}')
 
