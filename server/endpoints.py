@@ -791,12 +791,12 @@ def login():
 
 LOGS_EP = '/dev/logs'
 
+
 @api.route(LOGS_EP)
 class Logs(Resource):
 
     @api.doc('get_logs')
     def get(self):
-
         try:
             lines = request.args.get('lines', 100, type=int)
             log_dir = '/var/log'
@@ -805,12 +805,17 @@ class Logs(Resource):
             log_files = glob.glob(os.path.join(log_dir, '*.log'))
 
             if not log_files:
-                return {'message': 'No log files found', 'log_dir': log_dir}, 200
+                return {
+                    'message': 'No log files found',
+                    'log_dir': log_dir
+                }, 200
 
             for log_path in log_files:
                 log_name = os.path.basename(log_path)
                 try:
-                    with open(log_path, 'r', encoding='utf-8', errors='replace') as f:
+                    with open(log_path, 'r',
+                              encoding='utf-8',
+                              errors='replace') as f:
                         all_lines = f.readlines()
                         logs[log_name] = [
                             line.rstrip() for line in all_lines[-lines:]
@@ -818,7 +823,8 @@ class Logs(Resource):
                 except PermissionError:
                     logs[log_name] = ['Permission denied']
                 except Exception as e:
-                    logs[log_name] = [f'Error reading file: {str(e)}']
+                    err_msg = f'Error reading file: {str(e)}'
+                    logs[log_name] = [err_msg]
 
             return {
                 'log_dir': log_dir,
