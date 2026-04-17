@@ -21,6 +21,8 @@ import puzzles.queries_puzzles as puzzles
 import scores.queries_scores as scores_mod
 from users import queries_users as qu
 import friends.queries_friends as friends_mod
+import os
+import glob
 
 # import werkzeug.exceptions as wz
 
@@ -725,8 +727,8 @@ def signup():
     username = data.get("username", "").strip().lower()
     password = data.get("password", "")
 
-    if not email or not username or not password:
-        return {"error": "Email, username, and password are required"}, 400
+    if not email or not password:
+        return {"error": "Email and password are required"}, 400
 
     if len(password) < 6:
         return {"error": "Password must be at least 6 characters"}, 400
@@ -785,3 +787,44 @@ def login():
             "friends": user.get(qu.FRIENDS, []),
         }
     }, 200
+
+
+LOGS_EP = '/dev/logs'
+
+@api.route(LOGS_EP)
+class Logs(Resource):
+
+    @api.doc('get_logs')
+    def get(self):
+
+        try:
+            lines = request.args.get('lines', 100, type=int)
+            log_dir = '/var/log'
+            logs = {}
+
+            log_files = glob.glob(os.path.join(log_dir, '*.log'))
+
+            if not log_files:
+                return {'message': 'No log files found', 'log_dir': log_dir}, 200
+
+            for log_path in log_files:
+                log_name = os.path.basename(log_path)
+                try:
+                    with open(log_path, 'r', encoding='utf-8', errors='replace') as f:
+                        all_lines = f.readlines()
+                        logs[log_name] = [
+                            line.rstrip() for line in all_lines[-lines:]
+                        ]
+                except PermissionError:
+                    logs[log_name] = ['Permission denied']
+                except Exception as e:
+                    logs[log_name] = [f'Error reading file: {str(e)}']
+
+            return {
+                'log_dir': log_dir,
+                'lines_requested': lines,
+                'logs': logs
+            }, 200
+
+        except Exception as e:
+            return {'error': str(e)}, 500
