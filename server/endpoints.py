@@ -346,7 +346,8 @@ def _enrich_usernames(scores):
 class ScoresAggregated(Resource):
     def get(self):
         try:
-            scores = scores_mod.read_aggregated()
+            period = request.args.get('period', 'all')
+            scores = scores_mod.read_aggregated(period=period)
             return {'scores': _enrich_usernames(scores)}, 200
         except Exception as e:
             return {'error': str(e)}, 500
@@ -359,9 +360,11 @@ class ScoresFriendsAggregated(Resource):
         if not user_id:
             return {'error': 'user_id is required'}, 400
         try:
+            period = request.args.get('period', 'all')
             friend_ids = friends_mod.read(user_id)
             all_ids = friend_ids + [user_id]
-            scores = scores_mod.read_aggregated_by_user_ids(all_ids)
+            scores = scores_mod.read_aggregated_by_user_ids(
+                all_ids, period=period)
             return {'scores': _enrich_usernames(scores)}, 200
         except Exception as e:
             return {'error': str(e)}, 500
