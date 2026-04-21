@@ -1,6 +1,6 @@
 from functools import wraps
 from uuid import uuid4
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import data.db_connect as dbc
 
 COLLECTION = "scores"
@@ -97,6 +97,22 @@ def read_by_user_ids(user_ids: list) -> list:
     return docs
 
 
+PERIOD_DAYS = {
+    "week": 7,
+    "month": 30,
+}
+
+
+def _filter_by_period(docs, period: str = None):
+    if not period or period == "all":
+        return docs
+    days = PERIOD_DAYS.get(period)
+    if days is None:
+        return docs
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    return [d for d in docs if d.get(TIMESTAMP, "") >= cutoff]
+
+
 def _aggregate(docs: list) -> list:
     buckets = {}
     for doc in docs:
@@ -119,12 +135,14 @@ def _aggregate(docs: list) -> list:
 
 
 @needs_cache
-def read_aggregated() -> list:
-    return _aggregate(score_cache.values())
+def read_aggregated(period: str = None) -> list:
+    docs = _filter_by_period(score_cache.values(), period)
+    return _aggregate(docs)
 
 
 @needs_cache
-def read_aggregated_by_user_ids(user_ids: list) -> list:
+def read_aggregated_by_user_ids(user_ids: list,
+                                period: str = None) -> list:
     if not user_ids:
         return []
     uid_set = set(user_ids)
@@ -132,4 +150,5 @@ def read_aggregated_by_user_ids(user_ids: list) -> list:
         doc for doc in score_cache.values()
         if doc.get(USER_ID) in uid_set
     ]
+    docs = _filter_by_period(docs, period)
     return _aggregate(docs)
