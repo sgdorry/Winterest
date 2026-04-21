@@ -1,5 +1,13 @@
 include common.mk
 
+VENV        := .venv
+PY          := $(VENV)/bin/python
+PIP         := $(VENV)/bin/pip
+FLASK       := $(VENV)/bin/flask
+REQS        := requirements.txt requirements-dev.txt
+STAMP       := $(VENV)/.installed
+export PYTHONPATH := $(CURDIR)
+
 # Our directories
 API_DIR = server
 DB_DIR = data
@@ -10,7 +18,38 @@ COUNTRIES_DIR = countries
 CITIES_DIR = cities
 REQ_DIR = .
 
+.PHONY: setup start seed mongo-up dev_env all_tests docs prod github clean FORCE
+
 FORCE:
+
+setup: $(STAMP) mongo-up seed
+	@echo "Setup complete. Run: make start"
+
+start: $(STAMP) mongo-up
+	FLASK_ENV=development DEBUG=1 \
+	$(FLASK) --app server.endpoints run --debug --host=127.0.0.1 --port=8000
+
+seed: $(STAMP) mongo-up
+	$(PY) -m scripts.load_script
+
+$(STAMP): $(REQS)
+	@test -d $(VENV) || python3 -m venv $(VENV)
+	$(PIP) install --upgrade pip
+	$(PIP) install -r requirements-dev.txt
+	@touch $(STAMP)
+
+mongo-up:
+	@if command -v brew >/dev/null 2>&1; then \
+	  brew services list | grep -q "mongodb-community.*started" \
+	    || brew services start mongodb-community; \
+	else \
+	  echo "Non-macOS: ensure MongoDB is running on localhost:27017"; \
+	fi
+
+dev_env: $(STAMP)
+
+clean:
+	rm -rf $(VENV)
 
 prod: all_tests github
 
@@ -25,18 +64,5 @@ all_tests: FORCE
 	$(MAKE) -C $(COUNTRIES_DIR) tests
 	$(MAKE) -C $(CITIES_DIR) tests
 
-dev_env: FORCE
-	pip install -r $(REQ_DIR)/requirements-dev.txt
-	@echo "You should set PYTHONPATH to: "
-	@echo $(shell pwd)
-
 docs: FORCE
 	$(MAKE) -C $(API_DIR) docs
-
-# --- Local development targets ---
-
-seed: FORCE
-	PYTHONPATH=$(shell pwd):$$PYTHONPATH python -m scripts.load_script
-
-start: FORCE
-	./local.sh
