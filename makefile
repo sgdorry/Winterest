@@ -7,6 +7,7 @@ FLASK       := $(VENV)/bin/flask
 REQS        := requirements.txt requirements-dev.txt
 STAMP       := $(VENV)/.installed
 export PYTHONPATH := $(CURDIR)
+export PATH := $(CURDIR)/$(VENV)/bin:$(PATH)
 
 # Our directories
 API_DIR = server
