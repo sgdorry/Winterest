@@ -239,3 +239,33 @@ def get_leaderboard(limit: int = 10) -> list:
     users = list(user_cache.values())
     users.sort(key=lambda user: user.get(SCORE, 0), reverse=True)
     return users[:limit]
+
+
+@needs_cache
+def update_username(user_id: str, username: str) -> dict:
+    if not user_id or not isinstance(user_id, str):
+        raise ValueError("user_id is required")
+    if not username or not isinstance(username, str):
+        raise ValueError("username is required")
+
+    normalized_username = username.strip().lower()
+    if not normalized_username:
+        raise ValueError("username is required")
+    if not USERNAME_PATTERN.fullmatch(normalized_username):
+        raise ValueError(
+            "Username can only include letters, numbers, and underscores"
+        )
+
+    user = user_cache.get(user_id)
+    if not user:
+        raise ValueError("User not found")
+
+    existing_username = find_by_username(normalized_username)
+    if existing_username and existing_username.get(ID) != user_id:
+        raise ValueError("Username already exists")
+
+    if user.get(USERNAME) != normalized_username:
+        dbc.update(COLLECTION, {ID: user_id}, {USERNAME: normalized_username})
+        user[USERNAME] = normalized_username
+
+    return user

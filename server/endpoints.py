@@ -708,6 +708,38 @@ def login():
     }, 200
 
 
+@app.route("/users/username", methods=["PUT"])
+def update_username():
+    data = request.get_json()
+    if not data:
+        return {"error": "Missing JSON body"}, 400
+
+    user_id = data.get("user_id", "").strip()
+    username = data.get("username", "").strip().lower()
+
+    if not user_id or not username:
+        return {"error": "user_id and username are required"}, 400
+
+    try:
+        user = qu.update_username(user_id, username)
+    except ValueError as e:
+        error = str(e)
+        if error == "User not found":
+            return {"error": error}, 404
+        if error == "Username already exists":
+            return {"error": error}, 409
+        return {"error": error}, 400
+
+    return {
+        "message": "Username updated successfully",
+        "user": {
+            "id": user.get(qu.ID),
+            "email": user.get(qu.EMAIL),
+            "username": user.get(qu.USERNAME),
+        }
+    }, 200
+
+
 LOGS_EP = '/dev/logs'
 
 
