@@ -453,3 +453,38 @@ def test_endpoints_list():
     resp_json = resp.get_json()
     assert 'Available endpoints' in resp_json
     assert isinstance(resp_json['Available endpoints'], list)
+
+
+@patch('users.queries_users.update_username')
+def test_update_username_success(mock_update_username):
+    """Test PUT /users/username endpoint success."""
+    mock_update_username.return_value = {
+        'id': 'u1',
+        'email': 'player@winpoint.com',
+        'username': 'new_name',
+    }
+
+    resp = TEST_CLIENT.put('/users/username', json={
+        'user_id': 'u1',
+        'username': 'new_name',
+    })
+
+    assert resp.status_code == OK
+    resp_json = resp.get_json()
+    assert resp_json['message'] == 'Username updated successfully'
+    assert resp_json['user']['username'] == 'new_name'
+
+
+@patch('users.queries_users.update_username')
+def test_update_username_conflict(mock_update_username):
+    """Test PUT /users/username returns 409 for duplicate username."""
+    mock_update_username.side_effect = ValueError('Username already exists')
+
+    resp = TEST_CLIENT.put('/users/username', json={
+        'user_id': 'u1',
+        'username': 'taken_name',
+    })
+
+    assert resp.status_code == 409
+    resp_json = resp.get_json()
+    assert resp_json['error'] == 'Username already exists'
