@@ -1511,18 +1511,6 @@
       "nickname": "Jacksonville"
     }
   ],
-  "counties": [
-    {
-      "id": "1",
-      "name": "Los Angeles County",
-      "population": 10000000,
-      "state": "California",
-      "area": "4,751 sq mi",
-      "founded": "1850",
-      "county_seat": "Los Angeles",
-      "state_code": "CA"
-    }
-  ],
   "prompts": [
     {
       "id": "p1",

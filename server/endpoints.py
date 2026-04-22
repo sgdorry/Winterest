@@ -15,7 +15,6 @@ import states.queries_states as states
 from states.hints import build_states_hints
 import cities.queries_cities as cities
 from cities.hints import build_cities_hints
-import counties.queries_counties as counties
 import prompts.queries_prompts as prompts
 import puzzles.queries_puzzles as puzzles
 import scores.queries_scores as scores_mod
@@ -142,7 +141,6 @@ class Stats(Resource):
                 'countries': len(countries.read()),
                 'states': len(states.read()),
                 'cities': len(cities.read()),
-                'counties': len(counties.read()),
                 'prompts': len(prompts.read())
             }, 200
         except Exception as e:
@@ -631,88 +629,6 @@ class City(Resource):
         try:
             cities.delete(city_id)
             return {'message': 'City deleted successfully'}, 200
-        except ValueError as e:
-            return {'error': str(e)}, 404
-        except Exception as e:
-            return {'error': str(e)}, 500
-
-
-@api.route('/counties')
-class Counties(Resource):
-    """
-    Endpoints for managing counties
-    """
-    @api.doc('get_counties')
-    def get(self):
-        """
-        Get all counties
-        """
-        try:
-            all_counties = counties.read()
-            sorted_counties = sorted(all_counties,
-                                     key=lambda x: x.get('name', ''))
-            return {'counties': sorted_counties}, 200
-        except Exception as e:
-            return {'error': str(e)}, 500
-
-    @api.doc('create_county')
-    def post(self):
-        """
-        Create a new county
-        """
-        try:
-            data = request.get_json(force=True)
-            new_id = counties.create(data)
-            return {'id': new_id,
-                    'message': 'County created successfully'}, 201
-        except ValueError as e:
-            return {'error': str(e)}, 400
-        except Exception as e:
-            return {'error': str(e)}, 500
-
-
-@api.route('/counties/<string:county_id>')
-class County(Resource):
-    """
-    Endpoints for managing a specific county
-    """
-    @api.doc('get_county')
-    def get(self, county_id):
-        """
-        Get a specific county by ID
-        """
-        try:
-            county = counties.read(county_id)
-            if county:
-                return county, 200
-            else:
-                return {'error': 'County not found'}, 404
-        except Exception as e:
-            return {'error': str(e)}, 500
-
-    @api.doc('update_county')
-    def put(self, county_id):
-        """
-        Update a specific county by ID
-        """
-        try:
-            data = request.get_json(force=True)
-            state_code = data.get('STATE_CODE') or data.get('state_code', '')
-            counties.update(county_id, state_code, data)
-            return {'message': 'County updated successfully'}, 200
-        except ValueError as e:
-            return {'error': str(e)}, 400
-        except Exception as e:
-            return {'error': str(e)}, 500
-
-    @api.doc('delete_county')
-    def delete(self, county_id):
-        """
-        Delete a specific county by ID
-        """
-        try:
-            counties.delete(county_id)
-            return {'message': 'County deleted successfully'}, 200
         except ValueError as e:
             return {'error': str(e)}, 404
         except Exception as e:

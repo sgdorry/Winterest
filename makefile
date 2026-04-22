@@ -14,7 +14,6 @@ API_DIR = server
 DB_DIR = data
 SEC_DIR = security
 STATES_DIR = states
-COUNTIES_DIR = counties
 COUNTRIES_DIR = countries
 CITIES_DIR = cities
 REQ_DIR = .
@@ -61,7 +60,6 @@ github: FORCE
 all_tests: FORCE
 	$(MAKE) -C $(API_DIR) tests
 	$(MAKE) -C $(STATES_DIR) tests
-	$(MAKE) -C $(COUNTIES_DIR) tests
 	$(MAKE) -C $(COUNTRIES_DIR) tests
 	$(MAKE) -C $(CITIES_DIR) tests
 
