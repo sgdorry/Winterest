@@ -9,6 +9,7 @@ from flask_restx import Resource, Api, reqparse
 from flask import request
 from flask_cors import CORS
 from security import password as sec_pw
+from security.security_manager import protect, READ, LOGS
 
 import countries.queries_countries as countries
 from countries.hints import build_country_hints
@@ -748,6 +749,7 @@ LOGS_EP = '/dev/logs'
 class Logs(Resource):
 
     @api.doc('get_logs')
+    @protect(LOGS, action=READ)
     def get(self):
         try:
             lines = request.args.get('lines', 100, type=int)

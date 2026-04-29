@@ -31,6 +31,7 @@ VALIDATE_USER = 'validateUser'
 PASS_PHRASE = 'pass_phrase'
 IP_ADDRESS = 'ipAddress'
 CODES = 'codes'
+LOGS = 'logs'
 
 protocols = {}
 
@@ -332,6 +333,7 @@ def protocol_from_json(protocol_json):
 def fetch_all() -> None:
 	if len(protocols) < 1:
 		protocols[USERS] = USERS_PROTOCOL
+		protocols[LOGS] = LOGS_PROTOCOL
 
 
 @needs_protocols
@@ -375,6 +377,11 @@ USERS_API_KEY = os.environ.get('WINTEREST_USERS_API_KEY', 'WINTEREST_USERS_KEY')
 USERS_SEC_CHECKS = ActionChecks(api_key=True,
 								valid_api_keys=[USERS_API_KEY])
 USERS_PROTOCOL = SecProtocol(USERS, update=USERS_SEC_CHECKS)
+
+LOGS_API_KEY = os.environ.get('WINTEREST_LOGS_API_KEY', 'WINTEREST_LOGS_KEY')
+LOGS_SEC_CHECKS = ActionChecks(api_key=True,
+						valid_api_keys=[LOGS_API_KEY])
+LOGS_PROTOCOL = SecProtocol(LOGS, read=LOGS_SEC_CHECKS)
 
 
 def protect(feature_name: str, action: str = CREATE, header_name: str = 'X-API-Key'):
