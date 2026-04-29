@@ -27,7 +27,6 @@ PASSWORD = 'password'
 PROT_NM = 'protocol_name'
 SEC_COLLECT = 'security_protocols'
 USERS = 'users'
-COUNTRIES = 'countries'
 VALIDATE_USER = 'validateUser'
 PASS_PHRASE = 'pass_phrase'
 IP_ADDRESS = 'ipAddress'
@@ -333,14 +332,6 @@ def protocol_from_json(protocol_json):
 def fetch_all() -> None:
 	if len(protocols) < 1:
 		protocols[USERS] = USERS_PROTOCOL
-		# Seed a default countries protocol (in-memory) so decorators
-		# referencing `COUNTRIES` won't fail at import-time.
-		try:
-			protocols[COUNTRIES] = COUNTRIES_PROTOCOL
-		except NameError:
-			# If COUNTRIES_PROTOCOL isn't defined yet, ignore and allow
-			# later code to construct it.
-			pass
 
 
 @needs_protocols
@@ -384,11 +375,6 @@ USERS_API_KEY = os.environ.get('WINTEREST_USERS_API_KEY', 'WINTEREST_USERS_KEY')
 USERS_SEC_CHECKS = ActionChecks(api_key=True,
 								valid_api_keys=[USERS_API_KEY])
 USERS_PROTOCOL = SecProtocol(USERS, update=USERS_SEC_CHECKS)
-
-COUNTRIES_API_KEY = os.environ.get('WINTEREST_COUNTRIES_API_KEY', 'WINTEREST_COUNTRIES_KEY')
-COUNTRIES_SEC_CHECKS = ActionChecks(api_key=True,
-						valid_api_keys=[COUNTRIES_API_KEY])
-COUNTRIES_PROTOCOL = SecProtocol(COUNTRIES, create=COUNTRIES_SEC_CHECKS)
 
 
 def protect(feature_name: str, action: str = CREATE, header_name: str = 'X-API-Key'):

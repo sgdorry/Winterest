@@ -1,8 +1,8 @@
 from functools import wraps
 from uuid import uuid4
 import re
-import bcrypt
 import data.db_connect as dbc
+from security import password as pw
 
 COLLECTION = "users"
 
@@ -59,10 +59,7 @@ def _normalize_user_doc(doc: dict):
 
 
 def _hash_password(password: str) -> str:
-    return bcrypt.hashpw(
-        password.encode("utf-8"),
-        bcrypt.gensalt(),
-    ).decode("utf-8")
+    return pw.hash_password(password)
 
 
 @needs_cache
@@ -81,6 +78,10 @@ def create(fields: dict) -> str:
     if not USERNAME_PATTERN.fullmatch(username):
         raise ValueError(
             "Username can only include letters, numbers, and underscores"
+        )
+    if not pw.is_valid_password(fields[PASSWORD]):
+        raise ValueError(
+            f"Password must be at least {pw.MIN_PASSWORD_LEN} characters"
         )
 
     existing_user = find_by_email(email)
@@ -161,10 +162,7 @@ def verify(email_or_username: str, password: str):
     if not isinstance(stored_password, str) or not stored_password:
         return None
 
-    if bcrypt.checkpw(
-        password.encode("utf-8"),
-        stored_password.encode("utf-8"),
-    ):
+    if pw.check_password(stored_password, password):
         return user
 
     return None

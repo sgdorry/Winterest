@@ -8,6 +8,7 @@ from flask import Flask
 from flask_restx import Resource, Api, reqparse
 from flask import request
 from flask_cors import CORS
+from security import password as sec_pw
 
 import countries.queries_countries as countries
 from countries.hints import build_country_hints
@@ -649,7 +650,7 @@ def signup():
     if not email or not password:
         return {"error": "Email and password are required"}, 400
 
-    if len(password) < 6:
+    if not sec_pw.is_valid_password(password):
         return {"error": "Password must be at least 6 characters"}, 400
 
     try:
