@@ -27,6 +27,7 @@ PASSWORD = 'password'
 PROT_NM = 'protocol_name'
 SEC_COLLECT = 'security_protocols'
 USERS = 'users'
+COUNTRIES = 'countries'
 VALIDATE_USER = 'validateUser'
 PASS_PHRASE = 'pass_phrase'
 IP_ADDRESS = 'ipAddress'
@@ -332,6 +333,14 @@ def protocol_from_json(protocol_json):
 def fetch_all() -> None:
 	if len(protocols) < 1:
 		protocols[USERS] = USERS_PROTOCOL
+		# Seed a default countries protocol (in-memory) so decorators
+		# referencing `COUNTRIES` won't fail at import-time.
+		try:
+			protocols[COUNTRIES] = COUNTRIES_PROTOCOL
+		except NameError:
+			# If COUNTRIES_PROTOCOL isn't defined yet, ignore and allow
+			# later code to construct it.
+			pass
 
 
 @needs_protocols
@@ -376,226 +385,10 @@ USERS_SEC_CHECKS = ActionChecks(api_key=True,
 								valid_api_keys=[USERS_API_KEY])
 USERS_PROTOCOL = SecProtocol(USERS, update=USERS_SEC_CHECKS)
 
-
-def protect(feature_name: str, action: str = CREATE, header_name: str = 'X-API-Key'):
-	def decorator(fn):
-		@wraps(fn)
-		def wrapper(*args, **kwargs):
-			from flask import request
-
-			api_key_value = request.headers.get(header_name, '')
-			if not is_permitted(feature_name, action, api_key=api_key_value):
-				return {'error': 'API key required or invalid'}, 401
-			return fn(*args, **kwargs)
-
-		return wrapper
-
-	return decorator
-
-
-refresh_all()
-from copy import deepcopy
-from functools import wraps
-import os
-
-from . import api_key as apik
-
-CREATE = 'create'
-READ = 'read'
-UPDATE = 'update'
-DELETE = 'delete'
-
-API_KEY = 'api_key'
-VALIDATE_USER = 'validate_user'
-VALID_API_KEYS = 'valid_api_keys'
-VALID_USERS = 'valid_users'
-PROTOCOL_NAME = 'protocol_name'
-
-VALID_ACTIONS = [CREATE, READ, UPDATE, DELETE]
-
-PROMPTS = 'prompts'
-PROMPTS_API_KEY = os.environ.get('WINTEREST_PROMPTS_API_KEY', 'WINTEREST_PROMPTS_KEY')
-
-protocols = {}
-
-
-def _ensure_default_key():
-	if isinstance(PROMPTS_API_KEY, str) and len(PROMPTS_API_KEY) >= apik.MIN_KEY_LEN:
-		if not apik.exists(PROMPTS_API_KEY):
-			apik.add(PROMPTS_API_KEY)
-
-
-class ActionChecks:
-
-	def __init__(self,
-				 api_key=False,
-				 valid_api_keys=None,
-				 valid_users=None):
-		if not isinstance(api_key, bool):
-			raise TypeError(f'Bad type for api_key: {type(api_key)}')
-		if valid_api_keys is not None and not isinstance(valid_api_keys, list):
-			raise TypeError(f'Bad type for valid_api_keys: {type(valid_api_keys)}')
-		if valid_users is not None and not isinstance(valid_users, list):
-			raise TypeError(f'Bad type for valid_users: {type(valid_users)}')
-
-		self.api_key = api_key
-		self.valid_api_keys = list(valid_api_keys or [])
-		self.valid_users = list(valid_users) if valid_users is not None else None
-
-		if self.valid_api_keys:
-			for api_key_val in self.valid_api_keys:
-				if not isinstance(api_key_val, str):
-					raise TypeError(
-						f'Bad type for valid_api_keys item: {type(api_key_val)}'
-					)
-		if self.valid_users:
-			for user in self.valid_users:
-				if not isinstance(user, str):
-					raise TypeError(
-						f'Bad type for valid_users item: {type(user)}'
-					)
-
-	def to_json(self):
-		payload = {
-			API_KEY: self.api_key,
-		}
-		if self.valid_api_keys:
-			payload[VALID_API_KEYS] = list(self.valid_api_keys)
-		if self.valid_users is not None:
-			payload[VALID_USERS] = list(self.valid_users)
-		return payload
-
-	def is_valid_api_key(self, api_key: str) -> bool:
-		if not api_key or not isinstance(api_key, str):
-			return False
-		if self.valid_api_keys:
-			return api_key in self.valid_api_keys
-		return apik.exists(api_key)
-
-	def is_valid_user(self, user_id: str, user: str) -> bool:
-		if self.valid_users is None:
-			return True
-		return user in self.valid_users
-
-	def is_permitted(self, user_id: str, check_vals: dict) -> bool:
-		if self.api_key:
-			if API_KEY not in check_vals:
-				raise ValueError(f'Value missing for {API_KEY}')
-			if not self.is_valid_api_key(check_vals[API_KEY]):
-				return False
-		if self.valid_users is not None:
-			if VALIDATE_USER not in check_vals:
-				raise ValueError(f'Value missing for {VALIDATE_USER}')
-			if not self.is_valid_user(user_id, check_vals[VALIDATE_USER]):
-				return False
-		return True
-
-
-class SecProtocol:
-	"""A named feature protocol with action-specific checks."""
-
-	def __init__(self,
-				 name,
-				 create=ActionChecks(),
-				 read=ActionChecks(),
-				 update=ActionChecks(),
-				 delete=ActionChecks()):
-		if not isinstance(name, str):
-			raise TypeError(f'Bad type for name: {type(name)}')
-		if not isinstance(create, ActionChecks):
-			raise TypeError(f'Bad type for create: {type(create)}')
-		if not isinstance(read, ActionChecks):
-			raise TypeError(f'Bad type for read: {type(read)}')
-		if not isinstance(update, ActionChecks):
-			raise TypeError(f'Bad type for update: {type(update)}')
-		if not isinstance(delete, ActionChecks):
-			raise TypeError(f'Bad type for delete: {type(delete)}')
-
-		self.name = name
-		self.create = create
-		self.read = read
-		self.update = update
-		self.delete = delete
-
-	def to_json(self):
-		return {
-			PROTOCOL_NAME: self.name,
-			CREATE: self.create.to_json(),
-			READ: self.read.to_json(),
-			UPDATE: self.update.to_json(),
-			DELETE: self.delete.to_json(),
-		}
-
-	def is_permitted(self,
-					 action: str,
-					 user_id: str,
-					 check_vals: dict) -> bool:
-		if action not in VALID_ACTIONS:
-			raise ValueError(f'Unknown action: {action}')
-		return getattr(self, action).is_permitted(user_id, check_vals)
-
-
-def needs_protocols(fn):
-	@wraps(fn)
-	def wrapper(*args, **kwargs):
-		if not protocols:
-			refresh_all()
-		return fn(*args, **kwargs)
-
-	return wrapper
-
-
-def _seed_defaults():
-	_ensure_default_key()
-	protocols.clear()
-	protocols[USERS] = SecProtocol(
-		USERS,
-		update=ActionChecks(api_key=True, valid_api_keys=[USERS_API_KEY]),
-	)
-
-
-@needs_protocols
-def read() -> dict:
-	return deepcopy(protocols)
-
-
-@needs_protocols
-def read_feature(feature_name: str) -> dict:
-	return protocols.get(feature_name)
-
-
-def fetch_by_key(protocol_name: str):
-	if not isinstance(protocol_name, str):
-		return None
-	return protocols.get(protocol_name)
-
-
-def add(protocol):
-	if not isinstance(protocol, SecProtocol):
-		raise TypeError(f'Bad type for protocol: {type(protocol)}')
-	if protocol.name in protocols:
-		raise ValueError(f'Protocol already exists: {protocol.name}')
-	protocols[protocol.name] = protocol
-	return protocol
-
-
-def delete(protocol_name: str):
-	if protocol_name not in protocols:
-		raise ValueError(f'Unknown protocol: {protocol_name}')
-	return protocols.pop(protocol_name)
-
-
-def refresh_all():
-	_seed_defaults()
-	return deepcopy(protocols)
-
-
-def is_permitted(prot_name, action, user_id: str = '', api_key: str = ''):
-	protocol = fetch_by_key(prot_name)
-	if not protocol:
-		raise ValueError(f'Unknown protocol: {prot_name}')
-	check_vals = {API_KEY: api_key}
-	return protocol.is_permitted(action, user_id, check_vals)
+COUNTRIES_API_KEY = os.environ.get('WINTEREST_COUNTRIES_API_KEY', 'WINTEREST_COUNTRIES_KEY')
+COUNTRIES_SEC_CHECKS = ActionChecks(api_key=True,
+						valid_api_keys=[COUNTRIES_API_KEY])
+COUNTRIES_PROTOCOL = SecProtocol(COUNTRIES, create=COUNTRIES_SEC_CHECKS)
 
 
 def protect(feature_name: str, action: str = CREATE, header_name: str = 'X-API-Key'):

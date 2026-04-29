@@ -22,7 +22,6 @@ from users import queries_users as qu
 import friends.queries_friends as friends_mod
 import os
 import glob
-import security.sec_manager2 as sec_mgr
 
 # import werkzeug.exceptions as wz
 
@@ -404,7 +403,6 @@ class Countries(Resource):
             return {'error': str(e)}, 500
 
     @api.doc('create_country')
-    @sec_mgr.protect(sec_mgr.COUNTRIES, sec_mgr.CREATE)
     def post(self):
         """
         Create a new country
@@ -711,7 +709,6 @@ def login():
 
 
 @app.route("/users/username", methods=["PUT"])
-@sec_mgr.protect(sec_mgr.USERS, sec_mgr.UPDATE)
 def update_username():
     data = request.get_json()
     if not data:
