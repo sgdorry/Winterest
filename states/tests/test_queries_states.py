@@ -108,7 +108,6 @@ def test_create_bad_name(state_delta):
         with pytest.raises(Exception):
             qry.create({'id': '1', 'name': 5, 'population': 19870000, 'capital': 'Albany', 'governor': 'Kathy Hochul'}) #test with an integer as the name
 
-
 def test_create_bad_population(state_delta):
     with state_delta():
         with pytest.raises(Exception):

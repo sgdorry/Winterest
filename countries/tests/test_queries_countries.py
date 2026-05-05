@@ -1,6 +1,7 @@
 from copy import deepcopy
 from unittest.mock import patch
 import pytest
+from contextlib import contextmanager
 
 import sys
 from pathlib import Path
@@ -81,7 +82,32 @@ def test_create_requires_country_id(mock_read_one, mock_read):
 
     with pytest.raises(ValueError):
         qry.create(payload)
+        
+@pytest.fixture
+def country_delta():
+    @contextmanager
+    def _country_delta(delta=0):
+        old_count = qry.num_countries()
+        yield
+        new_count = qry.num_countries()
+        assert new_count - old_count == delta
+    return _country_delta
 
+def test_bad_name(country_delta):
+    with country_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': 'US', 'name': 5, 'population': 340000000, 'continent': 'North America', 
+                        'capital': 'Washington DC', 'gdp': '29.18 trillion USD', 'area': '3,810,000 sq mi', 
+                        'founded': '1776', 'president': 'Donald Trump', 'flag_color': 'Red, White, and Blue', 
+                        'language': 'English', 'climate': 'Varies widely by region; temperate to subtropical'})
+        
+def test_bad_population(country_delta):
+    with country_delta():
+        with pytest.raises(Exception):
+            qry.create({'id': 'US', 'name': 'United States of America', 'population': 'bruh', 'continent': 'North America', 
+                        'capital': 'Washington DC', 'gdp': '29.18 trillion USD', 'area': '3,810,000 sq mi', 
+                        'founded': '1776', 'president': 'Donald Trump', 'flag_color': 'Red, White, and Blue', 
+                        'language': 'English', 'climate': 'Varies widely by region; temperate to subtropical'})
 
 @patch('data.db_connect.read')
 @patch('data.db_connect.read_one')

@@ -74,6 +74,22 @@ def test_bad_test_for_num_cities():
     assert isinstance(count, int)
     assert count >= 0
 
+
+def test_bad_name(temp_city):
+    old_count = qry.num_cities() #current count of cities
+    with pytest.raises(Exception):
+        qry.create({'id': '1', 'name': 5, 'population': 19870000, 'state': 'New York', 
+                    'mayor': 'Zohran Mamdani', 'area': '469 sq mi', 'founded': '1624', 'gdp': '1.5 trillion USD', 
+                    'climate': 'Humid subtropical', 'nickname': 'The Big Apple'})
+
+
+def test_bad_population(temp_city):
+    old_count = qry.num_cities() #current count of cities
+    with pytest.raises(Exception):
+        qry.create({'id': '1', 'name': 'New York City', 'population': 'bruh', 'state': 'New York', 
+                    'mayor': 'Zohran Mamdani', 'area': '469 sq mi', 'founded': '1624', 'gdp': '1.5 trillion USD', 
+                    'climate': 'Humid subtropical', 'nickname': 'The Big Apple'}) 
+
 #updating the connection broke this test the person who updates delete to use the state code and city name will be able to fix this test
 @pytest.mark.skip 
 def test_delete(temp_city_no_delete):

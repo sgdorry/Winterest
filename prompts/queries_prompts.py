@@ -16,11 +16,12 @@ APPROVED = "approved"
 
 prompt_cache = {}
 
+
 def needs_cache(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         if not prompt_cache:
-            docs = dbc.read(COLLECTION) 
+            docs = dbc.read(COLLECTION)
             for doc in docs:
                 pid = doc.get(ID)
                 if pid:
@@ -57,6 +58,7 @@ def create(fields: dict) -> str:
     dbc.create(COLLECTION, doc)
     prompt_cache[pid] = doc
     return pid
+
 
 @needs_cache
 def read(prompt_type: str | None = None) -> list:

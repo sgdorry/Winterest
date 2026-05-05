@@ -14,9 +14,12 @@ API_DIR = server
 DB_DIR = data
 SEC_DIR = security
 STATES_DIR = states
-COUNTIES_DIR = counties
 COUNTRIES_DIR = countries
 CITIES_DIR = cities
+SCORES_DIR = scores
+USERS_DIR = users
+FRIENDS_DIR = friends
+PROMPTS_DIR = prompts
 REQ_DIR = .
 
 .PHONY: setup start seed mongo-up dev_env all_tests docs prod github clean FORCE
@@ -60,10 +63,13 @@ github: FORCE
 
 all_tests: FORCE
 	$(MAKE) -C $(API_DIR) tests
-	$(MAKE) -C $(STATES_DIR) tests
-	$(MAKE) -C $(COUNTIES_DIR) tests
 	$(MAKE) -C $(COUNTRIES_DIR) tests
+	$(MAKE) -C $(STATES_DIR) tests
 	$(MAKE) -C $(CITIES_DIR) tests
+	$(MAKE) -C $(SCORES_DIR) tests
+	$(MAKE) -C $(USERS_DIR) tests
+	$(MAKE) -C $(FRIENDS_DIR) tests
+	$(MAKE) -C $(PROMPTS_DIR) tests
 
 docs: FORCE
 	$(MAKE) -C $(API_DIR) docs
