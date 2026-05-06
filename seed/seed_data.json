@@ -700,6 +700,20 @@
       "flag_color": "Red, Black, and Green with a White Crescent and Star",
       "language": "Arabic",
       "climate": "Hot desert climate"
+    },
+    {
+      "country_id": "KG",
+      "name": "Kyrgyzstan",
+      "population": 7400000,
+      "continent": "Asia",
+      "capital": "Bishkek",
+      "gdp": "64.1 billion USD",
+      "area": "200,105 sq mi",
+      "founded": "1991",
+      "president": "Sadyr Japarov",
+      "flag_color": "Red and Yellow",
+      "language": "Kyrgyz",
+      "climate": "Subtropical to Polar climate"
     }
   ],
   "states": [
