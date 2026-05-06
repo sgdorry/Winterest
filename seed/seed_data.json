@@ -2003,6 +2003,19 @@
       "gdp": "40 billion USD",
       "climate": "Humid continental",
       "nickname": "Cleveland"
+    },
+    {
+      "id": "51",
+      "name": "Montgomery",
+      "population": "200,603",
+      "state": "Alabama",
+      "state_code": "AL",
+      "area": "162.27 sq mi",
+      "founded": "1819",
+      "mayor": "Steven L. Reed",
+      "gdp": "24 billion USD",
+      "climate": "Humid subtropical",
+      "nickname": "The Gump"
     }
   ],
   "prompts": [
