@@ -255,9 +255,9 @@ Database name: **seDB** (MongoDB)
 | population | int | Population |
 | area, founded, county_seat | string | Descriptive data |
 
-### prompts / puzzles
+### prompts
 
-Both store quiz content with `entity_type`, `answer`, `approved` flag, and associated hint/asset fields.
+Stores quiz content with `entity_type`, `answer`, `approved` flag, and associated hint/asset fields.
 
 ---
 

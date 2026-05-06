@@ -2036,27 +2036,5 @@
       "answer": "Japan",
       "approved": true
     }
-  ],
-  "puzzles": [
-  {
-    "id": "z1",
-    "entity_type": "country",
-    "answer": "United States",
-    "population": "331,900,000",
-    "climate": "Varies: continental, arid, tropical, polar",
-    "language": "English (de facto)",
-    "flag_url": "https://flagcdn.com/us.svg",
-    "approved": true
-  },
-  {
-    "id": "z2",
-    "entity_type": "country",
-    "answer": "France",
-    "population": "68,000,000",
-    "climate": "Temperate",
-    "language": "French",
-    "flag_url": "https://flagcdn.com/fr.svg",
-    "approved": true
-  }
-]
+  ]
 }

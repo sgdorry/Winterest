@@ -6,7 +6,7 @@ import pymongo as pm
 SE_DB = "seDB"
 DEFAULT_URI = "mongodb://localhost:27017"
 
-COLLECTIONS = ["countries", "states", "cities", "counties", "prompts", "puzzles"]
+COLLECTIONS = ["countries", "states", "cities", "counties", "prompts"]
 
 def get_client():
     uri = os.getenv("MONGO_URI", DEFAULT_URI)
@@ -34,7 +34,6 @@ def main():
         "cities": "id",
         "counties": "id",
         "prompts": "id",
-        "puzzles": "id",
     }
 
     for name in COLLECTIONS:
